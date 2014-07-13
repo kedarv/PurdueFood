@@ -4,4 +4,4 @@ Purdue Food is a web application built using Laravel 4.2.x, and the Purdue Housi
 
 ### License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+Purdue Food is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
