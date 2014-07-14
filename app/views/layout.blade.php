@@ -25,17 +25,15 @@
 
             <div class="collapse navbar-collapse" id="nav-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="<?php echo route('home'); ?>">Home</a>
-                    </li>
+                    <li>{{ HTML::linkAction('home', 'Home') }}</li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Today's Menu <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="<?php echo action('DiningController@pushData', array('name' => 'Earhart')); ?>">Earhart</a></li>
-                            <li><a href="<?php echo action('DiningController@pushData', array('name' => 'Ford')); ?>">Ford</a></li>
-                            <li><a href="<?php echo action('DiningController@pushData', array('name' => 'Hillenbrand')); ?>">Hillenbrand</a></li>
-                            <li><a href="<?php echo action('DiningController@pushData', array('name' => 'Wiley')); ?>">Wiley</a></li>
-                            <li><a href="<?php echo action('DiningController@pushData', array('name' => 'Windsor')); ?>">Windsor</a>
-                            </li>
+                            <li>{{ HTML::linkAction('DiningController@pushData', 'Earhart', ['name' => 'Earhart']) }}</li>
+                            <li>{{ HTML::linkAction('DiningController@pushData', 'Ford', ['name' => 'Ford']) }}</li>
+                            <li>{{ HTML::linkAction('DiningController@pushData', 'Hillenbrand', ['name' => 'Hillenbrand']) }}</li>
+                            <li>{{ HTML::linkAction('DiningController@pushData', 'Wiley', ['name' => 'Wiley']) }}</li>
+                            <li>{{ HTML::linkAction('DiningController@pushData', 'Windsor', ['name' => 'Windsor']) }}</li>
                         </ul>
                     </li>
 					<li><a href="?page=search">Historical Menu Lookup</a></li>
