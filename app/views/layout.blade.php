@@ -20,7 +20,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Purdue Food</a>
+                {{ HTML::linkAction('home', 'PurdueFood', array(), array('class' => 'navbar-brand')) }}
             </div>
 
             <div class="collapse navbar-collapse" id="nav-collapse">
