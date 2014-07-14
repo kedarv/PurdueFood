@@ -20,7 +20,11 @@ class UserController extends BaseController {
     {
         return View::make(Config::get('confide::signup_form'))->with('title', 'Registration');
     }
-
+	
+    public function details()
+    {
+        return View::make('user.details')->with('title', 'Account Details');
+    }	
     /**
      * Stores new account
      *

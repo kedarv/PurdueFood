@@ -15,6 +15,7 @@ Blade::extend(function($value)
   return preg_replace('/(\s*)@(break|continue)(\s*)/', '$1<?php $2; ?>$3', $value);
 });
 
+// Main Routes
 Route::get('/', array('as' => 'home', function()
 {
 	return View::make('home');
@@ -33,3 +34,6 @@ Route::post('user/forgot_password',        'UserController@do_forgot_password');
 Route::get( 'user/reset_password/{token}', 'UserController@reset_password');
 Route::post('user/reset_password',         'UserController@do_reset_password');
 Route::get( 'user/logout',                 'UserController@logout');
+
+// Additional Confide Routes
+Route::get( 'user/details',                 'UserController@details');

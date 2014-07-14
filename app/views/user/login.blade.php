@@ -27,7 +27,7 @@
         @endif
 
         @if ( Session::get('notice') )
-            <div class="alert alert-warning">{{{ Session::get('notice') }}}</div>
+            <div class="alert alert-info">{{{ Session::get('notice') }}}</div>
         @endif
         <div class="form-group">
             <button tabindex="3" type="submit" class="btn btn-default">{{{ Lang::get('confide::confide.login.submit') }}}</button>
