@@ -38,6 +38,7 @@
                     <p class="lead">Discover Menus. Rate Entrees and Courts. Share what you eat.</p>
                     <p class="lead">
 						{{ HTML::linkAction('UserController@create', 'Sign Up &raquo;', array(), array('class' => 'btn btn-lg btn-default')) }}
+						{{ HTML::linkAction('UserController@login', 'Login &raquo;', array(), array('class' => 'btn btn-lg btn-default')) }}
                     </p>
                 </div>
 
