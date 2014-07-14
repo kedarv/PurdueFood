@@ -36,7 +36,7 @@
                             <li>{{ HTML::linkAction('DiningController@pushData', 'Windsor', ['name' => 'Windsor']) }}</li>
                         </ul>
                     </li>
-					<li><a href="?page=search">Historical Menu Lookup</a></li>
+					<li><a href="#">Search</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					@if (Auth::guest())

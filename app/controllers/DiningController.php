@@ -34,6 +34,7 @@ protected static $restful = true;
 			$cacheforever = Cache::forever($id, $getfile);
 			$json = Cache::get($id);
 		}
+		$json =  json_decode($json, true);
 		$data['id'] = $id;
 		return View::make('food', compact('data', 'json'));
 	}
