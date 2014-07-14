@@ -37,7 +37,13 @@
                         </ul>
                     </li>
 					<li><a href="?page=search">Historical Menu Lookup</a></li>
-                </ul>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					@if ( Auth::guest())
+						<li>{{ HTML::linkAction('UserController@create', 'Register') }}</li>
+						<li>{{ HTML::linkAction('UserController@login', 'Login') }}</li>
+					@endif
+				</ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>
