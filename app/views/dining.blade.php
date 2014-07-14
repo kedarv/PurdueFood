@@ -13,7 +13,7 @@
 			<h3>{{{$station['Name']}}}</h3>
 				<div class="list-group">
 			@foreach($station['Items'] as $items)
-					<a href="{{{$items['ID']}}}" class="list-group-item" style="padding-top:15px;">
+					<a href="{{action('DiningController@getFood', ['id' => $items['ID']])}}" class="list-group-item" style="padding-top:15px;">
 						<h4 class="list-group-item-heading">{{{$items['Name']}}}
 						@if($items['IsVegetarian'] == true)
 							<span class="glyphicon glyphicon-leaf" style="color: green;"></span>

@@ -15,7 +15,6 @@ protected static $restful = true;
 		}		
 		$data['date'] = $date;
 		$url = "http://api.hfs.purdue.edu/menus/v2/locations/". $name . "/".$date."";
-		$filename = "cache/" . $name . "_" . $date . ".txt";
 		if (Cache::has($name . "_" . $date)) {
 			$json = Cache::get($name . "_" . $date);
 		} else {
@@ -26,4 +25,17 @@ protected static $restful = true;
 		$json = json_decode($json, true);
 		return View::make('dining', compact('data', 'json'));
     }
+	public function getFood($id){
+		$url = "http://api.hfs.purdue.edu/Menus/v2/V2Items/".$id."";
+		if (Cache::has($id)) {
+			$json = Cache::get($id);
+		} else {
+			$getfile = file_get_contents($url);
+			$cacheforever = Cache::forever($id, $getfile);
+			$json = Cache::get($id);
+		}
+		$data['id'] = $id;
+		return View::make('food', compact('data', 'json'));
+	}
+	
 }

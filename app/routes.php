@@ -23,6 +23,8 @@ Route::get('/', array('as' => 'home', function()
 Route::get('dining/{name?}/{date?}', 'DiningController@pushData')
 ->where(array('name' => 'Earhart|Ford|Hillenbrand|Wiley|Windsor', 'date' => '[0-9]{2}-[0-9]{2}-[0-9]{4}+'));
 
+Route::get('dining/food/{id}', 'DiningController@getFood');
+
 // Confide routes
 Route::get( 'user/create',                 'UserController@create');
 Route::post('user',                        'UserController@store');
