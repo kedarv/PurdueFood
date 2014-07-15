@@ -6,7 +6,7 @@ protected static $restful = true;
 	}
     public function pushData($name = NULL, $date = NULL)
     {
-		$data['name'] = $name;
+		$data['name'] = $name . " Dining Hall";
 		if($date == NULL) {
 			$date = date('m-d-Y', time());
 		}
@@ -34,8 +34,9 @@ protected static $restful = true;
 			$cacheforever = Cache::forever($id, $getfile);
 			$json = Cache::get($id);
 		}
-		$json =  json_decode($json, true);
+		$json = json_decode($json, true);
 		$data['id'] = $id;
+		$data['name'] = $json['Name'];
 		return View::make('food', compact('data', 'json'));
 	}
 	
