@@ -7,7 +7,8 @@
     <title>{{{ $data['name'] }}}</title>
 	{{ HTML::style('css/bootstrap.min.css'); }}
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	{{ HTML::script('js/bootstrap.min.js'); }}
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    {{ HTML::script('js/bootstrap.min.js'); }}
 	{{ HTML::script('js/login.js'); }}
 </head>
 <body>
