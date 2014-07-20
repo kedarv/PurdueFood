@@ -39,14 +39,22 @@ protected static $restful = true;
 		$json = json_decode($json, true);
 		$data['id'] = $id;
 		$data['name'] = $json['Name'];
-        $reviews = Array(
-            "rating" => 2.4,
-            "reviews" => array(
-                "user1" => "test",
-                "user2" => "test2"
-            )
-        );
-		$reviews = Reviews::where('food_id', '=', $id)->get()->toArray();
+		
+		// Get Relevant Reviews
+		$reviews = Reviews::where('food_id', '=', $id)->get();
+		
+		if($reviews->count() > 0) { 
+			// Sum ratings and divide by number of ratings to get an average
+			$data['sum'] = ($reviews->sum('rating'))/($reviews->count());
+		}
+		else {
+			$data['sum'] = "?";
+		}
+		
+		// Push reviews to array
+		$reviews = $reviews->toArray();
+		
+		// Pass data to view
 		return View::make('food', compact('data', 'json', 'reviews'));
 	}
 	
