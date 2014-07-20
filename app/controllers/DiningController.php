@@ -46,7 +46,7 @@ protected static $restful = true;
                 "user2" => "test2"
             )
         );
-		$reviews = Reviews::all()->toArray();
+		$reviews = Reviews::where('food_id', '=', $id)->get()->toArray();
 		return View::make('food', compact('data', 'json', 'reviews'));
 	}
 	
