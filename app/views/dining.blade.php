@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-	<b>endpoint:</b> http://api.hfs.purdue.edu/menus/v2/locations/{{{ $data['name'] }}}/{{{ $data['date'] }}}
+	<b>endpoint:</b> http://api.hfs.purdue.edu/menus/v2/locations/{{{ $data['shortName'] }}}/{{{ $data['date'] }}}
 
 	@foreach($json['Meals'] as $value)
 		<div class="well"><h2 style="margin-top:0px;">{{{$value['Name']}}} <small>From {{{date('g:i A', strtotime($value['Hours']['StartTime']))}}} to {{{date('g:i A', strtotime($value['Hours']['EndTime']))}}}</small></h2><hr/>

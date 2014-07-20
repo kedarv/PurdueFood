@@ -6,6 +6,7 @@ protected static $restful = true;
 	}
     public function pushData($name = NULL, $date = NULL)
     {
+        $data['shortName'] = $name;
 		$data['name'] = $name . " Dining Hall";
 		if($date == NULL) {
 			$date = date('m-d-Y', time());
