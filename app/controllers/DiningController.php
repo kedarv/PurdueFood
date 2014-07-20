@@ -39,7 +39,14 @@ protected static $restful = true;
 		$json = json_decode($json, true);
 		$data['id'] = $id;
 		$data['name'] = $json['Name'];
-		return View::make('food', compact('data', 'json'));
+        $reviews = Array(
+            "rating" => 2.4,
+            "reviews" => array(
+                "user1" => "test",
+                "user2" => "test2"
+            )
+        );
+		return View::make('food', compact('data', 'json','reviews'));
 	}
 	
 }
