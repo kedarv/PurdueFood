@@ -46,7 +46,7 @@ protected static $restful = true;
                 "user2" => "test2"
             )
         );
-		return View::make('food', compact('data', 'json','reviews'));
+		return View::make('food', compact('data', 'json', 'reviews'));
 	}
 	
 }

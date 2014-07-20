@@ -3,12 +3,14 @@
 @section('content')
 Rating
 	{{var_dump($json)}}
+	<hr/>
+	<b>Commenting as {{Auth::user()->username}}</b> [User ID: {{Auth::user()->id}} on {{$data['id']}}]
+	<hr/>
 	What others are saying about {{$data['name']}}:
-	--comments--
     {{var_dump($reviews)}}
     {{generateStars($reviews['rating'])}}
-
 <?php
+// Should find a better place to put this func
 function generateStars($rating)
 {
     $rounded = round($rating * 2) / 2; // rounds to nearest .5
