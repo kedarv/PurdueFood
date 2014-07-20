@@ -45,10 +45,14 @@ protected static $restful = true;
 		
 		if($reviews->count() > 0) { 
 			// Sum ratings and divide by number of ratings to get an average
-			$data['sum'] = ($reviews->sum('rating'))/($reviews->count());
+			$sum = ($reviews->sum('rating'))/($reviews->count());
+			$rounded = round($sum * 2) / 2; // rounds to nearest .5
+			$data['full_stars'] = floor( $rounded ); // number of full stars
+			$data['half_stars'] = $rounded - $data['full_stars']; // .5 if half star
 		}
 		else {
-			$data['sum'] = "?";
+			$data['full_stars'] = 0;
+			$data['half_stars'] = 0;
 		}
 		
 		// Push reviews to array

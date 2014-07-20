@@ -12,29 +12,20 @@ Rating
 	<hr/>
 	What others are saying about {{$data['name']}}:
     {{var_dump($reviews)}}
-	{{generateStars($data['sum'])}}
-<?php
-// Should find a better place to put this func
-function generateStars($rating) {
-
-    $rounded = round($rating * 2) / 2; // rounds to nearest .5
-    $intpart = floor( $rounded ); // number of full stars
-    $fraction = $rounded - $intpart; // .5 if half star
-    for($x=1; $x <= $intpart; $x++) {
-        echo '<span class="fa fa-star fa-5x"></span>';
-    }
-    if($fraction==.5) {
-        echo '<span class="fa fa-star-half-empty fa-5x"></span>';
-
-    }
-    else {
-       echo '<span class="fa fa-star-o fa-5x"></span>';
-    }
-    for($x=1; $x<=4-$intpart; $x++) {
-        echo '<span class="fa fa-star-o fa-5x"></span>';
-
-    }
-    echo "rated ".$rounded." out of 5 stars";
-}
-?>
+	
+	{{-- Parse Stars --}}
+	@for($i = 0; $i < $data['full_stars']; $i++)
+		<span class="fa fa-star fa-5x"></span>
+	@endfor
+	@if($data['half_stars'] > 0)
+		<span class="fa fa-star-half-full fa-5x"></span>
+		@for($i = 0; $i < 4 - $data['full_stars']; $i++)
+			<span class="fa fa-star-o fa-5x"></span>
+		@endfor
+	@else
+		@for($i = 0; $i < 5 - $data['full_stars']; $i++)
+			<span class="fa fa-star-o fa-5x"></span>
+		@endfor
+	@endif
+	
 @stop
