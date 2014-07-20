@@ -2,7 +2,7 @@
 
 @section('content')
 Rating
-	<pre>{{var_dump($json)}}</pre>
+	{{var_dump($json)}}
 	What others are saying about {{$json['Name']}}:
 	--comments--
 @stop
