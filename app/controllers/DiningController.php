@@ -46,6 +46,7 @@ protected static $restful = true;
                 "user2" => "test2"
             )
         );
+		$reviews = Reviews::all()->toArray();
 		return View::make('food', compact('data', 'json', 'reviews'));
 	}
 	

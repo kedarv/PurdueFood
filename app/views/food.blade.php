@@ -4,11 +4,18 @@
 Rating
 	{{var_dump($json)}}
 	<hr/>
+	@if (Auth::check())
 	<b>Commenting as {{Auth::user()->username}}</b> [User ID: {{Auth::user()->id}} on {{$data['id']}}]
+	@else
+	Hey, you need an account to comment! {{ HTML::linkAction('UserController@create', 'Register Now &raquo;', 'Register') }}
+	@endif
 	<hr/>
 	What others are saying about {{$data['name']}}:
     {{var_dump($reviews)}}
-    {{generateStars($reviews['rating'])}}
+	
+	@foreach($reviews as $review)
+		{{generateStars($review['rating'])}}
+	@endforeach
 <?php
 // Should find a better place to put this func
 function generateStars($rating)
