@@ -17,13 +17,14 @@
 	<hr/>
 	@if (Auth::check())
 	<b>Commenting as {{Auth::user()->username}}</b> [User ID: {{Auth::user()->id}} on {{$data['id']}}]
-
+		<input id="input-1"class="rating">
+		formdata
 	@else
 	Hey, you need an account to comment! {{ HTML::linkAction('UserController@create', 'Register', 'Register') }} or {{ HTML::linkAction('UserController@login', 'Login', 'Login') }}
 	@endif
 	<hr/>
-	What others are saying about {{$data['name']}}:
     @foreach($reviews as $review)
+	<div class="col-md-6">
 		<div class="well">
 			<img src="http://www.gravatar.com/avatar/" alt="{{$review['username']}}" class="img-responsive" style="float:left;padding-right:10px;"/>
 			<h4 style="margin:0px 0px 0px 95px;">{{$review['username']}}</h4>
@@ -31,8 +32,7 @@
 			<small>Posted {{$review['created_at']}}</small>
 			<hr/>
 			{{$review['comment']}}
-			{{var_dump($review)}}
 		</div>
+	</div>
 	@endforeach	
-	<input id="input-1"class="rating">
 @stop
