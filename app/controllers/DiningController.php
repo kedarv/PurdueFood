@@ -43,18 +43,14 @@ protected static $restful = true;
 		// Get Relevant Reviews
 		$reviews = Reviews::where('food_id', '=', $id)->get();
 		
-		if($reviews->count() > 0) { 
-			// Sum ratings and divide by number of ratings to get an average
-			$sum = ($reviews->sum('rating'))/($reviews->count());
-			$rounded = round($sum * 2) / 2; // rounds to nearest .5
-			$data['full_stars'] = floor( $rounded ); // number of full stars
-			$data['half_stars'] = $rounded - $data['full_stars']; // .5 if half star
+		if($reviews->count() > 0) {
+			$data['averageRating'] = ($reviews->sum('rating'))/($reviews->count());
 		}
 		else {
-			$data['full_stars'] = 0;
-			$data['half_stars'] = 0;
+            $data['averageRating']=0;
 		}
-		
+        $data['numVotes']=$reviews->count();
+
 		// Push reviews to array
 		$reviews = $reviews->toArray();
 		
