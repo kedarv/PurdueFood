@@ -8,3 +8,4 @@ Thumbs.db
 /vendor
 app/config/mail.php
 app/storage/cache
+app/config/database.php
