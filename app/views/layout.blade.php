@@ -14,7 +14,6 @@
 	@section('js')
 	{{ HTML::script('//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'); }}
 	{{ HTML::script('js/bootstrap.min.js'); }}
-	{{ HTML::script('js/login.js'); }}
     {{ HTML::script('js/star-rating.min.js'); }}
 	@show
 </head>

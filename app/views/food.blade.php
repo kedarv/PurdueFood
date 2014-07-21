@@ -9,6 +9,7 @@
 @parent
 	<div style="display:inline-block;font-size:12px;">
 		<input id="input-avgRating" value="{{$data['averageRating']}}" class="rating" data-disabled="true" data-show-clear="false" data-show-caption="false">
+		<input type="hidden" id="user" value="{{Auth::user()->username}}">
 	</div>
 @stop
 
