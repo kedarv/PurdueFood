@@ -44,8 +44,9 @@ protected static $restful = true;
 		$reviews = Reviews::where('food_id', '=', $id)->get();
 		$data['numVotes'] = $reviews->count();
 		if($data['numVotes'] > 0) {
-			// Need to look up how rounding works in php
-			$data['averageRating'] = ($reviews->sum('rating') * 2)/($reviews->count() * 2);
+			// Round votes to nearest .5
+			$notrounded_average = $reviews->sum('rating')/$reviews->count();
+			$data['averageRating'] = round($notrounded_average * 2, 0)/2;
 		}
 		else {
             $data['averageRating'] = 0;
