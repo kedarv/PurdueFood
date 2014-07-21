@@ -5,13 +5,18 @@
 {{ HTML::script('js/rating.js') }}
 @stop
 
+@section('append_header')
+@parent
+	<div style="display:inline-block;font-size:12px;">
+		<input id="input-avgRating" value="{{$data['averageRating']}}" class="rating" data-disabled="true" data-show-clear="false" data-show-caption="false">
+	</div>
+@stop
+
 @section('content')
-	<input id="input-avgRating" value="{{$data['averageRating']}}" class="rating" data-disabled="true" data-show-clear="false" data-show-caption="false"> among {{$data['numVotes']}} votes
 	{{var_dump($json)}}
 	<hr/>
 	@if (Auth::check())
 	<b>Commenting as {{Auth::user()->username}}</b> [User ID: {{Auth::user()->id}} on {{$data['id']}}]
-
 
 	@else
 	Hey, you need an account to comment! {{ HTML::linkAction('UserController@create', 'Register', 'Register') }} or {{ HTML::linkAction('UserController@login', 'Login', 'Login') }}
