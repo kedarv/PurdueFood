@@ -9,7 +9,6 @@
 @parent
 	<div style="display:inline-block;font-size:12px;">
 		<input id="input-avgRating" value="{{$data['averageRating']}}" class="rating" data-disabled="true" data-show-clear="false" data-show-caption="false">
-		<input type="hidden" id="user" value="{{Auth::user()->username}}">
 	</div>
 @stop
 
@@ -18,7 +17,8 @@
 	<hr/>
 	@if (Auth::check())
 	<b>Commenting as {{Auth::user()->username}}</b> [User ID: {{Auth::user()->id}} on {{$data['id']}}]
-		<input id="input-1"class="rating">
+		<input id="input-1" class="rating">
+		<input type="hidden" id="user" value="{{Auth::user()->username}}">
 		formdata
 	@else
 	Hey, you need an account to comment! {{ HTML::linkAction('UserController@create', 'Register', 'Register') }} or {{ HTML::linkAction('UserController@login', 'Login', 'Login') }}
