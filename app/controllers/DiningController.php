@@ -42,14 +42,13 @@ protected static $restful = true;
 		
 		// Get Relevant Reviews
 		$reviews = Reviews::where('food_id', '=', $id)->get();
-		
-		if($reviews->count() > 0) {
+		$data['numVotes'] = $reviews->count();
+		if($data['numVotes'] > 0) {
 			$data['averageRating'] = ($reviews->sum('rating'))/($reviews->count());
 		}
 		else {
-            $data['averageRating']=0;
+            $data['averageRating'] = 0;
 		}
-        $data['numVotes']=$reviews->count();
 
 		// Push reviews to array
 		$reviews = $reviews->toArray();

@@ -5,13 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{{ $data['name'] }}}</title>
+	@section('css')
 	{{ HTML::style('css/bootstrap.min.css'); }}
 	{{ HTML::style('//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css'); }}
+	{{ HTML::style('css/star-rating.min.css'); }}
+	@show
+	
+	@section('js')
 	{{ HTML::script('//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'); }}
 	{{ HTML::script('js/bootstrap.min.js'); }}
 	{{ HTML::script('js/login.js'); }}
-    {{ HTML::style('css/star-rating.min.css'); }}
     {{ HTML::script('js/star-rating.min.js'); }}
+	@show
 </head>
 <body>
  <nav class="navbar navbar-default" role="navigation">
@@ -64,5 +69,8 @@
             <div class="col-md-12">
 			<h1>{{{ $data['name'] }}}</h1>
 			@yield('content')
+			
+	@section('bottom_js')
+	@show
 </body>
 </html>

@@ -1,5 +1,10 @@
 @extends('layout')
 
+@section('bottom_js')
+@parent
+{{ HTML::script('js/rating.js') }}
+@stop
+
 @section('content')
 
 Rating:<br><input id="input-avgRating" value="{{$data['averageRating']}}" class="rating" data-disabled="true" data-show-clear="false" data-show-caption="false"> among {{$data['numVotes']}} votes
@@ -15,21 +20,5 @@ Rating:<br><input id="input-avgRating" value="{{$data['averageRating']}}" class=
 	<hr/>
 	What others are saying about {{$data['name']}}:
     {{var_dump($reviews)}}
-	
-
-
-
-<input id="input-1"class="rating">
-<script type="text/javascript">
-$("#input-1").rating({
-starCaptions: {1: "Very Poor", 2: "Poor", 3: "Ok", 4: "Good", 5: "Very Good"},
-starCaptionClasses: {1: "text-danger", 2: "text-warning", 3: "text-info", 4: "text-primary", 5: "text-success"},
-});
-$("#input-1").on("rating.change", function(event, value, caption) {
-    alert("You rated: " + value + " = " + $(caption).text());
-
-});
-
-</script>
-
+	<input id="input-1"class="rating">
 @stop
