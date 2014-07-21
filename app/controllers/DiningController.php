@@ -41,7 +41,9 @@ protected static $restful = true;
 		$data['name'] = $json['Name'];
 		
 		// Get Relevant Reviews
-		$reviews = Reviews::where('food_id', '=', $id)->get();
+		$reviews = Reviews::where('food_id', '=', $id)
+					->join('users', 'reviews.user_id', '=', 'users.id')
+					->get(array('reviews.*', 'users.username', 'users.email'));
 		$data['numVotes'] = $reviews->count();
 		if($data['numVotes'] > 0) {
 			// Round votes to nearest .5
