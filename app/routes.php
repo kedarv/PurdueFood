@@ -39,3 +39,6 @@ Route::get( 'user/logout',                 'UserController@logout');
 
 // Additional Confide Routes
 Route::get( 'user/details',                 'UserController@details');
+
+//Rating routes
+Route::post('ratings/setStar',               'DiningController@setStar');

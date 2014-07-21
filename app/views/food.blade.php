@@ -17,7 +17,7 @@
 	<hr/>
 	@if (Auth::check())
 	<b>Commenting as {{Auth::user()->username}}</b> [User ID: {{Auth::user()->id}} on {{$data['id']}}]
-		<input id="input-1" class="rating" data-user="{{Auth::user()->username}}">
+		<input id="input-1" class="rating" data-user="{{Auth::user()->id}}" data-food="{{$data['id']}}">
 		formdata
 	@else
 	Hey, you need an account to comment! {{ HTML::linkAction('UserController@create', 'Register', 'Register') }} or {{ HTML::linkAction('UserController@login', 'Login', 'Login') }}

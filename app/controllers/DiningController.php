@@ -60,5 +60,18 @@ protected static $restful = true;
 		// Pass data to view
 		return View::make('food', compact('data', 'json', 'reviews'));
 	}
+    public function setStar() {
+
+
+        $rating = Reviews::firstOrNew(array(
+            'food_id'=> Input::get('food_id'),
+            'user_id'=>     Input::get('user_id'),
+            'rating'=>  Input::get('rating'),
+
+        ));
+        $rating->save();
+        return 'Thanks for rating!';
+
+    }
 	
 }
