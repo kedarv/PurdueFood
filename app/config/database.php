@@ -57,7 +57,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'purduefood',
 			'username'  => 'root',
-			'password'  => '',
+			'password'  => 'rEgutHathu3R62pu',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
