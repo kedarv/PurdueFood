@@ -15,7 +15,7 @@ $("#input-1").on("rating.change", function(event, value, caption) {
         url: '/ratings/setStar',
 		data: form_data,
 		success:function (data) {
-			 $("#postRatingAlert").removeClass("alert-success alert-warning").addClass("alert-" + data['status']).html(data['text']).fadeIn(500).removeClass("hidden").delay(5000).fadeOut();;
+			 $("#postRatingAlert").removeClass("alert-success alert-info").addClass("alert-" + data['status']).html(data['text']).fadeIn(500).removeClass("hidden").delay(5000).fadeOut();
 			 console.log("Data: " + data['status'] + " " + data['text']);
 		},
 	}, 'json');

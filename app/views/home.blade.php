@@ -48,7 +48,7 @@
 
                 <div class="mastfoot">
                     <div class="inner">
-                        <p>&copy; 2014 Kedar V</p>
+                        <p>&copy; 2014 PurdueFood.com</p>
                     </div>
                 </div>
             </div>
