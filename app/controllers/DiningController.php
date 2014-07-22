@@ -54,7 +54,6 @@ protected static $restful = true;
             $data['averageRating'] = 0;
 		}
 
-
 		// Push reviews to array
 		$reviews = $reviews->toArray();
 
@@ -75,28 +74,38 @@ protected static $restful = true;
 		return View::make('food', compact('data', 'json', 'reviews'));
 	}
     public function setStar() {
+		// Verify that request is ajax, and that the user id sent is equal to the actual user id
+		if (Request::ajax() && Input::get('user_id') == Auth::id()){
+			$data = array(
+				'food_id'=> Input::get('food_id'),
+				'user_id'=> Input::get('user_id'),
+				'rating'=>  Input::get('rating'),
 
-        $data = array(
-            'food_id'=> Input::get('food_id'),
-            'user_id'=>     Input::get('user_id'),
-            'rating'=>  Input::get('rating'),
-
-        );
-        $query = Reviews::where('user_id', '=', $data['user_id'])
-            ->where('food_id', '=', $data['food_id'], 'AND');
-        if($query->count()>=1)
-        {
-            $updated=$query->first();
-            $updated->rating=$data['rating'];
-            $updated->save();
-        }
-        else
-        {
-            $rating = Reviews::firstOrNew($data);
-            $rating->save();
-        }
-        return 'Thanks for rating!';
-
-    }
-	
+			);
+			$query = Reviews::where('user_id', '=', $data['user_id'])
+				->where('food_id', '=', $data['food_id'], 'AND');
+			if($query->count() == 1) {
+				$updated = $query->first();
+				if(time() > strtotime($updated['updated_at']) + 30) {
+					$updated->rating = $data['rating'];
+					$updated->updated_at = date('Y-m-d H:i:s', time());
+					$updated->save();
+					$return_data = array('status' => 'success', 'text' => 'Thanks for voting!'); 
+				} else {
+					$return_data = array('status' => 'info', 'text' => 'Please wait a bit before voting again.'); 
+				}
+			}
+			else {
+				$rating = Reviews::firstOrNew($data);
+				$rating->save();
+				$return_data = array('status' => 'success', 'text' => 'Thanks for voting!'); 
+			}
+		} else {
+			$return_data = array('status' => 'danger', 'text' => 'Something went wrong!'); 
+		}
+		// Return JSON Reponse
+		header('Content-Type: application/json');
+		echo json_encode($return_data);
+		exit();
+    }	
 }

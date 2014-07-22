@@ -4,14 +4,19 @@ $("#input-1").rating({
 });
 $("#input-1").on("rating.change", function(event, value, caption) {
 	console.log($(this).data("user") + " voted " + value + " on "+ $(this).data("food"));
-    $.post("/ratings/setStar",
-        {
-            user_id:$(this).data("user"),
-            food_id:$(this).data("food"),
-            rating:value
-        },
-        function(data,status){
-            console.log("Data: " + data + "\nStatus: " + status);
-        });
-    $("#postRatingAlert").prop("hidden", false);
+	form_data = {
+		user_id:$(this).data("user"),
+        food_id:$(this).data("food"),
+        rating:value
+	};
+	
+	$.ajax({
+		type: 'POST',
+        url: '/ratings/setStar',
+		data: form_data,
+		success:function (data) {
+			 $("#postRatingAlert").removeClass("alert-success alert-warning").addClass("alert-" + data['status']).html(data['text']).fadeIn(500).removeClass("hidden").delay(5000).fadeOut();;
+			 console.log("Data: " + data['status'] + " " + data['text']);
+		},
+	}, 'json');
 });
