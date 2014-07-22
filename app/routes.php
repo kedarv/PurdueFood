@@ -42,4 +42,5 @@ Route::get( 'user/details',                 'UserController@details');
 
 //Rating routes
 Route::post('ratings/setStar',               'DiningController@setStar');
+Route::post('ratings/insertComment',         array('before' => 'csrf|auth', 'uses' => 'DiningController@insertComment'));
 Route::post( 'user/updateSettingsToggles',   'UserController@updateSettingsToggles');

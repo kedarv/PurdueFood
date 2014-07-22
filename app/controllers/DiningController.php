@@ -107,5 +107,11 @@ protected static $restful = true;
 		header('Content-Type: application/json');
 		echo json_encode($return_data);
 		exit();
-    }	
+    }
+	public function insertComment() {
+		$return_data = array('status' => 'success', 'text' => 'Thanks for commenting!', 'email' => md5(strtolower(trim(Auth::user()->email))), 'user' => Auth::user()->username, 'comment' =>Input::get('form.comment'), 'time' => date('Y-m-d H:i:s', time())); 
+		header('Content-Type: application/json');
+		echo json_encode($return_data);
+		exit();
+	}
 }
