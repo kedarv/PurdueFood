@@ -42,3 +42,4 @@ Route::get( 'user/details',                 'UserController@details');
 
 //Rating routes
 Route::post('ratings/setStar',               'DiningController@setStar');
+Route::post( 'user/updateSettingsToggles',   'UserController@updateSettingsToggles');

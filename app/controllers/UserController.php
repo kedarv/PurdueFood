@@ -230,5 +230,16 @@ class UserController extends BaseController {
         
         return Redirect::to('/');
     }
+    public function updateSettingsToggles() {
+        $data = array(
+            'settingToggle'=> Input::get('settingToggle'),
+            'user_id'=>     Input::get('user_id'),
+            'value'=>  Input::get('value'),
+        );
+        $query="update users set ".$data['settingToggle']." = ".((int)($data['value']=="true"))." where id = ".$data['user_id']."";
+        DB::update($query);
+        return 'Updated!';
+
+    }
 
 }
