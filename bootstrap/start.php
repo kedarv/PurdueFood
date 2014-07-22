@@ -27,7 +27,7 @@ $app = new Illuminate\Foundation\Application;
 $env = $app->detectEnvironment(array(
 
 	'local_nicky' => array('nickysemenza.local'),
-    'local_kedar' => array('kedar hostname here'),
+    'local_kedar' => array('kedarPC'),
 
 ));
 
