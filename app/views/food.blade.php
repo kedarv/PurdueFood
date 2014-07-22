@@ -36,6 +36,7 @@
 	@endif
 	<hr/>
 	<div class="comments">
+	<div class="row">
 		@foreach($reviews as $review)
 		<div class="col-md-6">
 			<div class="well">
@@ -48,5 +49,6 @@
 			</div>
 		</div>
 		@endforeach	
+		</div>
 	</div>
 @stop
