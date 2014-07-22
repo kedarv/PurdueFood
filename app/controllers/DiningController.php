@@ -62,14 +62,25 @@ protected static $restful = true;
 	}
     public function setStar() {
 
-
-        $rating = Reviews::firstOrNew(array(
+        $data = array(
             'food_id'=> Input::get('food_id'),
             'user_id'=>     Input::get('user_id'),
             'rating'=>  Input::get('rating'),
 
-        ));
-        $rating->save();
+        );
+        $query = Reviews::where('user_id', '=', $data['user_id'])
+            ->where('food_id', '=', $data['food_id'], 'AND');
+        if($query->count()>=1)
+        {
+            $updated=$query->first();
+            $updated->rating=$data['rating'];
+            $updated->save();
+        }
+        else
+        {
+            $rating = Reviews::firstOrNew($data);
+            $rating->save();
+        }
         return 'Thanks for rating!';
 
     }
