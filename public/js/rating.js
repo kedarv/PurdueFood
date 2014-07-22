@@ -13,4 +13,5 @@ $("#input-1").on("rating.change", function(event, value, caption) {
         function(data,status){
             console.log("Data: " + data + "\nStatus: " + status);
         });
+    $("#postRatingAlert").prop("hidden", false);
 });
