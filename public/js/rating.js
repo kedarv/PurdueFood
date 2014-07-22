@@ -36,7 +36,7 @@ $('#submit-comment').submit(function() {
 		console.log(data);
 			$('#submit-comment').slideUp('slow');
 			$('#commentAlert').addClass("alert-" + data['status']).html(data['text']).css('style', 'margin-top:5px').fadeIn(500).removeClass("hidden").delay(5000).fadeOut();
-			$('.comments').prepend( "<div class='col-md-12'><div class='well'><img src='http://www.gravatar.com/avatar/" + data['email'] + "?&r=x&d=identicon' alt='" + data['user'] + "' class='img-responsive' style='float:left;padding-right:10px;'/><h4 style='margin:0px 0px 0px 95px;'>" + data['user'] + "</h4><small>Posted at " + data['time'] +"</small><br/><br/><br/><hr/>" + data['comment'] + "</div></div>" )
+			$('.comments').prepend( "<div class='row'><div class='col-md-12'><div class='well'><img src='http://www.gravatar.com/avatar/" + data['email'] + "?&r=x&d=identicon' alt='" + data['user'] + "' class='img-responsive' style='float:left;padding-right:10px;'/><h4 style='margin:0px 0px 0px 95px;'>" + data['user'] + "</h4><small>Posted at " + data['time'] +"</small><br/><br/><br/><hr/>" + data['comment'] + "</div></div></div>" )
 		}
 	});
     $('#commentArea').addClass("hidden");
