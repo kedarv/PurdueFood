@@ -1,18 +1,18 @@
-@extends('user/layout')
+@extends('layout')
 @section('content')
 
 
 <div class="row">
-    <div class="col-md-7">
+    <div class="col-md-9">
         <b>Username:</b> {{Auth::user()->username}}
         <br/>
         <b>Email:</b> {{Auth::user()->email}}
         <br>
         Account created on {{date("F j Y", strtotime(Auth::user()->created_at))}}
     </div>
-    <div class="col-md-5">
-        <img src="http://www.gravatar.com/avatar/{{md5(strtolower(trim(Auth::user()->email)))}}?&r=x&d=identicon&s=256"  class="img-responsive" style="float:right;"/>
-        this is your profile picture, you can change it by visiting <a href="http://gravatar.com" target="_blank">gravatar.com</a>
+    <div class="col-md-3">
+        <img src="http://www.gravatar.com/avatar/{{md5(strtolower(trim(Auth::user()->email)))}}?&r=x&d=identicon&s=300"  class="img-responsive" style="float:right;"/>
+        <p style="float:right;" >this is your profile picture, you can change it by visiting <a href="http://gravatar.com" target="_blank">gravatar.com</a></p>
     </div>
 </div>
 
