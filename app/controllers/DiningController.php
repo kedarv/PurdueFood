@@ -54,9 +54,23 @@ protected static $restful = true;
             $data['averageRating'] = 0;
 		}
 
+
 		// Push reviews to array
 		$reviews = $reviews->toArray();
-		
+
+        $query = Reviews::where('user_id', '=', Auth::id())
+            ->where('food_id', '=', $id, 'AND');
+        if($query->count()>=1)
+        {
+            $updated=$query->first();
+            $data['currentUserRating']=$updated->rating;
+        }
+        else
+        {
+            $data['currentUserRating']=0;
+        }
+
+
 		// Pass data to view
 		return View::make('food', compact('data', 'json', 'reviews'));
 	}
