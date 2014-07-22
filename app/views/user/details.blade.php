@@ -1,15 +1,27 @@
 @extends('user/layout')
 @section('content')
-<b>Username:</b> {{Auth::user()->username}}
-<br/>
-<b>Email:</b> {{Auth::user()->email}}
+
+
+<div class="row">
+    <div class="col-md-7">
+        <b>Username:</b> {{Auth::user()->username}}
+        <br/>
+        <b>Email:</b> {{Auth::user()->email}}
+        <br>
+        Account created on {{date("F j Y", strtotime(Auth::user()->created_at))}}
+    </div>
+    <div class="col-md-5">
+        <img src="http://www.gravatar.com/avatar/{{md5(strtolower(trim(Auth::user()->email)))}}?&r=x&d=identicon&s=256"  class="img-responsive" style="float:right;"/>
+        this is your profile picture, you can change it by visiting <a href="http://gravatar.com" target="_blank">gravatar.com</a>
+    </div>
+</div>
+
+
 <hr/>
-Account created on {{date("F j Y", strtotime(Auth::user()->created_at))}}
 <?php
 $user = User::find(Auth::id());
 ?>
-<form action="" method="get">
-</form>
+<h2>Dietary Preferences</h2>
 {{Form::checkbox('non vegetarian items', 'settingToggle_vegetarian', $user->settingToggle_vegetarian)}} Hide non-vegetarian items<br>
 {{Form::checkbox('dairy items', 'settingToggle_dairy', $user->settingToggle_dairy)}} Hide items containing dairy<br>
 {{Form::checkbox('soy idems', 'settingToggle_soy', $user->settingToggle_soy)}} Hide items containing soy<br>
