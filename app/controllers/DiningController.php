@@ -63,11 +63,14 @@ protected static $restful = true;
         {
             $updated=$query->first();
             $data['currentUserRating']=$updated->rating;
+            $data['currentUserComment']=$updated->comment;
         }
         else
         {
             $data['currentUserRating']=0;
+            $data['currentUserComment']="";
         }
+
 
 
 		// Pass data to view

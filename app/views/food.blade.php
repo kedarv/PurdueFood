@@ -25,11 +25,14 @@
 	<input id="input-1" class="rating"  value="{{$data['currentUserRating']}}" data-user="{{Auth::user()->id}}" data-food="{{$data['id']}}">
 	<div class="alert hidden" role="alert" id="postRatingAlert">
 	</div>
-	{{Form::open(array('action' => 'DiningController@insertComment', 'id' => 'submit-comment', 'data-id' => $data['id']))}}
-	{{Form::textarea('comment', null, array('class' => 'form-control', 'rows' => '3', 'id' => 'comment', 'required'))}}
-	<hr/>
-	{{Form::button('Submit Review &raquo;', array('class' => 'btn btn-primary', 'type' => 'submit', 'data-user' => Auth::user()->id))}}
-	{{ Form::close() }}
+    {{Form::button('Update Review &raquo;', array('class' => 'btn btn-primary hidden', 'id' => 'updateCommentButton'))}}
+    <div id="commentArea" >
+        {{Form::open(array('action' => 'DiningController@insertComment', 'id' => 'submit-comment', 'data-id' => $data['id']))}}
+        {{Form::textarea('comment', $data['currentUserComment'], array('class' => 'form-control', 'rows' => '3', 'id' => 'comment', 'required'))}}
+        <br>
+        {{Form::button('Submit Review &raquo;', array('class' => 'btn btn-primary', 'type' => 'submit', 'data-user' => Auth::user()->id))}}
+        {{ Form::close() }}
+    </div>
 	<div class="alert hidden" id="commentAlert"></div>
 	@else
 	Hey, you need an account to comment! {{ HTML::linkAction('UserController@create', 'Register', 'Register') }} or {{ HTML::linkAction('UserController@login', 'Login', 'Login') }}
