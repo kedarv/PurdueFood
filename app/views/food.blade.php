@@ -35,8 +35,8 @@
 	Hey, you need an account to comment! {{ HTML::linkAction('UserController@create', 'Register', 'Register') }} or {{ HTML::linkAction('UserController@login', 'Login', 'Login') }}
 	@endif
 	<hr/>
-	<div class="comments">
 	<div class="row">
+	<div class="comments"></div>
 		@foreach($reviews as $review)
 		<div class="col-md-6">
 			<div class="well">
@@ -48,7 +48,7 @@
 				{{$review['comment']}}
 			</div>
 		</div>
+		
 		@endforeach	
 		</div>
-	</div>
 @stop
