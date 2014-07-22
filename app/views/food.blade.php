@@ -1,5 +1,20 @@
 @extends('layout')
 
+@section('css')
+@parent
+<style>
+row {
+    display: table;
+}
+
+[class*="col-"] {
+    float: none;
+    display: table-cell;
+    vertical-align: top;
+}
+</style>
+@stop
+
 @section('bottom_js')
 @parent
 {{ HTML::script('js/rating.js') }}
