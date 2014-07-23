@@ -1,5 +1,10 @@
 @extends('layout')
 
+@section('js')
+@parent
+{{ HTML::script('js/star-rating.min.js'); }}
+@stop
+
 @section('bottom_js')
 @parent
 {{ HTML::script('js/rating.js') }}
