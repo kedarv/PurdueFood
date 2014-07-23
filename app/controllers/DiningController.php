@@ -82,7 +82,7 @@ protected static $restful = true;
 				'rating'=>  Input::get('rating'),
 
 			);
-			$getReview = Reviews::firstOrNew(array('user_id' => Auth::user()->id));
+			$getReview = Reviews::firstOrNew(array('user_id' => Auth::user()->id, 'food_id' => Input::get('food_id')));
 			if(time() > strtotime($getReview['updated_at']) + 30) {
 				$getReview->rating = $data['rating'];
 				$getReview->food_id = $data['food_id'];
@@ -102,7 +102,7 @@ protected static $restful = true;
     }
 	public function insertComment() {
 		if (Request::ajax()) {
-			$getReview = Reviews::firstOrNew(array('user_id' => Auth::user()->id));
+			$getReview = Reviews::firstOrNew(array('user_id' => Auth::user()->id, 'food_id' => Input::get('form.id')));
 			if(strlen(Input::get('form.comment')) >= 10) {
 				$getReview->comment = Input::get('form.comment');
 				$getReview->food_id = Input::get('form.id');
