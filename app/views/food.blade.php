@@ -17,6 +17,8 @@
 @stop
 
 @section('content')
+{{Form::checkbox('Favorite', 'foodToggle_favorite', true)}} Mark as favorite<br>
+<input type="hidden" id="id_data" data-user="{{Auth::id()}}" data-food="{{$data['id']}}">
 	{{var_dump($json)}}
 	<hr/>
 	@if (Auth::check())

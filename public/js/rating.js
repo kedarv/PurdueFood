@@ -60,3 +60,27 @@ $( document ).ready(function() {
         });
     }
 });
+
+
+
+$(function () {
+    $(' [value^="foodToggle_"]:checkbox').change(function()
+    {
+        console.log(this.value + "|" + this.checked + " userID: " + $('#id_data').data("user") + " foodID: "+ $('#id_data').data("food"));
+        hideOrShow = this.checked
+//        $.post("favorites/update",
+//            {
+//                user_id:$('#id_data').data("user"),
+//                food_id:$('#id_data').data("food"),
+//                settingToggle:this.value,
+//                value:this.checked
+//
+//            },
+//            function(data,status)
+//            {
+//                do something upon success
+//
+//            });
+
+    });
+});
