@@ -3,10 +3,10 @@ $("#input-1").rating({
 	starCaptionClasses: {1: "text-danger", 2: "text-warning", 3: "text-info", 4: "text-primary", 5: "text-success"},
 });
 $("#input-1").on("rating.change", function(event, value, caption) {
-	console.log($(this).data("user") + " voted " + value + " on "+ $(this).data("food"));
+	console.log($('#id_data').data("user") + " voted " + value + " on "+ $('#id_data').data("food"));
 	form_data = {
-		user_id:$(this).data("user"),
-        food_id:$(this).data("food"),
+		user_id:$('#id_data').data("user"),
+        food_id:$('#id_data').data("food"),
         rating:value
 	};
 	

@@ -24,7 +24,7 @@
 	@if (Auth::check())
 	<b>Reviewing as {{Auth::user()->username}}</b> [User ID: {{Auth::user()->id}} on {{$data['id']}}]
 	<br>
-	<input id="input-1" class="rating"  value="{{$data['currentUserRating']}}" data-user="{{Auth::user()->id}}" data-food="{{$data['id']}}">
+	<input id="input-1" class="rating"  value="{{$data['currentUserRating']}}">
 	<div class="alert hidden" role="alert" id="postRatingAlert">
 	</div>
     {{Form::button('Update Review &raquo;', array('class' => 'btn btn-primary hidden', 'id' => 'updateCommentButton'))}}
