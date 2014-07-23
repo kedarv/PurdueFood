@@ -4,9 +4,7 @@ protected static $restful = true;
 	public function getContentDataAttribute($data) {
 		return json_decode($data);
 	}
-    public function pushData($name = NULL, $date = NULL)
-    {
-
+    public function pushData($name = NULL, $date = NULL){
 		if($date == NULL) {
 			$date = date('m-d-Y', time());
 		}

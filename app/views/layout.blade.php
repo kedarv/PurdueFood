@@ -44,7 +44,7 @@
                             <li>{{ HTML::linkAction('DiningController@pushData', 'Windsor', ['name' => 'Windsor']) }}</li>
                         </ul>
                     </li>
-					<li><a href="#">Search</a></li>
+					<li>{{ HTML::linkAction('SearchController@searchByDate', 'Search') }}</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					@if (Auth::guest())
