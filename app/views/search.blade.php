@@ -3,6 +3,39 @@
 @section('css')
 @parent
 {{ HTML::style('css/datepicker3.css'); }}
+<style>
+body.modal-open {
+    overflow: visible;
+}
+.spinner {
+  width: 30px;
+  height: 30px;
+  background-color: #333;
+
+  margin: 100px auto;
+  -webkit-animation: rotateplane 1.2s infinite ease-in-out;
+  animation: rotateplane 1.2s infinite ease-in-out;
+}
+
+@-webkit-keyframes rotateplane {
+  0% { -webkit-transform: perspective(120px) }
+  50% { -webkit-transform: perspective(120px) rotateY(180deg) }
+  100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
+}
+
+@keyframes rotateplane {
+  0% { 
+    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg) 
+  } 50% { 
+    transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg) 
+  } 100% { 
+    transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+  }
+}
+</style>
 @stop
 
 @section('bottom_js')
@@ -33,8 +66,19 @@ $('.input-group.date').datepicker({
         <h4 class="modal-title" id="myModalLabel">Modal title</h4>
       </div>
       <div class="modal-body">
-        display json from controller
-      </div>
+		<table class='table'>
+		<thead>
+			<tr>
+				<th>Date</th>
+				<th>Location</th>
+				<th>Meal</th>
+			</tr>
+			</thead>
+			<tbody id='details_id'>
+			</tbody>
+		</table>
+		<div class="spinner hidden" id="schedule_loader"></div>
+	  </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
@@ -78,6 +122,7 @@ $('.input-group.date').datepicker({
 		</div>
 		{{Form::submit('Search &raquo;', array('class' => 'btn btn-primary'))}}
 		{{ Form::close() }}
+		<div class="spinner hidden" id="search_loader"></div>
 		<div class="results hidden" id="results_container"><hr/><div class="list-group" id="results"></div></div>
 	</div>
 </div>

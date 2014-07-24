@@ -44,12 +44,14 @@ $('#submit-comment').submit(function() {
 	return false;
 });
 
+// Process Search Form
 $('#search_by_food').submit(function() {
 	var token = $("[name=_token]").val();
-	$("div.list_group").remove();
+	$("#results").empty();
+	 $('#search_loader').removeClass('hidden').fadeIn(100); 
 	$.ajax({
 		type: 'POST',
-        url: '/search/by/food',
+        url: '/purduefood/public/search/by/food',
 		dataType: 'json',
 		data: {_token: token, food: $("#insertFood").val()},
 		success:function (data) {
@@ -65,26 +67,29 @@ $('#search_by_food').submit(function() {
 			}
 		}
 	});
+	$('#search_loader').slideUp(500).delay(800).fadeOut(400);
 	return false;
 });
 
+// Display schedule of clicked item
 $(document).on('click', '#info', function(){ 
 	var food_id = $(this).data("id");
 	var food_name = $(this).data("name");
 	$("#myModalLabel").html(food_name);
+	 $('#schedule_loader').removeClass('hidden').fadeIn(100); 
 	$.ajax({
 		type: 'POST',
-        url: '/search/schedule',
+        url: '/purduefood/public/search/schedule',
 		dataType: 'json',
 		data: {food_id: food_id},
 		success:function (data) {
-			$.each(data, function(key, value){
+		$("#details_id").empty();
+		$.each(data, function(key, value){
 				$.each(value, function(key2, value2){
-				//still need to iterate upon key2
-				console.log(key2);
-					console.log(value[key2][value2]);
+					$('#details_id').append("<tr><td>" + value2['Date'] + "</td>" + "<td>" + value2['Location'] + "</td>" + "<td>" + value2['Meal'] + "</td></tr>");
 				});
 			});
+		$('#schedule_loader').slideUp(500).delay(800).fadeOut(400);
 		}
 	});
 	return false;
