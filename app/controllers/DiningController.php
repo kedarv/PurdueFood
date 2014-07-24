@@ -73,7 +73,7 @@ protected static $restful = true;
         $data['isFavorite']=0;
         if($favoriteLookup->count()==1)
         {
-            $data['isFavorite']=$favoriteLookup->favorite;
+            $data['isFavorite']=$favoriteLookup->first()->favorite;
         }
 
 
