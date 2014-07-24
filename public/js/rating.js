@@ -75,7 +75,7 @@ $('#search_by_food').submit(function() {
 $(document).on('click', '#info', function(){ 
 	var food_id = $(this).data("id");
 	var food_name = $(this).data("name");
-	$("#myModalLabel").html("<a href=/dining/food/" + food_id + ">" + food_name + "&raquo;</a><div class='align-right'><a href=/dining/food/" + food_id + ">" + food_name + "&raquo;</a>");
+	$("#myModalLabel").html("<a href=/dining/food/" + food_id + ">" + food_name + "&raquo;</a>");
 	 $('#schedule_loader').removeClass('hidden').fadeIn(100); 
 	$.ajax({
 		type: 'POST',
