@@ -62,6 +62,7 @@ $( document ).ready(function() {
             $('#updateCommentButton').addClass("hidden");
         });
     }
+
 });
 
 
@@ -70,20 +71,26 @@ $(function () {
     $(' [value^="foodToggle_"]:checkbox').change(function()
     {
         console.log(this.value + "|" + this.checked + " userID: " + $('#id_data').data("user") + " foodID: "+ $('#id_data').data("food"));
-        hideOrShow = this.checked
-//        $.post("favorites/update",
-//            {
-//                user_id:$('#id_data').data("user"),
-//                food_id:$('#id_data').data("food"),
-//                settingToggle:this.value,
-//                value:this.checked
-//
-//            },
-//            function(data,status)
-//            {
-//                do something upon success
-//
-//            });
+        favoriteOrNot = this.checked
+
+        form_data = {
+            user_id:$('#id_data').data("user"),
+            food_id:$('#id_data').data("food"),
+            foodToggle:this.value,
+            value:favoriteOrNot
+        };
+
+        $.ajax(
+         {
+            type: 'POST',
+            url: '/favorites/update',
+            data: form_data,
+            success:function (data)
+            {
+                $("#postFavoriteAlert").removeClass("alert-success alert-info").addClass("alert-" + data['status']).html(data['text']).fadeIn(500).removeClass("hidden").delay(5000).fadeOut();
+                console.log("Data: " + data['status'] + " " + data['text']);
+            }
+        }, 'json');
 
     });
 });

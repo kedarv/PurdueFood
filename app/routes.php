@@ -47,7 +47,7 @@ Route::get('user/details',                 array('before' => 'auth', 'uses' => '
 Route::post('ratings/setStar',               'DiningController@setStar');
 Route::post('ratings/insertComment',         array('before' => 'csrf|auth', 'uses' => 'DiningController@insertComment'));
 Route::post('user/updateSettingsToggles',   'UserController@updateSettingsToggles');
-Route::post('favorites/update',               'DiningController@aupdateFavorite');
+Route::post('favorites/update',               'DiningController@updateFavorites');
 
 //Search Routes
 Route::post('search/by/date',              array('before' => 'csrf', 'uses' => 'SearchController@redirectToDate'));

@@ -69,6 +69,8 @@ protected static $restful = true;
             $data['currentUserComment']="";
         }
 
+        $data['isFavorite']=Favorites::where('user_id', '=', Auth::id()) ->where('food_id', '=', $id, 'AND')->first()->favorite;
+
 
 
 		// Pass data to view
@@ -118,4 +120,37 @@ protected static $restful = true;
 			exit();
 		}
 	}
+    public function updateFavorites()
+    {
+        if (Request::ajax() && Input::get('user_id') == Auth::id()){
+            $data = array(
+                'food_id'=> Input::get('food_id'),
+                'user_id'=>  Input::get('user_id'),
+                'value'=> Input::get('value'),
+                'foodToggle' => Input::get('foodToggle')
+            );
+
+            $int=((int)($data['value']=="true"));
+            $getFavorite = Favorites::firstOrNew(array('user_id' => $data['user_id'], 'food_id' => $data['food_id']));
+            $getFavorite->favorite = $int;
+            $getFavorite->save();
+            if($int==0)
+            {
+                $text="Favorite Removed!";
+            }
+            else
+            {
+                $text="Marked as favorite!";
+            }
+
+                $return_data = array('status' => 'success', 'text' => $text);
+        } else {
+            $return_data = array('status' => 'danger', 'text' => 'Something went wrong!');
+        }
+        // Return JSON Reponse
+        header('Content-Type: application/json');
+        echo json_encode($return_data);
+        exit();
+    }
+
 }

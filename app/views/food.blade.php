@@ -19,10 +19,13 @@
 	<div style="display:inline-block;font-size:12px;">
 		<input id="input-avgRating" value="{{$data['averageRating']}}" class="rating" data-disabled="true" data-show-clear="false" data-show-caption="false">
 	</div>
+    <div style="display:inline-block;font-size:12px;">
+        {{Form::checkbox('Favorite', 'foodToggle_favorite', $data['isFavorite'],array('class' => 'icon-check'))}} Mark as favorite<br>
+    </div>
 @stop
 
 @section('content')
-{{Form::checkbox('Favorite', 'foodToggle_favorite', true)}} Mark as favorite<br>
+<div class="alert hidden" role="alert" id="postFavoriteAlert"></div>
 <input type="hidden" id="id_data" data-user="{{Auth::id()}}" data-food="{{$data['id']}}">
 	{{var_dump($json)}}
 	<hr/>
