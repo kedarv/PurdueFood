@@ -51,3 +51,4 @@ Route::post('favorites/update',               'DiningController@updateFavorites'
 //Search Routes
 Route::post('search/by/date',              array('before' => 'csrf', 'uses' => 'SearchController@redirectToDate'));
 Route::post('search/by/food',              array('before' => 'csrf', 'uses' => 'SearchController@searchByFood'));
+Route::post('search/schedule',             'SearchController@getSchedule');

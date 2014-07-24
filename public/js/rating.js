@@ -47,7 +47,6 @@ $('#submit-comment').submit(function() {
 $('#search_by_food').submit(function() {
 	var token = $("[name=_token]").val();
 	$("div.list_group").remove();
-	var pathname = window.location.pathname;
 	$.ajax({
 		type: 'POST',
         url: '/search/by/food',
@@ -60,7 +59,7 @@ $('#search_by_food').submit(function() {
 			else {
 				$.each(data, function(key, value){
 					console.log(key, value);
-					$('#results').append("<a href='dining/food/" +  value + "' class='list-group-item' style='padding-top:15px;'><h4 class=\"list-group-item-heading\">" + key + "<span class='glyphicon glyphicon-chevron-right pull-right'></span></h4></a>");
+					$('#results').append("<a href='#' class='list-group-item' style='padding-top:15px;' data-toggle='modal' data-target='#myModal' data-id='" + value + "' data-name='" +  key + "' id='info'><h4 class=\"list-group-item-heading\">" + key + "<span class='glyphicon glyphicon-chevron-right pull-right'></span></h4></a>");
 				});
 				$('#results_container').fadeIn(500).removeClass("hidden");
 			}
@@ -68,6 +67,28 @@ $('#search_by_food').submit(function() {
 	});
 	return false;
 });
+
+$(document).on('click', '#info', function(){ 
+	var food_id = $(this).data("id");
+	var food_name = $(this).data("name");
+	$("#myModalLabel").html(food_name);
+	$.ajax({
+		type: 'POST',
+        url: '/search/schedule',
+		dataType: 'json',
+		data: {food_id: food_id},
+		success:function (data) {
+			$.each(data, function(key, value){
+				$.each(value, function(key2, value2){
+				//still need to iterate upon key2
+				console.log(key2);
+					console.log(value[key2][value2]);
+				});
+			});
+		}
+	});
+	return false;
+})
 
 $( document ).ready(function() {
     console.log($('textarea', "#commentArea").val()=="");

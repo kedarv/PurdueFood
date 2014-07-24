@@ -60,4 +60,28 @@ class SearchController extends Controller {
 			exit();
 		}
 	}
+	public function getSchedule() {
+			$validator = Validator::make(
+				array('food_id' => Input::get('food_id')),
+				array('food_id' => 'required|min:3')
+			);
+			if ($validator->fails()) {
+				$json = json_encode(array('status' => 'danger', 'text' => 'Please fill in the form!'));
+			}
+			else { // Validation Passed
+				$url = "http://api.hfs.purdue.edu/Menus/v2/V2Items/". Input::get('food_id') . "?schedule";
+					 //"http://api.hfs.purdue.edu/Menus/v2/V2Items/78dbc504-255a-4060-839b-fe17ce8e005b?schedule";
+				if (Cache::has(Input::get('food_id') . "_schedule")) {
+					$json = Cache::get(Input::get('food_id') . "_schedule");
+				}
+				else {
+					$getfile = file_get_contents($url);
+					Cache::forever(Input::get('food_id') . "_schedule", $getfile);
+					$json = Cache::get(Input::get('food_id') . "_schedule");
+				}
+			}
+		header('Content-Type: application/json');
+		echo $json;
+		exit();
+	}
 }
