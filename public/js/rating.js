@@ -1,7 +1,3 @@
-$("#input-1").rating({
-	starCaptions: {1: "Very Poor", 2: "Poor", 3: "Ok", 4: "Good", 5: "Very Good"},
-	starCaptionClasses: {1: "text-danger", 2: "text-warning", 3: "text-info", 4: "text-primary", 5: "text-success"},
-});
 $("#input-1").on("rating.change", function(event, value, caption) {
 	console.log($('#id_data').data("user") + " voted " + value + " on "+ $('#id_data').data("food"));
 	form_data = {
@@ -48,6 +44,30 @@ $('#submit-comment').submit(function() {
 	return false;
 });
 
+$('#search_by_food').submit(function() {
+	var token = $("[name=_token]").val();
+	$("div.list_group").remove();
+	var pathname = window.location.pathname;
+	$.ajax({
+		type: 'POST',
+        url: '/search/by/food',
+		dataType: 'json',
+		data: {_token: token, food: $("#insertFood").val()},
+		success:function (data) {
+			if(data['status'] == "danger") {
+				$('#search_by_food_error').html(data['text']).fadeIn(500).removeClass("hidden").delay(5000).fadeOut();
+			}
+			else {
+				$.each(data, function(key, value){
+					console.log(key, value);
+					$('#results').append("<a href='dining/food/" +  value + "' class='list-group-item' style='padding-top:15px;'><h4 class=\"list-group-item-heading\">" + key + "<span class='glyphicon glyphicon-chevron-right pull-right'></span></h4></a>");
+				});
+				$('#results_container').fadeIn(500).removeClass("hidden");
+			}
+		}
+	});
+	return false;
+});
 
 $( document ).ready(function() {
     console.log($('textarea', "#commentArea").val()=="");

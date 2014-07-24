@@ -7,6 +7,7 @@
 
 @section('bottom_js')
 @parent
+{{ HTML::script('js/rating.js') }}
 {{ HTML::script('js/bootstrap-datepicker.js') }}
 <script>
 $('.input-group.date').datepicker({
@@ -50,19 +51,16 @@ $('.input-group.date').datepicker({
 
 <div class="col-md-6">
 	<div class="well">
-	Want to know when a dish will reappear in the dining courts? Search the name of the food below!<br/><hr/>
-		@if(Session::has('search_food_error'))
-		<div class="alert alert-danger">
-			{{ Session::get('search_food_error') }}
+		Want to know when a dish will reappear in the dining courts? Search the name of the food below!<br/><hr/>
+		<div class="alert alert-danger hidden" id="search_by_food_error"></div>
+		{{Form::open(array('action' => 'SearchController@searchByFood', 'id' => 'search_by_food'))}}
+		<div class="form-group">
+			{{Form::label('insertFood', 'Name of Food')}}
+			{{Form::text('food', null, array('class' => 'form-control', 'placeholder' => 'Name of Food', 'id' => 'insertFood' ))}}
 		</div>
-	@endif
-	{{Form::open(array('action' => 'SearchController@searchByFood'))}}
-	<div class="form-group">
-		{{Form::label('insertFood', 'Name of Food')}}
-		{{Form::text('food', null, array('class' => 'form-control', 'placeholder' => 'Name of Food', 'id' => 'insertFood' ))}}
-	</div>
-	{{Form::submit('Search &raquo;', array('class' => 'btn btn-primary'))}}
-	{{ Form::close() }}
+		{{Form::submit('Search &raquo;', array('class' => 'btn btn-primary'))}}
+		{{ Form::close() }}
+		<div class="results hidden" id="results_container"><hr/><div class="list-group" id="results"></div></div>
 	</div>
 </div>
 @stop
