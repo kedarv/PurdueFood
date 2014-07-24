@@ -69,8 +69,12 @@ protected static $restful = true;
             $data['currentUserComment']="";
         }
 
-        $data['isFavorite']=Favorites::where('user_id', '=', Auth::id()) ->where('food_id', '=', $id, 'AND')->first()->favorite;
-
+        $favoriteLookup=Favorites::where('user_id', '=', Auth::id()) ->where('food_id', '=', $id, 'AND');
+        $data['isFavorite']=0;
+        if($favoriteLookup->count()==1)
+        {
+            $data['isFavorite']=$favoriteLookup->favorite;
+        }
 
 
 		// Pass data to view
