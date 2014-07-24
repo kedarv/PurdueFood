@@ -13,14 +13,28 @@
 	CKEDITOR.replace('comment');
 </script>
 @stop
+<!--this chunk should probably go inside the header...-->
+<style>
+    input[type=checkbox] { display:none; } /* to hide the checkbox itself */
+    input[type=checkbox] + label:before {
+        font-family: FontAwesome;
+        display: inline-block;
+        font-size: 30px;
+        content: "\f004";
+    }
+    input[type=checkbox] + label:before { color: #BFBFBF; } /* allow space for check mark */
+    input[type=checkbox]:checked + label:before { color: #F01D7C; } /* allow space for check mark */
 
+</style>
 @section('append_header')
 @parent
 	<div style="display:inline-block;font-size:12px;">
 		<input id="input-avgRating" value="{{$data['averageRating']}}" class="rating" data-disabled="true" data-show-clear="false" data-show-caption="false">
 	</div>
     <div style="display:inline-block;font-size:12px;">
-        {{Form::checkbox('Favorite', 'foodToggle_favorite', $data['isFavorite'],array('class' => 'icon-check'))}} Mark as favorite<br>
+        {{Form::checkbox('Favorite', 'foodToggle_favorite', $data['isFavorite'], array('id' => 'favoriteCheckbox'))}}
+        <label for="favoriteCheckbox"></label>
+
     </div>
 @stop
 
