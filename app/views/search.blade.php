@@ -25,9 +25,10 @@ $('.input-group.date').datepicker({
 <hr/>
 <div class="col-md-6">
 	<div class="well">
-	@if(Session::has('search_error'))
+	Look up what food courts have served in the past, or view what they will serve in the future (up to one week).<hr/>
+	@if(Session::has('search_date_error'))
 		<div class="alert alert-danger">
-			{{ Session::get('search_error') }}
+			{{ Session::get('search_date_error') }}
 		</div>
 	@endif
 	
@@ -49,7 +50,19 @@ $('.input-group.date').datepicker({
 
 <div class="col-md-6">
 	<div class="well">
-		search by food
+	Want to know when a dish will reappear in the dining courts? Search the name of the food below!<br/><hr/>
+		@if(Session::has('search_food_error'))
+		<div class="alert alert-danger">
+			{{ Session::get('search_food_error') }}
+		</div>
+	@endif
+	{{Form::open(array('action' => 'SearchController@searchByFood'))}}
+	<div class="form-group">
+		{{Form::label('insertFood', 'Name of Food')}}
+		{{Form::text('food', null, array('class' => 'form-control', 'placeholder' => 'Name of Food', 'id' => 'insertFood' ))}}
+	</div>
+	{{Form::submit('Search &raquo;', array('class' => 'btn btn-primary'))}}
+	{{ Form::close() }}
 	</div>
 </div>
 @stop

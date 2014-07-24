@@ -13,19 +13,26 @@
 	CKEDITOR.replace('comment');
 </script>
 @stop
-<!--this chunk should probably go inside the header...-->
+
+@section('css')
+@parent
 <style>
     input[type=checkbox] { display:none; } /* to hide the checkbox itself */
     input[type=checkbox] + label:before {
         font-family: FontAwesome;
         display: inline-block;
-        font-size: 30px;
+		position: absolute;
+		margin-top: -22px;
+        font-size: 2.8em;
+		font-weight: 500;
         content: "\f004";
     }
     input[type=checkbox] + label:before { color: #BFBFBF; } /* allow space for check mark */
     input[type=checkbox]:checked + label:before { color: #F01D7C; } /* allow space for check mark */
 
 </style>
+@stop
+
 @section('append_header')
 @parent
 	<div style="display:inline-block;font-size:12px;">

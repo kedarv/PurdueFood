@@ -25,8 +25,7 @@ Route::get('dining/{name?}/{date?}', 'DiningController@pushData')
 
 Route::get('dining/food/{id}', 'DiningController@getFood');
 
-Route::get('search/{date?}', 'SearchController@searchByDate')
-->where(array('date' => '[0-9]{2}-[0-9]{2}-[0-9]{4}+'));
+Route::get('search', 'SearchController@searchMain');
 
 // Confide Routes
 Route::get('user/create',                 'UserController@create');
@@ -51,3 +50,4 @@ Route::post('favorites/update',               'DiningController@updateFavorites'
 
 //Search Routes
 Route::post('search/by/date',              array('before' => 'csrf', 'uses' => 'SearchController@redirectToDate'));
+Route::post('search/by/food',              array('before' => 'csrf', 'uses' => 'SearchController@searchByFood'));
