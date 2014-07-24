@@ -51,7 +51,7 @@ $('#search_by_food').submit(function() {
 	 $('#search_loader').removeClass('hidden').fadeIn(100); 
 	$.ajax({
 		type: 'POST',
-        url: '/purduefood/public/search/by/food',
+        url: '/search/by/food',
 		dataType: 'json',
 		data: {_token: token, food: $("#insertFood").val()},
 		success:function (data) {
@@ -79,7 +79,7 @@ $(document).on('click', '#info', function(){
 	 $('#schedule_loader').removeClass('hidden').fadeIn(100); 
 	$.ajax({
 		type: 'POST',
-        url: '/purduefood/public/search/schedule',
+        url: '/search/schedule',
 		dataType: 'json',
 		data: {food_id: food_id},
 		success:function (data) {
