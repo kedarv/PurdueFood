@@ -49,6 +49,7 @@ $('#search_by_food').submit(function() {
 	var token = $("[name=_token]").val();
 	$("#results").empty();
 	 $('#search_loader').removeClass('hidden').fadeIn(100); 
+	 $('#results_container').addClass("hidden");
 	$.ajax({
 		type: 'POST',
         url: '/search/by/food',
