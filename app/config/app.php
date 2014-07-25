@@ -123,6 +123,7 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Zizaco\Confide\ConfideServiceProvider',
 		'Barryvdh\MigrationGenerator\MigrationGeneratorServiceProvider',
+		'Mews\Purifier\PurifierServiceProvider',
 
 	),
 
@@ -190,7 +191,8 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
-		'Confide'    => 'Zizaco\Confide\ConfideFacade',
+		'Confide'  		  => 'Zizaco\Confide\ConfideFacade',
+		'Purifier' 		  => 'Mews\Purifier\Facades\Purifier',
 	),
 
 );

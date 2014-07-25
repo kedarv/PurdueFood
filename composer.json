@@ -8,7 +8,8 @@
 		"laravelbook/ardent": "dev-master",
         "zizaco/confide": "3.2.x",
 		"guzzlehttp/guzzle": "4.*",
-		"barryvdh/laravel-migration-generator": "dev-master"
+		"barryvdh/laravel-migration-generator": "dev-master",
+		"mews/purifier": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

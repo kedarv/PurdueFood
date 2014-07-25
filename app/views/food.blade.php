@@ -83,7 +83,7 @@
 					<input id="input-avgRating" value="{{$review['rating']}}" class="rating" data-size="xs" data-disabled="true" data-show-clear="false" data-show-caption="false">	
 					<small>Posted {{$review['created_at']}}</small>
 					<hr/>
-					{{$review['comment']}}
+					 {{Purifier::clean($review['comment'])}}
 				</div>
 			</div>
 			@endforeach
