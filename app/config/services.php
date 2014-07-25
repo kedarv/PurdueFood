@@ -16,7 +16,7 @@ return array(
 
 	'mailgun' => array(
 		'domain' => 'purduefood.com',
-		'secret' => '680e272672d50014595f79d7b5b7edcb ',
+		'secret' => 'key-2b1dxrtom76-hpnspdqqwjfdbnqy84m9 ',
 	),
 
 	'mandrill' => array(
