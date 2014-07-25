@@ -28,7 +28,7 @@ return array(
 	|
 	*/
 
-	'host' => 'smtp.mandrillapp.com',
+	'host' => 'smtp.mailgun.org',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => 'kedar54@gmail.com', 'name' => 'Purdue Food'),
+	'from' => array('address' => 'postmaster@purduefood.com', 'name' => 'Purdue Food'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return array(
 	|
 	*/
 
-	'username' => 'kedar54@gmail.com',
+	'username' => 'postmaster@purduefood.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return array(
 	|
 	*/
 
-	'password' => 'vmn9F5xqlOvYCYD5H4MK3g',
+	'password' => '680e272672d50014595f79d7b5b7edcb ',
 
 	/*
 	|--------------------------------------------------------------------------
