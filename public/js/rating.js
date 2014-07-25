@@ -48,8 +48,8 @@ $('#submit-comment').submit(function() {
 $('#search_by_food').submit(function() {
 	var token = $("[name=_token]").val();
 	$("#results").empty();
+	$('#results_container').addClass("hidden");
 	 $('#search_loader').removeClass('hidden').fadeIn(100); 
-	 $('#results_container').addClass("hidden");
 	$.ajax({
 		type: 'POST',
         url: '/search/by/food',
@@ -74,22 +74,23 @@ $('#search_by_food').submit(function() {
 
 // Display schedule of clicked item
 $(document).on('click', '#info', function(){ 
+	$("#details_id").empty().addClass("hidden");
 	var food_id = $(this).data("id");
 	var food_name = $(this).data("name");
 	$("#myModalLabel").html("<a href=/dining/food/" + food_id + ">" + food_name + "&raquo;</a>");
-	 $('#schedule_loader').removeClass('hidden').fadeIn(100); 
+	$('#schedule_loader').removeClass('hidden').fadeIn(100); 
 	$.ajax({
 		type: 'POST',
         url: '/search/schedule',
 		dataType: 'json',
 		data: {food_id: food_id},
 		success:function (data) {
-		$("#details_id").empty();
 		$.each(data, function(key, value){
 				$.each(value, function(key2, value2){
 					$('#details_id').append("<tr><td>" + value2['Date'] + "</td>" + "<td>" + value2['Location'] + "</td>" + "<td>" + value2['Meal'] + "</td></tr>");
 				});
 			});
+		$("#details_id").fadeIn(400).removeClass("hidden");
 		$('#schedule_loader').slideUp(500).delay(800).fadeOut(400);
 		}
 	});

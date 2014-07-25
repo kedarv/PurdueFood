@@ -23,7 +23,7 @@ class UserController extends BaseController {
 	
     public function details()
     {
-        $data['name']="Account Details";
+        $data['name'] = "";
         return View::make('user.details',compact('data'));
     }	
     /**

@@ -16,9 +16,9 @@
 					<a href="{{action('DiningController@getFood', ['id' => $items['ID']])}}" class="list-group-item" style="padding-top:15px;">
 						<h4 class="list-group-item-heading">{{{$items['Name']}}}
 						@if($items['IsVegetarian'] == true)
-							<span class="glyphicon glyphicon-leaf" style="color: green;"></span>
+							<span class="fa fa-leaf" style="color: green;"></span>
 						@endif
-						<span class="glyphicon glyphicon-chevron-right pull-right"></span>
+						<span class="fa fa-chevron-right pull-right" style="padding-top:2px;"></span>
 						</h4>
 					</a>
 			@endforeach
