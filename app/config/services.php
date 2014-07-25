@@ -15,8 +15,8 @@ return array(
 	*/
 
 	'mailgun' => array(
-		'domain' => '',
-		'secret' => '',
+		'domain' => 'purduefood.com',
+		'secret' => '680e272672d50014595f79d7b5b7edcb ',
 	),
 
 	'mandrill' => array(
