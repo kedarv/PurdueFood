@@ -55,6 +55,7 @@ protected static $restful = true;
 		// Push reviews to array
 		$reviews = $reviews->toArray();
 		//$getVotes = Votes::join('reviews', 'reviews.id', '=', 'votes.comment_id')->get(array('votes.vote', 'votes.user_id'))->toArray();
+		$images = Uploads::where('food_id', '=', $id)->get()->toArray();
 		
 		////////////////////////////////////////////////////////////////////
 		// THIS BLOCK SHOULD BE MERGED AS A JOIN
@@ -80,7 +81,7 @@ protected static $restful = true;
 		////////////////////////////////////////////////////////////////////
 
 		// Pass data to view
-		return View::make('food', compact('data', 'json', 'reviews'));
+		return View::make('food', compact('data', 'json', 'reviews', 'images'));
 	}
     public function setStar() {
 		// Verify that request is ajax, and that the user id sent is equal to the actual user id

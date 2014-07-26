@@ -51,7 +51,15 @@
 @stop
 
 @section('content')
-<form id="my-awesome-dropzone" action="{{ url('user/upload')}}" class="dropzone"></form>
+@foreach($images as $image)
+	<img src="{{URL::to('/')}}/uploads/{{($image['filename'])}}" style="width:250px;height:250px;">
+@endforeach
+
+@if (Auth::check())
+<form id="my-awesome-dropzone" action="{{ url('user/upload')}}" class="dropzone">
+	<input type="hidden" name="food_id" value="{{$data['id']}}" />
+</form>
+@endif
 
 <div class="alert hidden" role="alert" id="postFavoriteAlert"></div>
 <input type="hidden" id="id_data" data-user="{{Auth::id()}}" data-food="{{$data['id']}}">

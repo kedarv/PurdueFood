@@ -25,9 +25,9 @@ class UserController extends BaseController {
 			$filename = Str::random(20) . '.' . Input::file('file')->guessExtension();
 			$destinationPath = 'uploads';
 			$upload_success = Input::file('file')->move($destinationPath, $filename);
-
 			if( $upload_success ) {
-			   return Response::json('success', 200);
+				$upload = Uploads::create(array('food_id' => Input::get('food_id'), 'filename' => $filename, 'email' => Auth::user()->email));
+				return Response::json('success', 200);
 			} else {
 			   return Response::json('error', 400);
 			}
