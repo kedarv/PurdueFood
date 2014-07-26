@@ -9,6 +9,7 @@
 @parent
 {{ HTML::script('js/rating.js') }}
 {{ HTML::script('libs/ckeditor/ckeditor.js') }}
+{{ HTML::script('js/dropzone.js') }}
 <script>
 	$("#input-1").rating({
 		starCaptions: {1: "Very Poor", 2: "Poor", 3: "Ok", 4: "Good", 5: "Very Good"},
@@ -20,6 +21,7 @@
 
 @section('css')
 @parent
+{{ HTML::style('css/dropzone.css'); }}
 <style>
     input[type=checkbox] { display:none; } /* to hide the checkbox itself */
     input[type=checkbox] + label:before {
@@ -33,7 +35,6 @@
     }
     input[type=checkbox] + label:before { color: #BFBFBF; } /* allow space for check mark */
     input[type=checkbox]:checked + label:before { color: #F01D7C; } /* allow space for check mark */
-
 </style>
 @stop
 
@@ -50,9 +51,10 @@
 @stop
 
 @section('content')
+<form id="my-awesome-dropzone" action="{{ url('user/upload')}}" class="dropzone"></form>
+
 <div class="alert hidden" role="alert" id="postFavoriteAlert"></div>
 <input type="hidden" id="id_data" data-user="{{Auth::id()}}" data-food="{{$data['id']}}">
-	{{var_dump($json)}}
 	<hr/>
 	@if (Auth::check())
 	<b>Reviewing as {{Auth::user()->username}}</b> [User ID: {{Auth::user()->id}} on {{$data['id']}}]

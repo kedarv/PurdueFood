@@ -11,6 +11,28 @@
 */
 
 class UserController extends BaseController {
+	// Upload image
+	public function post_upload() {
+		$file = array('image' => Input::file('file'));
+		$rules = array(
+			'image' => 'image|max:2500|mimes:jpg,png,bmp'
+		);
+		$validator = Validator::make($file, $rules);
+		if ($validator->fails()) {
+			return Response::json('error', 400);
+		}
+		else {
+			$filename = Str::random(20) . '.' . Input::file('file')->guessExtension();
+			$destinationPath = 'uploads';
+			$upload_success = Input::file('file')->move($destinationPath, $filename);
+
+			if( $upload_success ) {
+			   return Response::json('success', 200);
+			} else {
+			   return Response::json('error', 400);
+			}
+		}
+	}
 
     /**
      * Displays the form for account creation
