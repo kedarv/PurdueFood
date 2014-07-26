@@ -15,7 +15,7 @@ return array(
 	|
 	*/
 
-	'driver' => 'mailgun',
+	'driver' => 'smtp',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => 'kedar54@gmail.com', 'name' => 'Purdue Food'),
+	'from' => array('address' => 'post@purduefood.com', 'name' => 'Purdue Food'),
 
 	/*
 	|--------------------------------------------------------------------------

@@ -54,17 +54,18 @@ protected static $restful = true;
 
 		// Push reviews to array
 		$reviews = $reviews->toArray();
-
+		//$getVotes = Votes::join('reviews', 'reviews.id', '=', 'votes.comment_id')->get(array('votes.vote', 'votes.user_id'))->toArray();
+		
+		////////////////////////////////////////////////////////////////////
+		// THIS BLOCK SHOULD BE MERGED AS A JOIN
         $query = Reviews::where('user_id', '=', Auth::id())
             ->where('food_id', '=', $id, 'AND');
-        if($query->count()>=1)
-        {
+        if($query->count()>=1){
             $updated=$query->first();
             $data['currentUserRating']=$updated->rating;
             $data['currentUserComment']=$updated->comment;
         }
-        else
-        {
+        else {
             $data['currentUserRating']=0;
             $data['currentUserComment']="";
         }
@@ -75,7 +76,8 @@ protected static $restful = true;
         {
             $data['isFavorite']=$favoriteLookup->first()->favorite;
         }
-
+		// THIS BLOCK SHOULD BE MERGED AS A JOIN
+		////////////////////////////////////////////////////////////////////
 
 		// Pass data to view
 		return View::make('food', compact('data', 'json', 'reviews'));
@@ -124,6 +126,33 @@ protected static $restful = true;
 			exit();
 		}
 	}
+	public function insertVote() {
+		if (Request::ajax()){
+				if(Input::get('action') == "up") {
+					$vote = 1;
+				}
+				else {
+					$vote = 0;
+				}
+			$getVote = Votes::firstOrNew(array('user_id' => Auth::user()->id, 'comment_id' => Input::get('comment_id')));
+			if(time() > strtotime($getVote['updated_at']) + 10) {
+				$getVote->user_id = Auth::user()->id;
+				$getVote->vote = $vote;
+				$getVote->comment_id = Input::get('comment_id');
+				$getVote->updated_at = date('Y-m-d H:i:s', time());
+				$getVote->save();
+				$return_data = array('status' => 'success', 'text' => 'Thanks for voting!', 'id' => Input::get('action')); 
+			} else {
+				$return_data = array('status' => 'info', 'text' => 'Please wait a bit before voting again.', 'id' => Input::get('action'));
+			}
+		} else {
+			$return_data = array('status' => 'danger', 'text' => 'Something went wrong!', 'id' => Input::get('action'));
+		}
+		header('Content-Type: application/json');
+		echo json_encode($return_data);
+		exit();
+	}
+	
     public function updateFavorites()
     {
         if (Request::ajax() && Input::get('user_id') == Auth::id()){

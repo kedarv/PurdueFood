@@ -5,7 +5,6 @@ $("#input-1").on("rating.change", function(event, value, caption) {
         food_id:$('#id_data').data("food"),
         rating:value
 	};
-	
 	$.ajax({
 		type: 'POST',
         url: '/ratings/setStar',
@@ -95,7 +94,32 @@ $(document).on('click', '#info', function(){
 		}
 	});
 	return false;
-})
+});
+
+// Vote on Comments
+$(document).on('click', '.vote', function(){
+	$(this).children("i").removeClass("active").addClass("fa-spin");
+	form_data = {
+		action: $(this).attr("id"),
+        comment_id:$(this).data("comment_id"),
+	};
+	$.ajax({
+		type: 'POST',
+        url: '/ratings/insertVote',
+		dataType: 'json',
+		data: form_data,
+		success:function (data) {
+			if(data['status'] == "success") {
+				$("#" + data['id']).addClass("active");
+				$("#" + data['id']).children("i").removeClass("fa-spin fa-arrow-down").addClass("fa-check");
+			}
+			else {
+				$("#" + data['id']).children("i").removeClass("fa-spin fa-arrow-up fa-arrow-down active").addClass("fa-exclamation-triangle");
+			}
+			console.log(data);
+		}
+	});	
+});
 
 $( document ).ready(function() {
     console.log($('textarea', "#commentArea").val()=="");
