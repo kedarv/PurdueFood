@@ -1,15 +1,4 @@
 <?php
-
-/*
-|--------------------------------------------------------------------------
-| Confide Controller Template
-|--------------------------------------------------------------------------
-|
-| This is the default Confide controller template for controlling user
-| authentication. Feel free to change to your needs.
-|
-*/
-
 class UserController extends BaseController {
 	// Upload image
 	public function post_upload() {
@@ -32,6 +21,21 @@ class UserController extends BaseController {
 			   return Response::json('error', 400);
 			}
 		}
+	}
+	// Generate code for image upload by email
+	public function generateEmailCode(){
+		if (Request::ajax()) {
+			$shortcode = substr(md5(rand()), 0, 3);
+			$getUpload = Uploads::firstOrNew(array('email' => Auth::user()->email, 'food_id' => Input::get('food_id'), 'filename' => ''));
+			$getUpload->email = Auth::user()->email;
+			$getUpload->food_id = Input::get('food_id');
+			$getUpload->shortcode = $shortcode;
+			$getUpload->save();
+			$return_data = array('status' => 'success', 'code' => $shortcode); 
+		}
+		header('Content-Type: application/json');
+		echo json_encode($return_data);
+		exit();
 	}
 
     /**

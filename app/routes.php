@@ -44,6 +44,7 @@ Route::get('user/details',                 array('before' => 'auth', 'uses' => '
 
 //Upload Route
 Route::post('user/upload',                 'UserController@post_upload');
+Route::post('user/generateCode',                 'UserController@generateEmailCode');
 
 //Rating, Comment, Favorite Routes
 Route::post('ratings/setStar',               'DiningController@setStar');

@@ -121,6 +121,28 @@ $(document).on('click', '.vote', function(){
 	});	
 });
 
+// Generate random shortcode
+$(document).on('click', '#generate_code', function(){ 
+	form_data = {
+		user_id: $(this).data("user"),
+        food_id: $(this).data("food")
+	};
+	$.ajax({
+		type: 'POST',
+        url: '/purduefood/public/user/generateCode',
+		dataType: 'json',
+		data: form_data,
+		success:function (data) {
+			if(data['status'] == "success") {
+				console.log(data);
+				console.log(data['code']);
+				$("#genCode").html(data['code']);
+			}
+		}
+	});
+	return false;
+});
+
 $( document ).ready(function() {
     console.log($('textarea', "#commentArea").val()=="");
     if($('textarea', "#commentArea").val()!="")

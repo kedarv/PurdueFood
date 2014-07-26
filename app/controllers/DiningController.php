@@ -55,7 +55,7 @@ protected static $restful = true;
 		// Push reviews to array
 		$reviews = $reviews->toArray();
 		//$getVotes = Votes::join('reviews', 'reviews.id', '=', 'votes.comment_id')->get(array('votes.vote', 'votes.user_id'))->toArray();
-		$images = Uploads::where('food_id', '=', $id)->get()->toArray();
+		$images = Uploads::where('food_id', '=', $id)->where('filename', '!=', '')->get()->toArray();
 		
 		////////////////////////////////////////////////////////////////////
 		// THIS BLOCK SHOULD BE MERGED AS A JOIN

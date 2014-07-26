@@ -35,6 +35,14 @@
     }
     input[type=checkbox] + label:before { color: #BFBFBF; } /* allow space for check mark */
     input[type=checkbox]:checked + label:before { color: #F01D7C; } /* allow space for check mark */
+	.code {
+		padding: 2px 4px;
+		font-size: 90%;
+		color: #fff;
+		background-color: #333;
+		border-radius: 3px;
+		box-shadow: inset 0 -1px 0 rgba(0,0,0,.25);
+	}
 </style>
 @stop
 
@@ -51,22 +59,61 @@
 @stop
 
 @section('content')
-@foreach($images as $image)
-	<img src="{{URL::to('/')}}/uploads/{{($image['filename'])}}" style="width:250px;height:250px;">
-@endforeach
-
-@if (Auth::check())
-<form id="my-awesome-dropzone" action="{{ url('user/upload')}}" class="dropzone">
-	<input type="hidden" name="food_id" value="{{$data['id']}}" />
-</form>
-@endif
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Upload image by email</h4>
+      </div>
+      <div class="modal-body">
+        Please send an email with your image attached to {{ HTML::mailto('postmaster@purduefood.com') }} with the subject: <span class="code" id="genCode">generating..</span>
+		<hr/>
+		If you are not using the same email address as your Purdue Food account, it may take up to 48 hours for your image to be processed.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+	@if (Auth::check())
+	<div class="col-xs-6 col-md-4">
+		<div class="thumbnail">
+			<form id="my-awesome-dropzone" action="{{ url('user/upload')}}" class="dropzone">
+				<input type="hidden" name="food_id" value="{{$data['id']}}" />
+			</form>
+		</div>
+	</div>
+	@else
+	<div class="col-xs-6 col-md-2">
+		<a href="#" class="thumbnail">
+           <img src="http://placehold.it/180x110" style="height: 110px;" class="img-response">
+        </a>
+	</div>
+	<div class="col-xs-6 col-md-2">
+		<a href="#" class="thumbnail">
+			<img src="http://placehold.it/180x110" style="height: 110px;" class="img-response">
+		</a>
+	</div>
+	@endif
+	@foreach($images as $image)
+	<div class="col-xs-6 col-md-2">
+		<a href="#" class="thumbnail">
+			<img src="{{URL::to('/')}}/uploads/{{($image['filename'])}}" style="height: 110px;" class="img-response">
+		</a>
+	</div>
+	@endforeach	
+	<div class="col-md-12">
+		<a href="#" id="generate_code" data-toggle="modal" data-target="#myModal" data-user="{{Auth::id()}}" data-food="{{$data['id']}}">Upload an image by sending an email &raquo;</a>
+	</div>
+</div>
 
 <div class="alert hidden" role="alert" id="postFavoriteAlert"></div>
 <input type="hidden" id="id_data" data-user="{{Auth::id()}}" data-food="{{$data['id']}}">
 	<hr/>
 	@if (Auth::check())
-	<b>Reviewing as {{Auth::user()->username}}</b> [User ID: {{Auth::user()->id}} on {{$data['id']}}]
-	<br>
 	<input id="input-1" class="rating"  value="{{$data['currentUserRating']}}">
 	<div class="alert hidden" role="alert" id="postRatingAlert"></div>
     {{Form::button('Update Review &raquo;', array('class' => 'btn btn-primary hidden', 'id' => 'updateCommentButton'))}}
