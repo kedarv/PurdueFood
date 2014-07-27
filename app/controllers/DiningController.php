@@ -186,4 +186,44 @@ protected static $restful = true;
         echo json_encode($return_data);
         exit();
     }
+    public function receiveMailImages()
+    {
+        $username="api";
+        $password="key-0mmilzckzqe6pw0hhm9fhq5ej4aa4nq8";
+        $data = $_POST;
+
+        $fromemail = $data['sender'];
+        $subject = $data['subject'];
+        $body = $data['body-plain'];
+        error_log($fromemail);
+        error_log($subject);
+        error_log($body);
+        $attachmentCount=count($data['attachments']);
+        error_log($data['attachments']);
+        error_log($attachmentCount);
+        if(($attachmentCount)>=1)
+        {
+            $arr=json_decode($data['attachments']);
+            foreach($arr as $item)
+            {
+                $url=$item->{'url'};
+                $name=$item->{'name'};
+                //File to save the contents to
+                $fp = fopen ("uploads/".$fromemail."_".$subject."_".$name, 'w+');
+                $ch = curl_init($url);
+                curl_setopt($ch, CURLOPT_TIMEOUT, 50);
+
+                //give curl the file pointer so that it can write to it
+                curl_setopt($ch, CURLOPT_FILE, $fp);
+                curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+                curl_setopt($ch, CURLOPT_USERPWD, $username . ":" . $password);
+                $data = curl_exec($ch);//get curl response
+                curl_close($ch);
+
+
+
+            }
+        }
+        file_put_contents('incomingmail.log', $output,);
+    }
 }
