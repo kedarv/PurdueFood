@@ -51,6 +51,9 @@
 	<div style="display:inline-block;font-size:12px;">
 		<input id="input-avgRating" value="{{$data['averageRating']}}" class="rating" data-disabled="true" data-show-clear="false" data-show-caption="false">
 	</div>
+<div style="display:inline-block;font-size:12px;">
+    ({{$data['numVotes']}} votes)
+    </div>
 @if (Auth::check())
     <div style="display:inline-block;font-size:12px;">
         {{Form::checkbox('Favorite', 'foodToggle_favorite', $data['isFavorite'], array('id' => 'favoriteCheckbox'))}}
