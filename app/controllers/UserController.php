@@ -4,7 +4,7 @@ class UserController extends BaseController {
 	public function post_upload() {
 		$file = array('image' => Input::file('file'));
 		$rules = array(
-			'image' => 'image|max:2500|mimes:jpg,png,bmp'
+			'image' => 'image|max:2500|mimes:jpeg,png,bmp'
 		);
 		$validator = Validator::make($file, $rules);
 		if ($validator->fails()) {
