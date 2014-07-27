@@ -51,6 +51,37 @@
 		border-radius: 3px;
 		box-shadow: inset 0 -1px 0 rgba(0,0,0,.25);
 	}
+	body.modal-open {
+		overflow: visible;
+	}
+	.spinner {
+	  width: 30px;
+	  height: 30px;
+	  background-color: #333;
+
+	  margin: 100px auto;
+	  -webkit-animation: rotateplane 1.2s infinite ease-in-out;
+	  animation: rotateplane 1.2s infinite ease-in-out;
+	}
+
+	@-webkit-keyframes rotateplane {
+	  0% { -webkit-transform: perspective(120px) }
+	  50% { -webkit-transform: perspective(120px) rotateY(180deg) }
+	  100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
+	}
+
+	@keyframes rotateplane {
+	  0% { 
+		transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+		-webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg) 
+	  } 50% { 
+		transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+		-webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg) 
+	  } 100% { 
+		transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+		-webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+	  }
+	}
 </style>
 @stop
 
@@ -69,15 +100,46 @@
 
     </div>
 @endif
+</h1>
+<a href="#" data-toggle="modal" data-target="#scheduleModal" data-id="{{$data['id']}}" data-name="{{$data['name']}}" id="info">View Item Schedule &raquo;</a>
+<hr/>
 @stop
 
 @section('content')
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="scheduleModal" tabindex="-1" role="dialog" aria-labelledby="scheduleModal" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">Upload image by email</h4>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+		<table class='table'>
+		<thead>
+			<tr>
+				<th>Date</th>
+				<th>Location</th>
+				<th>Meal</th>
+			</tr>
+			</thead>
+			<tbody id='details_id'>
+			</tbody>
+		</table>
+		<div class="spinner hidden" id="schedule_loader"></div>
+	  </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="uploadModalLabel">Upload image by email</h4>
       </div>
       <div class="modal-body">
         Please send an email with your image attached to {{ HTML::mailto('postmaster@purduefood.com') }} with the subject: <span class="code" id="genCode">generating..</span>
