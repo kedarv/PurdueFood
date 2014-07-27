@@ -8,7 +8,7 @@ class UserController extends BaseController {
 		);
 		$validator = Validator::make($file, $rules);
 		if ($validator->fails()) {
-			return Response::json('error', 400);
+			return Response::json('error1', 400);
 		}
 		else {
 			$filename = Str::random(20) . '.' . Input::file('file')->guessExtension();
