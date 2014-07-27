@@ -98,7 +98,9 @@ $(document).on('click', '#info', function(){
 
 // Vote on Comments
 $(document).on('click', '.vote', function(){
-	$(this).children("i").removeClass("active").addClass("fa-spin");
+	$(".vote").removeClass("active");
+	$(this).toggleClass("active");
+	$(this).children("i").addClass("fa-spin");
 	form_data = {
 		action: $(this).attr("id"),
         comment_id:$(this).data("comment_id"),
@@ -110,11 +112,11 @@ $(document).on('click', '.vote', function(){
 		data: form_data,
 		success:function (data) {
 			if(data['status'] == "success") {
-				$("#" + data['id']).addClass("active");
-				$("#" + data['id']).children("i").removeClass("fa-spin fa-arrow-down").addClass("fa-check");
+				$("#" + data['opposite']).children("i").removeClass("fa-check").addClass("fa-arrow-" + data['opposite']);
+				$("#" + data['id']).children("i").removeClass("fa-spin fa-arrow-down fa-arrow-up fa-exclamation-triangle").addClass("fa-check");
 			}
 			else {
-				$("#" + data['id']).children("i").removeClass("fa-spin fa-arrow-up fa-arrow-down active").addClass("fa-exclamation-triangle");
+				$("#" + data['id']).children("i").removeClass("fa-spin fa-arrow-up fa-arrow-down").addClass("fa-exclamation-triangle");
 			}
 			console.log(data);
 		}

@@ -54,7 +54,10 @@ protected static $restful = true;
 
 		// Push reviews to array
 		$reviews = $reviews->toArray();
-		//$getVotes = Votes::join('reviews', 'reviews.id', '=', 'votes.comment_id')->get(array('votes.vote', 'votes.user_id'))->toArray();
+		/*$getVotes = Reviews::where('reviews.food_id', '=', $id)
+					->join('votes', 'votes.comment_id', '=', 'reviews.id')
+					->get(array('votes.vote', 'votes.user_id', 'votes.comment_id'))->toArray();
+		*/
 		$images = Uploads::where('food_id', '=', $id)->where('filename', '!=', '')->get()->toArray();
 		
 		////////////////////////////////////////////////////////////////////
@@ -130,9 +133,11 @@ protected static $restful = true;
 	public function insertVote() {
 		if (Request::ajax()){
 				if(Input::get('action') == "up") {
+					$opp = "down"; // Opposite of action
 					$vote = 1;
 				}
 				else {
+					$opp = "up"; // Opposite of action
 					$vote = 0;
 				}
 			$getVote = Votes::firstOrNew(array('user_id' => Auth::user()->id, 'comment_id' => Input::get('comment_id')));
@@ -142,9 +147,9 @@ protected static $restful = true;
 				$getVote->comment_id = Input::get('comment_id');
 				$getVote->updated_at = date('Y-m-d H:i:s', time());
 				$getVote->save();
-				$return_data = array('status' => 'success', 'text' => 'Thanks for voting!', 'id' => Input::get('action')); 
+				$return_data = array('status' => 'success', 'text' => 'Thanks for voting!', 'id' => Input::get('action'), 'opposite' => $opp); 
 			} else {
-				$return_data = array('status' => 'info', 'text' => 'Please wait a bit before voting again.', 'id' => Input::get('action'));
+				$return_data = array('status' => 'info', 'text' => 'Please wait a bit before voting again.', 'id' => Input::get('action'), 'opposite' => $opp);
 			}
 		} else {
 			$return_data = array('status' => 'danger', 'text' => 'Something went wrong!', 'id' => Input::get('action'));
@@ -224,6 +229,6 @@ protected static $restful = true;
 
             }
         }
-        file_put_contents('incomingmail.log', $output,);
+        file_put_contents('incomingmail.log', $output);
     }
 }

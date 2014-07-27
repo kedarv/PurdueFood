@@ -10,10 +10,17 @@
 {{ HTML::script('js/rating.js') }}
 {{ HTML::script('libs/ckeditor/ckeditor.js') }}
 {{ HTML::script('js/dropzone.js') }}
+{{ HTML::script('js/jquery.fancybox.pack.js') }}
 <script>
 	$("#input-1").rating({
 		starCaptions: {1: "Very Poor", 2: "Poor", 3: "Ok", 4: "Good", 5: "Very Good"},
 		starCaptionClasses: {1: "text-danger", 2: "text-warning", 3: "text-info", 4: "text-primary", 5: "text-success"},
+	});
+	$(".fancybox").fancybox({
+		openEffect  : 'elastic',
+		closeEffect : 'elastic',
+		nextEffect  : 'none',
+		prevEffect : 'none',
 	});
 	CKEDITOR.replace('comment');
 </script>
@@ -22,6 +29,7 @@
 @section('css')
 @parent
 {{ HTML::style('css/dropzone.css'); }}
+{{ HTML::style('css/jquery.fancybox.css'); }}
 <style>
     input[type=checkbox] { display:none; } /* to hide the checkbox itself */
     input[type=checkbox] + label:before {
@@ -91,28 +99,19 @@
 			</form>
 		</div>
 	</div>
-	@else
-	<div class="col-xs-6 col-md-2">
-		<a href="#" class="thumbnail">
-           <img src="http://placehold.it/180x110" style="height: 110px;" class="img-response">
-        </a>
-	</div>
-	<div class="col-xs-6 col-md-2">
-		<a href="#" class="thumbnail">
-			<img src="http://placehold.it/180x110" style="height: 110px;" class="img-response">
-		</a>
-	</div>
 	@endif
 	@foreach($images as $image)
 	<div class="col-xs-6 col-md-2">
-		<a href="#" class="thumbnail">
-			<img src="{{URL::to('/')}}/uploads/{{($image['filename'])}}" style="height: 110px;" class="img-response">
+		<a rel="gallery" class="fancybox thumbnail" href="{{URL::to('/')}}/uploads/{{($image['filename'])}}">
+			<img src="{{URL::to('/')}}/uploads/{{($image['filename'])}}" style="height: 110px;" class="img-responsive">
 		</a>
 	</div>
-	@endforeach	
+	@endforeach
+	@if (Auth::check())
 	<div class="col-md-12">
 		<a href="#" id="generate_code" data-toggle="modal" data-target="#myModal" data-user="{{Auth::id()}}" data-food="{{$data['id']}}">Upload an image by sending an email &raquo;</a>
 	</div>
+	@endif
 </div>
 
 <div class="alert hidden" role="alert" id="postFavoriteAlert"></div>
@@ -133,7 +132,7 @@
 	@else
 	Hey, you need an account to comment! {{ HTML::linkAction('UserController@create', 'Register', 'Register') }} or {{ HTML::linkAction('UserController@login', 'Login', 'Login') }}
 	@endif
-	<hr/>
+	<hr/>	
 	<div class="comments"></div>
 		@foreach(array_chunk($reviews, 2) as $twoReviews)
 			<div class="row">
@@ -141,14 +140,6 @@
 			<div class="col-md-6">
 				<div class="well">
 					<img src="http://www.gravatar.com/avatar/{{md5(strtolower(trim($review['email'])))}}?&r=x&d=identicon" alt="{{$review['username']}}" class="img-responsive" style="float:left;padding-right:10px;"/>
-					<div style="float:right;">
-						<a class="btn btn-primary btn-sm vote" id="up" data-comment_id="{{$review['id']}}">
-							<i class="fa fa-arrow-up"></i>
-						</a>
-						<a class="btn btn-danger btn-sm vote" id="down" data-comment_id="{{$review['id']}}">
-							<i class="fa fa fa-arrow-down"></i>
-						</a>
-					</div>
 					<h4 style="margin:0px 0px 0px 95px;">{{$review['username']}}</h4>
 					<input id="input-avgRating" value="{{$review['rating']}}" class="rating" data-size="xs" data-disabled="true" data-show-clear="false" data-show-caption="false">	
 					<small>Posted {{$review['created_at']}}</small>
