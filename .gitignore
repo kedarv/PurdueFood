@@ -9,3 +9,4 @@ Thumbs.db
 app/config/mail.php
 app/storage/cache
 app/config/database.php
+public/uploads
