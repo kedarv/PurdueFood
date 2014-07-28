@@ -201,7 +201,7 @@
 			@foreach($twoReviews as $review)
 			<div class="col-md-6">
 				<div class="well">
-					<img src="http://www.gravatar.com/avatar/{{md5(strtolower(trim($review['email'])))}}?&r=x&d=identicon" alt="{{$review['username']}}" class="img-responsive" style="float:left;padding-right:10px;"/>
+					<img src="https://www.gravatar.com/avatar/{{md5(strtolower(trim($review['email'])))}}?&r=x&d=identicon" alt="{{$review['username']}}" class="img-responsive" style="float:left;padding-right:10px;"/>
 					<h4 style="margin:0px 0px 0px 95px;">{{$review['username']}}</h4>
 					<input id="input-avgRating" value="{{$review['rating']}}" class="rating" data-size="xs" data-disabled="true" data-show-clear="false" data-show-caption="false">	
 					<small>Posted {{$review['created_at']}}</small>
