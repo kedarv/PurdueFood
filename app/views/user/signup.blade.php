@@ -4,6 +4,14 @@
 			<input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
 			<fieldset>
 				<div class="form-group">
+					<label for="firstname">First Name</label>
+					<input class="form-control" placeholder="First Name" type="text" name="firstname" id="firstname" value="{{{ Input::old('firstname') }}}">
+				</div>
+				<div class="form-group">
+					<label for="lastname">Last Name</label>
+					<input class="form-control" placeholder="Last Name" type="text" name="lastname" id="lastname" value="{{{ Input::old('lastname') }}}">
+				</div>
+				<div class="form-group">
 					<label for="username">{{{ Lang::get('confide::confide.username') }}}</label>
 					<input class="form-control" placeholder="{{{ Lang::get('confide::confide.username') }}}" type="text" name="username" id="username" value="{{{ Input::old('username') }}}">
 				</div>
