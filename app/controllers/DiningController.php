@@ -194,7 +194,7 @@ protected static $restful = true;
     public function receiveMailImages()
     {
         $username="api";
-        $password="key-0mmilzckzqe6pw0hhm9fhq5ej4aa4nq8";
+        $password="key-2b1dxrtom76-hpnspdqqwjfdbnqy84m9";
         $data = $_POST;
 
         $fromemail = $data['sender'];
@@ -206,6 +206,9 @@ protected static $restful = true;
         $attachmentCount=count($data['attachments']);
         error_log($data['attachments']);
         error_log($attachmentCount);
+
+
+
         if(($attachmentCount)>=1)
         {
             $arr=json_decode($data['attachments']);
@@ -224,11 +227,9 @@ protected static $restful = true;
                 curl_setopt($ch, CURLOPT_USERPWD, $username . ":" . $password);
                 $data = curl_exec($ch);//get curl response
                 curl_close($ch);
-
-
-
             }
         }
-        file_put_contents('incomingmail.log', $output);
+        $output = print_r($_REQUEST, true);
+        file_put_contents('incomingmail.log', $output, FILE_APPEND);
     }
 }

@@ -57,5 +57,5 @@ Route::post('ratings/insertVote',         array('before' => 'auth', 'uses' => 'D
 Route::post('search/by/date',              array('before' => 'csrf', 'uses' => 'SearchController@redirectToDate'));
 Route::post('search/by/food',              array('before' => 'csrf', 'uses' => 'SearchController@searchByFood'));
 Route::post('search/schedule',             'SearchController@getSchedule');
-Route::post('mail/receiveImages', 'DiningController@receiveMailImages');
+Route::post('mail/receiveimages', 'DiningController@receiveMailImages');
 Route::get('fb/callback', 'UserController@fbCallback');
