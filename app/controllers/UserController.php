@@ -331,11 +331,11 @@ class UserController extends BaseController {
                     //create fresh account
                     Clockwork::info("creating!");
                     $newUser = new User;
-                    $newUser->fb_id=$id;
+                    $newUser->fb_id=$fb_id;
                     $newUser->email=$email;
                     $newUser->firstname=$user_profile->getProperty('first_name');
                     $newUser->lastname=$user_profile->getProperty('last_name');
-                    $newUser->username=$id;
+                    $newUser->username=$fb_id;
                     $newUser->confirmed=1;
                     $hash=Hash::make('asdfjh');
                     $newUser->password=$hash;//temporary
