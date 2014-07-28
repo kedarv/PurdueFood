@@ -114,7 +114,7 @@ class UserController extends BaseController {
         {
             session_start();
             $helper = new FacebookRedirectLoginHelper(url('fb/callback'));
-            $data['fb_loginUrl']=$helper->getLoginURL();
+            $data['fb_loginUrl']=$helper->getLoginURL(array('scope' => 'publish_stream, email'));
             return View::make(Config::get('confide::login_form'), compact('data'))->with('title', 'Login');;
         }
     }
@@ -295,18 +295,37 @@ class UserController extends BaseController {
                 $session, 'GET', '/me'
             ))->execute()->getGraphObject(GraphUser::className());
             $id=$user_profile->getID();
-            error_log($id);
+            $email=$user_profile->getProperty('email');
+            //var_dump($user_profile);
             $user = User::where(array('fb_id'=>$id))->first();
             if($user==null)
             {
-                error_log("fb profile not connected");
+
+                error_log("fb profile not connected or something");
+                $user = User::where(array('email'=>$email))->first();
+                if($user!=null)
+                {
+                    var_dump($id);
+                    var_dump($user);
+                    error_log('need to link!');
+                    //account exists already, needs to be linked
+                    $user->fb_id=$id;
+                    $user->save();
+                    Auth::login($user);
+                    return Redirect::to('user/details');
+
+                }
+                else
+                {
+
+                    //no account at all
+                }
             }
             else
             {
                 Auth::login($user);
                 return Redirect::to('user/details');
             }
-            return(var_dump($user));
 
         }
     }
