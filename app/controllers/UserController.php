@@ -291,55 +291,66 @@ class UserController extends BaseController {
             Clockwork::info($ex);
             // When validation fails or other local issues
         }
-        if ($session) {
-            Clockwork::info("logged in via fb!");
+        if ($session)
+        {
+            Clockwork::info("fb callback success!");
             // Logged in.
             $user_profile = (new FacebookRequest(
                 $session, 'GET', '/me'
             ))->execute()->getGraphObject(GraphUser::className());
-            $id=$user_profile->getID();
+            $fb_id=$user_profile->getID();
             $email=$user_profile->getProperty('email');
             //var_dump($user_profile);
-            $user = User::where(array('fb_id'=>$id))->first();
+            $user = User::where(array('fb_id'=>$fb_id))->first();
             Clockwork::info($user_profile); // 'Message text.' appears in Clockwork log tab
             if($user==null)
             {
-
+                //fb uid not found in database
                 Clockwork::info("fb profile not connected or something");
-                $user = User::where(array('email'=>$email))->first();
-                if($user!=null)
+                $user2 = User::where(array('email'=>$email))->first();
+                if($user2!=null)
                 {
-//                    var_dump($id);
-//                    var_dump($user);
+                    //account with facebook email exists already
+                    Clockwork::info($user2);
                     Clockwork::info('need to link!');
-                    //account exists already, needs to be linked
-                    $user->fb_id=$id;
-                    $user->save();
-                    Auth::login($user);
+                    $user2->fb_id=$fb_id;
+                    $user2->save();
+                    Clockwork::info($user2);
+                    Clockwork::info($user2->errors()->all(':message'));
+
+                    $query="update users set fb_id = ".$fb_id." where id = ".$user2->id."";
+                    DB::update($query);
+
+                    Auth::login($user2);
                     return Redirect::to('user/details');
 
                 }
                 else
                 {
+                    //create fresh account
                     Clockwork::info("creating!");
-                    $user = new User;
-                    $user->fb_id=$id;
-                    $user->firstname=$user_profile->getProperty('first_name');
-                    $user->lastname=$user_profile->getProperty('last_name');
-                    $user->fb_id=$id;
-                    $user->username=$id;
-                    $user->confirmed=1;
-                    $user->save();
-                    Auth::login($user);
-                    Clockwork::info($user);
+                    $newUser = new User;
+                    $newUser->fb_id=$id;
+                    $newUser->email=$email;
+                    $newUser->firstname=$user_profile->getProperty('first_name');
+                    $newUser->lastname=$user_profile->getProperty('last_name');
+                    $newUser->username=$id;
+                    $newUser->confirmed=1;
+                    $hash=Hash::make('asdfjh');
+                    $newUser->password=$hash;//temporary
+                    $newUser->password_confirmation=$hash;//temporary
+                    $newUser->save();
+                    Clockwork::info($newUser);
+                    Clockwork::info($newUser->id);
+                    Clockwork::info($newUser->errors()->all(':message'));
+                    Auth::login($newUser);
                     return Redirect::to('user/details');
 
-                    //$user-
-                    //no account at all
                 }
             }
             else
             {
+                Clockwork::info("found matching fbid, logging in");
                 Auth::login($user);
                 return Redirect::to('user/details');
             }
