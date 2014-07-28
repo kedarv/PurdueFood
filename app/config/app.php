@@ -124,6 +124,7 @@ return array(
 		'Zizaco\Confide\ConfideServiceProvider',
 		'Barryvdh\MigrationGenerator\MigrationGeneratorServiceProvider',
 		'Mews\Purifier\PurifierServiceProvider',
+        'Clockwork\Support\Laravel\ClockworkServiceProvider'
 
 	),
 
@@ -193,6 +194,7 @@ return array(
 		'View'            => 'Illuminate\Support\Facades\View',
 		'Confide'  		  => 'Zizaco\Confide\ConfideFacade',
 		'Purifier' 		  => 'Mews\Purifier\Facades\Purifier',
+        'Clockwork'       => 'Clockwork\Support\Laravel\Facade',
 	),
 
 );

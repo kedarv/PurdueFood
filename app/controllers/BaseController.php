@@ -13,6 +13,15 @@ class BaseController extends Controller {
 		{
 			$this->layout = View::make($this->layout);
 		}
+        $this->beforeFilter(function()
+        {
+            Event::fire('clockwork.controller.start');
+        });
+
+        $this->afterFilter(function()
+        {
+            Event::fire('clockwork.controller.end');
+        });
 	}
 
 }

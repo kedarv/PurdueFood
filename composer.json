@@ -10,7 +10,8 @@
 		"guzzlehttp/guzzle": "4.*",
 		"barryvdh/laravel-migration-generator": "dev-master",
 		"mews/purifier": "dev-master",
-        "facebook/php-sdk-v4" : "4.0.*"
+        "facebook/php-sdk-v4" : "4.0.*",
+        "itsgoingd/clockwork": "1.*"
 	},
 	"autoload": {
 		"classmap": [
