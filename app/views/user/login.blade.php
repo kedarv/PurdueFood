@@ -1,5 +1,6 @@
 @extends('user/layout')
 @section('content')
+<a href="{{$data['fb_loginUrl']}}"> FB login</a>
 <form method="POST" action="{{{ Confide::checkAction('UserController@do_login') ?: URL::to('/user/login') }}}" accept-charset="UTF-8">
     <input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
     <fieldset>

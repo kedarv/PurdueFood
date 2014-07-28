@@ -1,4 +1,11 @@
 <?php
+use Facebook\FacebookSession;
+use Facebook\FacebookRequest;
+use Facebook\GraphUser;
+use Facebook\FacebookRedirectLoginHelper;
+use Facebook\FacebookRequestException;
+use Facebook\FacebookJavaScriptLoginHelper;
+FacebookSession::setDefaultApplication('309640359218030', 'e80105d3f5ccdb973d2773f7c9204f6c');
 class UserController extends BaseController {
 	// Upload image
 	public function post_upload() {
@@ -105,7 +112,10 @@ class UserController extends BaseController {
         }
         else
         {
-            return View::make(Config::get('confide::login_form'))->with('title', 'Login');;
+            session_start();
+            $helper = new FacebookRedirectLoginHelper(url('fb/callback'));
+            $data['fb_loginUrl']=$helper->getLoginURL();
+            return View::make(Config::get('confide::login_form'), compact('data'))->with('title', 'Login');;
         }
     }
 
@@ -267,6 +277,38 @@ class UserController extends BaseController {
         DB::update($query);
         return 'Updated!';
 
+    }
+    public function fbCallback()
+    {
+        session_start();
+        $helper = new FacebookRedirectLoginHelper(url('fb/callback'));
+        try {
+            $session = $helper->getSessionFromRedirect();
+        } catch(FacebookRequestException $ex) {
+            // When Facebook returns an error
+        } catch(\Exception $ex) {
+            // When validation fails or other local issues
+        }
+        if ($session) {
+            // Logged in.
+            $user_profile = (new FacebookRequest(
+                $session, 'GET', '/me'
+            ))->execute()->getGraphObject(GraphUser::className());
+            $id=$user_profile->getID();
+            error_log($id);
+            $user = User::where(array('fb_id'=>$id))->first();
+            if($user==null)
+            {
+                error_log("fb profile not connected");
+            }
+            else
+            {
+                Auth::login($user);
+                return Redirect::to('user/details');
+            }
+            return(var_dump($user));
+
+        }
     }
 
 }
