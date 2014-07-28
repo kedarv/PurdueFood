@@ -285,11 +285,14 @@ class UserController extends BaseController {
         try {
             $session = $helper->getSessionFromRedirect();
         } catch(FacebookRequestException $ex) {
+            Clockwork::info($ex);
             // When Facebook returns an error
         } catch(\Exception $ex) {
+            Clockwork::info($ex);
             // When validation fails or other local issues
         }
         if ($session) {
+            Clockwork::info("logged in via fb!");
             // Logged in.
             $user_profile = (new FacebookRequest(
                 $session, 'GET', '/me'
@@ -298,16 +301,17 @@ class UserController extends BaseController {
             $email=$user_profile->getProperty('email');
             //var_dump($user_profile);
             $user = User::where(array('fb_id'=>$id))->first();
+            Clockwork::info($user_profile); // 'Message text.' appears in Clockwork log tab
             if($user==null)
             {
 
-                error_log("fb profile not connected or something");
+                Clockwork::info("fb profile not connected or something");
                 $user = User::where(array('email'=>$email))->first();
                 if($user!=null)
                 {
-                    var_dump($id);
-                    var_dump($user);
-                    error_log('need to link!');
+//                    var_dump($id);
+//                    var_dump($user);
+                    Clockwork::info('need to link!');
                     //account exists already, needs to be linked
                     $user->fb_id=$id;
                     $user->save();
@@ -317,7 +321,20 @@ class UserController extends BaseController {
                 }
                 else
                 {
+                    Clockwork::info("creating!");
+                    $user = new User;
+                    $user->fb_id=$id;
+                    $user->firstname=$user_profile->getProperty('first_name');
+                    $user->lastname=$user_profile->getProperty('last_name');
+                    $user->fb_id=$id;
+                    $user->username=$id;
+                    $user->confirmed=1;
+                    $user->save();
+                    Auth::login($user);
+                    Clockwork::info($user);
+                    return Redirect::to('user/details');
 
+                    //$user-
                     //no account at all
                 }
             }
