@@ -39,7 +39,7 @@
 
         <!-- First Featurette -->
         <div class="featurette" id="about">
-            <img class="featurette-image img-circle img-responsive pull-right" src="assets/img/350x350.gif">
+            <img class="featurette-image img-circle img-responsive pull-right" src="img/350x350.gif">
             <h2 class="featurette-heading">View Menus
             </h2>
             <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
@@ -49,7 +49,7 @@
 
         <!-- Second Featurette -->
         <div class="featurette" id="services">
-            <img class="featurette-image img-circle img-responsive pull-left" src="assets/img/350x350.gif">
+            <img class="featurette-image img-circle img-responsive pull-left" src="img/350x350.gif">
             <h2 class="featurette-heading">Review Items
             </h2>
             <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
@@ -59,7 +59,7 @@
 
         <!-- Third Featurette -->
         <div class="featurette" id="contact">
-            <img class="featurette-image img-circle img-responsive pull-right" src="assets/img/350x350.gif">
+            <img class="featurette-image img-circle img-responsive pull-right" src="img/350x350.gif">
             <h2 class="featurette-heading">Search for Items
             </h2>
             <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
