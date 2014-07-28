@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Purdue Food</title>
 	{{ HTML::style('css/bootstrap.min.css'); }}
+	{{ HTML::style('https://fonts.googleapis.com/css?family=Roboto:400,300'); }}
 	{{ HTML::style('css/home.css'); }}
-	{{ HTML::style('http://fonts.googleapis.com/css?family=Roboto:400,300'); }}
 	{{ HTML::style('//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css'); }}
 	{{ HTML::script('//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'); }}
 	{{ HTML::script('js/bootstrap.min.js'); }}	
@@ -39,7 +39,7 @@
 
         <!-- First Featurette -->
         <div class="featurette" id="about">
-            <img class="featurette-image img-circle img-responsive pull-right" src="http://placehold.it/350x350">
+            <img class="featurette-image img-circle img-responsive pull-right" src="assets/img/350x350.gif">
             <h2 class="featurette-heading">View Menus
             </h2>
             <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
@@ -49,7 +49,7 @@
 
         <!-- Second Featurette -->
         <div class="featurette" id="services">
-            <img class="featurette-image img-circle img-responsive pull-left" src="http://placehold.it/350x350">
+            <img class="featurette-image img-circle img-responsive pull-left" src="assets/img/350x350.gif">
             <h2 class="featurette-heading">Review Items
             </h2>
             <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
@@ -59,7 +59,7 @@
 
         <!-- Third Featurette -->
         <div class="featurette" id="contact">
-            <img class="featurette-image img-circle img-responsive pull-right" src="http://placehold.it/350x350">
+            <img class="featurette-image img-circle img-responsive pull-right" src="assets/img/350x350.gif">
             <h2 class="featurette-heading">Search for Items
             </h2>
             <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
