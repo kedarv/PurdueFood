@@ -60,3 +60,6 @@ Route::post('search/schedule',             'SearchController@getSchedule');
 Route::post('mail/receiveimages', 'DiningController@receiveMailImages');
 Route::get('fb/callback', 'UserController@fbCallback');
 Route::get('fb/auth', array('uses' => 'UserController@fbGoToLoginUrl'));
+
+//Confide Custom Validator
+App::bind('confide.user_validator', 'CustomValidator');
