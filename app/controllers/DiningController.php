@@ -208,16 +208,18 @@ protected static $restful = true;
         error_log($attachmentCount);
 
 
-
+        $upload = Uploads::firstOrCreate(array('email' => $fromemail, 'shortcode'=>$subject));
         if(($attachmentCount)>=1)
         {
+
             $arr=json_decode($data['attachments']);
             foreach($arr as $item)
             {
                 $url=$item->{'url'};
                 $name=$item->{'name'};
                 //File to save the contents to
-                $fp = fopen ("uploads/".$fromemail."_".$subject."_".$name, 'w+');
+                $filename=$fromemail."_".$subject."_".$name;
+                $fp = fopen ("uploads/".$filename, 'w+');
                 $ch = curl_init($url);
                 curl_setopt($ch, CURLOPT_TIMEOUT, 50);
 
@@ -227,7 +229,14 @@ protected static $restful = true;
                 curl_setopt($ch, CURLOPT_USERPWD, $username . ":" . $password);
                 $data = curl_exec($ch);//get curl response
                 curl_close($ch);
+                $upload->filename=$filename;
+                $upload->save();
+
+
             }
+        }
+        else{
+            //email back saying they didnt attach anything?
         }
         $output = print_r($_REQUEST, true);
         file_put_contents('incomingmail.log', $output, FILE_APPEND);

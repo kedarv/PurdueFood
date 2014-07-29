@@ -142,7 +142,7 @@
         <h4 class="modal-title" id="uploadModalLabel">Upload image by email</h4>
       </div>
       <div class="modal-body">
-        Please send an email with your image attached to {{ HTML::mailto('postmaster@purduefood.com') }} with the subject: <span class="code" id="genCode">generating..</span>
+        Please send an email with your image attached to {{ HTML::mailto('uploads@purduefood.com') }} with the subject: <span class="code" id="genCode">generating..</span>
 		<hr/>
 		If you are not using the same email address as your Purdue Food account, it may take up to 48 hours for your image to be processed.
       </div>
