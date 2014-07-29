@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="row">
-	<div class="col-md-10"><h1>{{Auth::user()->username}}'s Profile</h1></div>
+	<div class="col-md-10"><h1>{{Auth::user()->firstname}}'s Profile</h1></div>
     <div class="col-md-2"><a href="#" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="https://www.gravatar.com/avatar/{{md5(strtolower(trim(Auth::user()->email)))}}?&r=x&d=identicon&s=100"></a></div>
 	<hr/>
 </div>
