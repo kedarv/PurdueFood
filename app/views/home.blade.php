@@ -54,7 +54,7 @@
             <img class="featurette-image img-circle img-responsive pull-right" src="img/350x350.gif">
             <h2 class="featurette-heading">View Menus
             </h2>
-            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+            <p class="lead">Easily see when and where your favorite dishes will be served in the upcoming week. You can even receive email updates!</p>
         </div>
 
         <hr class="featurette-divider">
@@ -64,7 +64,7 @@
             <img class="featurette-image img-circle img-responsive pull-left" src="img/350x350.gif">
             <h2 class="featurette-heading">Review Items
             </h2>
-            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+            <p class="lead">You can rate dishes and leave comments, just like you would on Yelp. We will provide the Purdue Food Services with useful feedback on what you like!</p>
         </div>
 
         <hr class="featurette-divider">
@@ -74,7 +74,7 @@
             <img class="featurette-image img-circle img-responsive pull-right" src="img/350x350.gif">
             <h2 class="featurette-heading">Search for Items
             </h2>
-            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+            <p class="lead">If you liked last night's pasta, go search for pasta and add that dish to your favorites!</p>
         </div>
 
         <hr class="featurette-divider">
