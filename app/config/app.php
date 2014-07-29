@@ -124,7 +124,9 @@ return array(
 		'Zizaco\Confide\ConfideServiceProvider',
 		'Barryvdh\MigrationGenerator\MigrationGeneratorServiceProvider',
 		'Mews\Purifier\PurifierServiceProvider',
-        'Clockwork\Support\Laravel\ClockworkServiceProvider'
+        'Clockwork\Support\Laravel\ClockworkServiceProvider',
+         'Barryvdh\Cors\CorsServiceProvider',
+
 
 	),
 
