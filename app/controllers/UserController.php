@@ -342,9 +342,9 @@ class UserController extends BaseController {
                     $newUser->password=$hash;//temporary
                     $newUser->password_confirmation=$hash;//temporary
                     $newUser->save();
-                    Clockwork::info($newUser);
-                    Clockwork::info($newUser->id);
-                    Clockwork::info($newUser->errors()->all(':message'));
+                    Clockwork::info(array('user object'=>$newUser));
+                    Clockwork::info(array('user id'=>$newUser->id));
+                    Clockwork::info(array('errors'=>$newUser->errors()->all(':message')));
                     Auth::login($newUser);
                 }
             }
@@ -365,10 +365,24 @@ class UserController extends BaseController {
                 )
             ))->execute()->getGraphObject(GraphUser::className());
             $token=$extendedToken->getProperty('access_token');
-            Clockwork::info($token);
+            Clockwork::info(array("token"=>$token));
             //$query="update users set fb_token = ".$token." where id = ".Auth::id();
             $query= "UPDATE users SET fb_token = '".$token."' WHERE id = '".Auth::id()."'";
             DB::update($query);
+
+            $permissionCheck = (new FacebookRequest(
+                $session, 'GET', '/me/permissions'
+            ))->execute()->getGraphObject()->asArray();
+            Clockwork::info($permissionCheck);
+            $permissionList = Array();
+            foreach($permissionCheck as $eachPerm)
+            {
+                $permissionList[$eachPerm->permission] = $eachPerm->status;
+            }
+            if($permissionList['email']=="declined")
+            {
+                //uh oh
+            }
             return Redirect::to('user/details');
         }
     }
