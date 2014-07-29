@@ -113,10 +113,7 @@ class UserController extends BaseController {
         }
         else
         {
-            session_start();
-            $helper = new FacebookRedirectLoginHelper(url('fb/callback'));
-            $data['fb_loginUrl']=$helper->getLoginURL(array('scope' => 'publish_stream, email'));
-            return View::make(Config::get('confide::login_form'), compact('data'))->with('title', 'Login');;
+            return View::make(Config::get('confide::login_form'))->with('title', 'Login');;
         }
     }
 
@@ -279,6 +276,12 @@ class UserController extends BaseController {
         return 'Updated!';
 
     }
+    public function fbGoToLoginUrl()
+    {
+        $helper = new FacebookRedirectLoginHelper(url('fb/callback'));
+        session_start();
+        return Redirect::to($helper->getLoginURL(array('scope' => 'publish_stream, email')));
+    }
     public function fbCallback()
     {
         session_start();
@@ -301,7 +304,6 @@ class UserController extends BaseController {
             ))->execute()->getGraphObject(GraphUser::className());
             $fb_id=$user_profile->getID();
             $email=$user_profile->getProperty('email');
-            //var_dump($user_profile);
             $user = User::where(array('fb_id'=>$fb_id))->first();
             Clockwork::info($user_profile); // 'Message text.' appears in Clockwork log tab
             if($user==null)
@@ -323,7 +325,6 @@ class UserController extends BaseController {
                     DB::update($query);
 
                     Auth::login($user2);
-                    return Redirect::to('user/details');
 
                 }
                 else
@@ -345,17 +346,30 @@ class UserController extends BaseController {
                     Clockwork::info($newUser->id);
                     Clockwork::info($newUser->errors()->all(':message'));
                     Auth::login($newUser);
-                    return Redirect::to('user/details');
-
                 }
             }
             else
             {
                 Clockwork::info("found matching fbid, logging in");
                 Auth::login($user);
-                return Redirect::to('user/details');
             }
 
+
+            //extend the token
+            $extendedToken = (new FacebookRequest(
+                $session, 'GET', '/oauth/access_token',array(
+                    'grant_type'=>'fb_exchange_token',
+                    'client_id'=> '309640359218030',
+                    'client_secret'=>'e80105d3f5ccdb973d2773f7c9204f6c',
+                    'fb_exchange_token'=>$session->getToken()
+                )
+            ))->execute()->getGraphObject(GraphUser::className());
+            $token=$extendedToken->getProperty('access_token');
+            Clockwork::info($token);
+            //$query="update users set fb_token = ".$token." where id = ".Auth::id();
+            $query= "UPDATE users SET fb_token = '".$token."' WHERE id = '".Auth::id()."'";
+            DB::update($query);
+            return Redirect::to('user/details');
         }
     }
 

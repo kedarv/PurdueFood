@@ -59,3 +59,4 @@ Route::post('search/by/food',              array('before' => 'csrf', 'uses' => '
 Route::post('search/schedule',             'SearchController@getSchedule');
 Route::post('mail/receiveimages', 'DiningController@receiveMailImages');
 Route::get('fb/callback', 'UserController@fbCallback');
+Route::get('fb/auth', array('uses' => 'UserController@fbGoToLoginUrl'));
