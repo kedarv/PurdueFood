@@ -11,8 +11,7 @@
 		"barryvdh/laravel-migration-generator": "dev-master",
 		"mews/purifier": "dev-master",
         "facebook/php-sdk-v4" : "4.0.*",
-        "itsgoingd/clockwork": "1.*",
-		"barryvdh/laravel-cors": "0.2.x"
+        "itsgoingd/clockwork": "1.*"
 	},
 	"autoload": {
 		"classmap": [
