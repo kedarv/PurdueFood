@@ -10,9 +10,10 @@
 	{{ HTML::style('css/home.css'); }}
 	{{ HTML::style('//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css'); }}
 	{{ HTML::script('//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'); }}
-	{{ HTML::script('js/bootstrap.min.js'); }}	
+	{{ HTML::script('js/bootstrap.min.js'); }}
 </head>
 <body>
+{{ HTML::script('js/tracking.js'); }}
 	@include('nav')
   <header class="header-image">
         <div class="headline">
