@@ -32,13 +32,18 @@ class UserController extends BaseController {
 	// Generate code for image upload by email
 	public function generateEmailCode(){
 		if (Request::ajax()) {
-			$shortcode = substr(md5(rand()), 0, 3);
-			$getUpload = Uploads::firstOrCreate(array('email' => Auth::user()->email, 'food_id' => Input::get('food_id')));
-			$getUpload->email = Auth::user()->email;
-			$getUpload->food_id = Input::get('food_id');
-			$getUpload->shortcode = $shortcode;
-			$getUpload->save();
-			$return_data = array('status' => 'success', 'code' => $shortcode); 
+			$checkUpload = Uploads::where('email', '=', Auth::user()->email)
+							->where('food_id', '=', Input::get('food_id'))
+							->where('filename', '=', '');
+			if($checkUpload->count() == 1) {
+				$getUpload = $checkUpload->get()->toArray();
+				$return_data = array('status' => 'success', 'code' => $getUpload[0]['shortcode']); 
+			}
+			else {
+				$shortcode = substr(md5(rand()), 0, 3);
+				Uploads::create(array('email' => Auth::user()->email, 'food_id' => Input::get('food_id'), 'filename' => '', 'shortcode' => $shortcode));
+				$return_data = array('status' => 'success', 'code' => $shortcode); 
+			}
 		}
 		header('Content-Type: application/json');
 		echo json_encode($return_data);

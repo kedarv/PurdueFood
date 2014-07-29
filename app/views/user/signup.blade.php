@@ -1,5 +1,34 @@
 @extends('user/layout')
+@section('css')
+@parent
+
+{{ HTML::style('//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css'); }}
+<style>
+.btn-facebook {
+	color: #fff;
+	background-color: #3b5998;
+	border-color: rgba(0,0,0,0.2);
+	padding: 10px 0px !important;
+}
+.btn-facebook:hover{
+	color: #fff;
+	background-color: #30487b;
+}
+.btn-facebook-i {
+	width: 20px;
+	padding-right: 5px;
+	border-right: 1px solid rgba(0,0,0,0.2);
+}
+</style>
+@stop
+
 @section('content')
+<div class="text-center">
+<a href="{{ action('UserController@fbGoToLoginUrl')}}" class="btn btn-lg btn-facebook" style="width:215px;">
+	<i class="fa fa-facebook btn-facebook-i"></i> Login with Facebook
+</a>
+</div>
+<hr/>
 		<form method="POST" action="{{{ (Confide::checkAction('UserController@store')) ?: URL::to('user')  }}}" accept-charset="UTF-8">
 			<input type="hidden" name="_token" value="{{{ Session::getToken() }}}">
 			<fieldset>

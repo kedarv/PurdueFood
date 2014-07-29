@@ -5,9 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ $title }}</title>
+	@section('css')
 	{{ HTML::style('css/bootstrap.min.css'); }}
+	@show
+	
+	@section('js')
 	{{ HTML::script('//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'); }}
 	{{ HTML::script('js/bootstrap.min.js'); }}	
+	@show
 </head>
 <body>
 <script>

@@ -131,7 +131,7 @@ $(document).on('click', '#generate_code', function(){
 	};
 	$.ajax({
 		type: 'POST',
-        url: '/user/generateCode',
+        url: '/purduefood/public/user/generateCode',
 		dataType: 'json',
 		data: form_data,
 		success:function (data) {
