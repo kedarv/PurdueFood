@@ -11,6 +11,7 @@
 	{{ HTML::style('//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css'); }}
 	{{ HTML::script('//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'); }}
 	{{ HTML::script('js/bootstrap.min.js'); }}
+    <meta name="google-site-verification" content="9LqqnbKBFPx3lPxMhSbg_ZZ0vK4etgAu8uCQ7zShJI8" />
 </head>
 <body>
 {{ HTML::script('js/tracking.js'); }}
