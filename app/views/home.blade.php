@@ -23,7 +23,7 @@
 					@if (Auth::guest())
 						{{ HTML::linkAction('UserController@create', 'Sign Up', array(), array('class' => 'btn btn-lg btn-default', 'style' => 'width: 225px;')) }}
 						<span class="or_btn">OR</span>
-						<a href="{{ action('UserController@login')}}" class="btn btn-lg btn-facebook" style="width:225px;"><i class="fa fa-facebook btn-facebook-i"></i> Connect with Facebook</a>
+						<a href="{{ action('UserController@fbGoToLoginUrl')}}" class="btn btn-lg btn-facebook" style="width:225px;"><i class="fa fa-facebook btn-facebook-i"></i> Connect with Facebook</a>
 						<br/><br/>
 						<span class="already_member">Already signed up? {{ HTML::linkAction('UserController@login', 'Login')}}</span>
 					@else
@@ -33,7 +33,7 @@
 				<div class="visible-xs">
 					@if (Auth::guest())
 						{{ HTML::linkAction('UserController@create', 'Sign Up', array(), array('class' => 'btn btn-lg btn-default', 'style' => 'width: 225px;')) }}
-						<a href="{{ action('UserController@login')}}" class="btn btn-lg btn-facebook" style="width:225px;margin-top:5px;"><i class="fa fa-facebook btn-facebook-i"></i> Connect with Facebook</a>
+						<a href="{{ action('UserController@fbGoToLoginUrl')}}" class="btn btn-lg btn-facebook" style="width:225px;margin-top:5px;"><i class="fa fa-facebook btn-facebook-i"></i> Connect with Facebook</a>
 						<br/><br/>
 						<span class="already_member">Already signed up? {{ HTML::linkAction('UserController@login', 'Login')}}</span>
 					@else
