@@ -33,7 +33,7 @@ class UserController extends BaseController {
 	public function generateEmailCode(){
 		if (Request::ajax()) {
 			$shortcode = substr(md5(rand()), 0, 3);
-			$getUpload = Uploads::firstOrNew(array('email' => Auth::user()->email, 'food_id' => Input::get('food_id'), 'filename' => ''));
+			$getUpload = Uploads::firstOrCreate(array('email' => Auth::user()->email, 'food_id' => Input::get('food_id'), 'filename' => ''));
 			$getUpload->email = Auth::user()->email;
 			$getUpload->food_id = Input::get('food_id');
 			$getUpload->shortcode = $shortcode;
