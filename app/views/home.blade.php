@@ -30,7 +30,7 @@
 						<br/><br/>
 						<span class="already_member">Already signed up? {{ HTML::linkAction('UserController@login', 'Login &raquo;')}}</span>
 					@else
-						Welcome Back, {{Auth::user()->firstname}}!
+						<span class="already_member">Welcome Back, {{Auth::user()->firstname}}!</a>
 					@endif
 				</div>
 				<div class="visible-xs">
@@ -40,7 +40,7 @@
 						<br/><br/>
 						<span class="already_member">Already signed up? {{ HTML::linkAction('UserController@login', 'Login')}}</span>
 					@else
-						Welcome Back, {{Auth::user()->firstname}}!
+						<span class="already_member">Welcome Back, {{Auth::user()->firstname}}!</a>
 					@endif
 					</div>
             </div>
