@@ -5,7 +5,7 @@ use Facebook\GraphUser;
 use Facebook\FacebookRedirectLoginHelper;
 use Facebook\FacebookRequestException;
 use Facebook\FacebookJavaScriptLoginHelper;
-FacebookSession::setDefaultApplication('309640359218030', 'e80105d3f5ccdb973d2773f7c9204f6c');
+FacebookSession::setDefaultApplication(Config::get('keys.fb_appid'), Config::get('keys.fb_secret'));
 class UserController extends BaseController {
 	// Upload image
 	public function post_upload() {
@@ -396,8 +396,8 @@ class UserController extends BaseController {
             $extendedToken = (new FacebookRequest(
                 $session, 'GET', '/oauth/access_token',array(
                     'grant_type'=>'fb_exchange_token',
-                    'client_id'=> '309640359218030',
-                    'client_secret'=>'e80105d3f5ccdb973d2773f7c9204f6c',
+                    'client_id'=> Config::get('keys.fb_appid'),
+                    'client_secret'=>Config::get('keys.fb_secret'),
                     'fb_exchange_token'=>$session->getToken()
                 )
             ))->execute()->getGraphObject(GraphUser::className());

@@ -199,7 +199,7 @@ protected static $restful = true;
     public function receiveMailImages()
     {
         $username="api";
-        $password="key-2b1dxrtom76-hpnspdqqwjfdbnqy84m9";
+        $password=Config::get('keys.mailgun');
         $data = $_POST;
 
         $fromemail = $data['sender'];

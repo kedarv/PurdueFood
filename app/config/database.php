@@ -57,7 +57,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'purduefood',
 			'username'  => 'root',
-			'password'  => 'rEgutHathu3R62pu',
+			'password'  => Config::get('keys.production_sqlpass'),
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

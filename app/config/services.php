@@ -16,7 +16,7 @@ return array(
 
 	'mailgun' => array(
 		'domain' => 'purduefood.com',
-		'secret' => 'key-2b1dxrtom76-hpnspdqqwjfdbnqy84m9 ',
+		'secret' => Config::get('keys.mailgun'),
 	),
 
 	'mandrill' => array(
