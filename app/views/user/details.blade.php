@@ -46,7 +46,7 @@
 				@foreach($data['reviews'] as $review)
 					<tr>
 						<td>
-						<a href="{{action('DiningController@getFood', array('id' => $review['food_id']))}}#{{$review['comment_id']}}">{{$review['name']}}</a></td>
+						<a href="{{action('DiningController@getFood', array('id' => urlencode($review['name'])))}}#{{$review['comment_id']}}">{{$review['name']}}</a></td>
 						<td>{{$review['rating']}}</td>
 						<td>{{{substr($review['comment'], 0, 30)}}}</td>
 					</tr>
@@ -58,7 +58,7 @@
 			<div class="list-group">
 				<br/>
 				@foreach($data['favorites'] as $fav)
-					{{link_to_action('DiningController@getFood', $fav['name'], array('id' => $fav['food_id']), array('class' => 'list-group-item'))}}
+					{{link_to_action('DiningController@getFood', $fav['name'], array('id' => urlencode($fav['name'])), array('class' => 'list-group-item'))}}
 				@endforeach
 			</div>
 		</div>

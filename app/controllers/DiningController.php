@@ -26,6 +26,9 @@ protected static $restful = true;
 		return View::make('dining', compact('data', 'json'));
     }
 	public function getFood($id){
+
+        if(substr($id,8,1)!="-")
+            $id=Foods::where('name','=',urldecode($id))->first()->food_id;
 		$url = "http://api.hfs.purdue.edu/Menus/v2/V2Items/".$id."";
 		if (Cache::has($id)) {
 			$json = Cache::get($id);
