@@ -12,7 +12,16 @@ protected static $restful = true;
 			$name = "Earhart";
 		}
         $data['shortName'] = $name;
-        $data['name'] = $name . " Dining Hall";
+        $data['name'] = $name . " Dining Court";
+		if($name == "Earhart"){
+			$data['nav_link'] = "Earhart Dining Hall";
+		}
+		elseif($name == "Windsor"){
+			$data['nav_link'] = "Windsor Halls";
+		}
+		else {
+			$data['nav_link'] = $data['name'];
+		}
 		$data['date'] = $date;
 		$url = "http://api.hfs.purdue.edu/menus/v2/locations/". $name . "/".$date."";
 		if (Cache::has($name . "_" . $date)) {
