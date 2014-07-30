@@ -23,10 +23,25 @@
     <div id="myTabContent" class="tab-content">
       <div class="tab-pane fade in active" id="reviews">
 		<br/>
+          <table class="table table-striped table-bordered">
+              <tr>
+                  <th>Food Name</th>
+                  <th>Rating</th>
+                  <th>Review</th>
+              </tr>
+          @foreach($data['reviews'] as $review)
+              <tr>
+          <td>{{$review['food_id']}}</td><td> {{$review['rating']}}</td><td> {{$review['comment']}} </td>
+               </tr>
+          @endforeach
+          </table>
         
       </div>
       <div class="tab-pane fade" id="favorite">
 		<br/>
+          @foreach($data['favorites'] as $fav)
+          {{$fav['food_id']}}<br>
+          @endforeach
 
       </div>
     </div>

@@ -62,6 +62,14 @@ class UserController extends BaseController {
     public function details()
     {
         $data['name'] = "";
+
+        $favorites = Favorites::where('user_id', '=', Auth::id())
+            ->where('favorite', '=', 1, 'AND')->get();
+        $data['favorites']=$favorites;
+
+        $reviews = Reviews::where('user_id', '=', Auth::id())->get();
+        $data['reviews']=$reviews;
+        
         return View::make('user.details',compact('data'));
     }	
     /**
