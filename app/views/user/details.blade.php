@@ -13,6 +13,8 @@
 			<li class="list-group-item text-center"><b>User Information</b></li>
 			<li class="list-group-item text-right"><span class="pull-left"><strong>Joined</strong></span> {{date("F j, Y", strtotime(Auth::user()->created_at))}}</li>
 			<li class="list-group-item text-right"><span class="pull-left"><strong>Email</strong></span> {{Auth::user()->email}}</li>
+			<li class="list-group-item text-center">You have <b>{{$data['numReviews']}} {{Str::plural('review', $data['numReviews'])}}</b></li>
+			<li class="list-group-item text-center">You have <b>{{$data['numFav']}} {{Str::plural('favorite', $data['numFav'])}}</b></li>
 		</ul> 
 	</div>
 	<div class="col-md-9">

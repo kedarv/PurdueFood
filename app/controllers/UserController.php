@@ -76,8 +76,7 @@ class UserController extends BaseController {
             }
             array_push($favoriteArray,array('name'=>$name,'food_id'=>$each['food_id']));
         }
-        $data['favorites']=$favoriteArray;
-
+        $data['favorites'] = $favoriteArray;
 
         $reviews = Reviews::where('user_id', '=', Auth::id())->get();
         $reviewsArray=array();
@@ -91,6 +90,8 @@ class UserController extends BaseController {
             }
             array_push($reviewsArray,array('name'=>$name,'food_id'=>$each['food_id'],'comment'=>$each['comment'],'rating'=>$each['rating'], 'comment_id' => $each['id']));
         }
+		$data['numFav'] = $favorites->count();
+		$data['numReviews'] = $reviews->count();
         $data['reviews']=$reviewsArray;
 
         return View::make('user.details',compact('data'));

@@ -174,8 +174,8 @@
 
 <div class="alert hidden" role="alert" id="postFavoriteAlert"></div>
 <input type="hidden" id="id_data" data-user="{{Auth::id()}}" data-food="{{$data['id']}}">
-	<hr/>
 	@if (Auth::check())
+	<hr/>
 	<input id="input-1" class="rating"  value="{{$data['currentUserRating']}}">
 	<div class="alert hidden" role="alert" id="postRatingAlert"></div>
     {{Form::button('Update Review &raquo;', array('class' => 'btn btn-primary hidden', 'id' => 'updateCommentButton'))}}
@@ -190,7 +190,7 @@
 	@else
 	Hey, you need an account to comment! {{ HTML::linkAction('UserController@create', 'Register', 'Register') }} or {{ HTML::linkAction('UserController@login', 'Login', 'Login') }}
 	@endif
-	<hr/>	
+	<hr/>
 	<div class="comments"></div>
 		@foreach(array_chunk($reviews, 2) as $twoReviews)
 			<div class="row">
