@@ -1,8 +1,14 @@
 @extends('layout')
+@section('js')
+@parent
+<script>
+console.log("endpoint: http://api.hfs.purdue.edu/menus/v2/locations/{{{ $data['shortName'] }}}/{{{ $data['date'] }}}");
+</script>
+@stop
 
 @section('content')
-	<b>endpoint:</b> http://api.hfs.purdue.edu/menus/v2/locations/{{{ $data['shortName'] }}}/{{{ $data['date'] }}}
-
+<a href="https://www.google.com/maps/dir/Current+Location/{{{urlencode($data['nav_link'])}}}+Lafayette+IN">Navigate to Dining Court &raquo;</a>
+<hr/>
 	@foreach($json['Meals'] as $value)
 		<div class="well"><h2 style="margin-top:0px;">{{{$value['Name']}}} <small>From {{{date('g:i A', strtotime($value['Hours']['StartTime']))}}} to {{{date('g:i A', strtotime($value['Hours']['EndTime']))}}}</small></h2><hr/>
 		@if($value['Status'] == "Closed" || $value['Status'] == "Unavailable")
