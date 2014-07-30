@@ -9,13 +9,23 @@
 	font-weight: 400;
 	color: rgba(255, 255, 255, 0.8);
 }
+.or_wrap {
+	position: relative;
+	top: 1px;
+	display: inline-block;
+}
 .already_member {
 	text-align: center;
+	font-weight: 300;
+	font-size: 20px;
+	color: rgba(255, 255, 255, 0.9);
+	text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+.already_member a{
+	color: #fff;
 	font-weight: 400;
 	font-size: 20px;
-	color: rgba(255, 255, 255, 0.8);
 }
-
 .btn-facebook {
 	color: #fff;
 	background-color: #3b5998;
@@ -30,7 +40,6 @@
 	width: 20px;
 	border-right: 1px solid rgba(0,0,0,0.2);
 }
-
 .header-image {
     display: block;
     width: 100%;
@@ -46,11 +55,10 @@
     padding: 70px 0;
 	font-family: 'Roboto', sans-serif;
 }
-
 .headline h1 {
     font-size: 130px;
 	color: #fff;
-	text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+	text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 	font-weight: 300 !important; 
 }
 

@@ -90,14 +90,10 @@
 	<div style="display:inline-block;font-size:12px;">
 		<input id="input-avgRating" value="{{$data['averageRating']}}" class="rating" data-disabled="true" data-show-clear="false" data-show-caption="false">
 	</div>
-<div style="display:inline-block;font-size:12px;">
-    ({{$data['numVotes']}} votes)
-    </div>
 @if (Auth::check())
     <div style="display:inline-block;font-size:12px;">
         {{Form::checkbox('Favorite', 'foodToggle_favorite', $data['isFavorite'], array('id' => 'favoriteCheckbox'))}}
         <label for="favoriteCheckbox"></label>
-
     </div>
 @endif
 </h1>
@@ -200,7 +196,7 @@
 			<div class="row">
 			@foreach($twoReviews as $review)
 			<div class="col-md-6">
-				<div class="well">
+				<div class="well" id="{{$review['id']}}">
 					<img src="https://www.gravatar.com/avatar/{{md5(strtolower(trim($review['email'])))}}?&r=x&d=identicon" alt="{{{ $review['firstname'] or $review['username'] }}}" class="img-responsive" style="float:left;padding-right:10px;"/>
 					<h4 style="margin:0px 0px 0px 95px;">{{{ $review['firstname'] }}} {{{substr($review['lastname'], 0, 1)}}}.</h4>
 					<input id="input-avgRating" value="{{$review['rating']}}" class="rating" data-size="xs" data-disabled="true" data-show-clear="false" data-show-caption="false">	

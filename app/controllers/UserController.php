@@ -89,7 +89,7 @@ class UserController extends BaseController {
             {
                 $name=$foodLookup->name;
             }
-            array_push($reviewsArray,array('name'=>$name,'food_id'=>$each['food_id'],'comment'=>$each['comment'],'rating'=>$each['rating']));
+            array_push($reviewsArray,array('name'=>$name,'food_id'=>$each['food_id'],'comment'=>$each['comment'],'rating'=>$each['rating'], 'comment_id' => $each['id']));
         }
         $data['reviews']=$reviewsArray;
 

@@ -23,10 +23,12 @@
 				<div class="hidden-xs">
 					@if (Auth::guest())
 						{{ HTML::linkAction('UserController@create', 'Sign Up', array(), array('class' => 'btn btn-lg btn-default', 'style' => 'width: 225px;')) }}
-						<span class="or_btn">OR</span>
+						<div class="or_wrap">
+							<div class="or_btn">OR</div>
+						</div>
 						<a href="{{ action('UserController@fbGoToLoginUrl')}}" class="btn btn-lg btn-facebook" style="width:225px;"><i class="fa fa-facebook btn-facebook-i"></i> Connect with Facebook</a>
 						<br/><br/>
-						<span class="already_member">Already signed up? {{ HTML::linkAction('UserController@login', 'Login')}}</span>
+						<span class="already_member">Already signed up? {{ HTML::linkAction('UserController@login', 'Login &raquo;')}}</span>
 					@else
 						Welcome Back, {{Auth::user()->firstname}}!
 					@endif

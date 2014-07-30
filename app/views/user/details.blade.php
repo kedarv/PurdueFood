@@ -20,32 +20,38 @@
 			<li class="active"><a href="#reviews" role="tab" data-toggle="tab">Reviews</a></li>
 			<li><a href="#favorite" role="tab" data-toggle="tab">Favorite Items</a></li>
 		</ul>
-    <div id="myTabContent" class="tab-content">
-      <div class="tab-pane fade in active" id="reviews">
-		<br/>
-          <table class="table table-striped table-bordered">
-              <tr>
-                  <th>Food Name</th>
-                  <th>Rating</th>
-                  <th>Review</th>
-              </tr>
-          @foreach($data['reviews'] as $review)
-              <tr>
-          <td>{{$review['name']}}</td><td> {{$review['rating']}}</td><td> {{$review['comment']}} </td>
-               </tr>
-          @endforeach
-          </table>
-        
-      </div>
-      <div class="tab-pane fade" id="favorite">
-		<br/>
-          @foreach($data['favorites'] as $fav)
-          {{$fav['name']}}<br>
-          @endforeach
-
-      </div>
+	<div id="myTabContent" class="tab-content">
+		<div class="tab-pane fade in active" id="reviews">
+			<br/>
+			<table class="table table-striped table-bordered">
+				<thead>
+					<tr>
+						<th>Food Name</th>
+						<th>Rating</th>
+						<th>Review</th>
+					</tr>
+				</thead>
+				<tbody>
+				@foreach($data['reviews'] as $review)
+					<tr>
+						<td>
+						<a href="{{action('DiningController@getFood', array('id' => $review['food_id']))}}#{{$review['comment_id']}}">{{$review['name']}}</a></td>
+						<td>{{$review['rating']}}</td>
+						<td>{{{substr($review['comment'], 0, 30)}}}</td>
+					</tr>
+				@endforeach
+				</tbody>
+			</table>
+		</div>
+		<div class="tab-pane fade" id="favorite">
+			<div class="list-group">
+				<br/>
+				@foreach($data['favorites'] as $fav)
+					{{link_to_action('DiningController@getFood', $fav['name'], array('id' => $fav['food_id']), array('class' => 'list-group-item'))}}
+				@endforeach
+			</div>
+		</div>
     </div>
-
 	</div>
 </div>
 <hr/>
