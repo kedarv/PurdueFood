@@ -31,7 +31,7 @@
               </tr>
           @foreach($data['reviews'] as $review)
               <tr>
-          <td>{{$review['food_id']}}</td><td> {{$review['rating']}}</td><td> {{$review['comment']}} </td>
+          <td>{{$review['name']}}</td><td> {{$review['rating']}}</td><td> {{$review['comment']}} </td>
                </tr>
           @endforeach
           </table>
@@ -40,7 +40,7 @@
       <div class="tab-pane fade" id="favorite">
 		<br/>
           @foreach($data['favorites'] as $fav)
-          {{$fav['food_id']}}<br>
+          {{$fav['name']}}<br>
           @endforeach
 
       </div>

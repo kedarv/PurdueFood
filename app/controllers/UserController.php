@@ -65,11 +65,34 @@ class UserController extends BaseController {
 
         $favorites = Favorites::where('user_id', '=', Auth::id())
             ->where('favorite', '=', 1, 'AND')->get();
-        $data['favorites']=$favorites;
+        $favoriteArray=array();
+        foreach($favorites as $each)
+        {
+            $name=$each['food_id'];
+            $foodLookup=Foods::find($each['food_id']);
+            if($foodLookup!=null)
+            {
+                $name=$foodLookup->name;
+            }
+            array_push($favoriteArray,array('name'=>$name,'food_id'=>$each['food_id']));
+        }
+        $data['favorites']=$favoriteArray;
+
 
         $reviews = Reviews::where('user_id', '=', Auth::id())->get();
-        $data['reviews']=$reviews;
-        
+        $reviewsArray=array();
+        foreach($reviews as $each)
+        {
+            $name=$each['food_id'];
+            $foodLookup=Foods::find($each['food_id']);
+            if($foodLookup!=null)
+            {
+                $name=$foodLookup->name;
+            }
+            array_push($reviewsArray,array('name'=>$name,'food_id'=>$each['food_id'],'comment'=>$each['comment'],'rating'=>$each['rating']));
+        }
+        $data['reviews']=$reviewsArray;
+
         return View::make('user.details',compact('data'));
     }	
     /**

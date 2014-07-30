@@ -37,8 +37,10 @@ protected static $restful = true;
 		$json = json_decode($json, true);
 		$data['id'] = $id;
 		$data['name'] = $json['Name'];
-		
-		// Get Relevant Reviews
+        $saveData = Foods::firstOrCreate(array('food_id' => $id, 'name'=>$json['Name']));
+
+
+        // Get Relevant Reviews
 		$reviews = Reviews::where('food_id', '=', $id)
 					->join('users', 'reviews.user_id', '=', 'users.id')
 					->get(array('reviews.*', 'users.firstname', 'users.lastname', 'users.username', 'users.email'));
