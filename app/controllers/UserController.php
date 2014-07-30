@@ -61,7 +61,7 @@ class UserController extends BaseController {
 	
     public function details()
     {
-        $data['name'] = "";
+        $data['name'] = Auth::user()->firstname . "'s Profile";
 
         $favorites = Favorites::where('user_id', '=', Auth::id())
             ->where('favorite', '=', 1, 'AND')->get();

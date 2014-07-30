@@ -24,9 +24,11 @@
     <div class="container" style="margin-top:20px;">
         <div class="row">
             <div class="col-md-12">
-			<h1>{{{ $data['name'] }}} @section('append_header')@show</h1>
+			<h1 id="heading">{{{ $data['name'] }}} @section('append_header')@show</h1>
 			@yield('content')
-			
+			</div>
+		</div>
+	</div>
 	@section('bottom_js')
 	@show
 </body>

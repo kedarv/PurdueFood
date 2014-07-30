@@ -1,9 +1,18 @@
 @extends('layout')
-@section('content')
 
+@section('css')
+@parent
+<style>
+#heading {
+	display: none;
+}
+</style>
+@stop
+
+@section('content')
 <div class="row">
 	<div class="col-md-10"><h1>{{Auth::user()->firstname}}'s Profile</h1></div>
-    <div class="col-md-2"><a href="#" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="https://www.gravatar.com/avatar/{{md5(strtolower(trim(Auth::user()->email)))}}?&r=x&d=identicon&s=100"></a></div>
+    <div class="col-md-2"><a href="#" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="https://www.gravatar.com/avatar/{{md5(strtolower(trim(Auth::user()->email)))}}?&amp;r=x&amp;d=identicon&amp;s=100" alt="Profile Picture"></a></div>
 	<hr/>
 </div>
 <hr/>
