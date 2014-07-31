@@ -4,6 +4,9 @@
 	<meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+	<META NAME="description" CONTENT="Welcome to Purdue Food, where you can discover the dining menus at Purdue University. You can also write reviews for food items, upload pictures of your meals, and share what you eat.">
+	<META NAME="keywords" CONTENT="Purdue Food, PurdueFood, Purdue, Purdue Dining Courts, Purdue Dining">
+	<META NAME="robot" CONTENT="index,follow">
     <title>Purdue Food</title>
 	{{ HTML::style('css/bootstrap.min.css'); }}
 	{{ HTML::style('https://fonts.googleapis.com/css?family=Roboto:400,300'); }}
