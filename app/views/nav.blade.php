@@ -27,14 +27,14 @@
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					@if (Auth::guest())
-						<li>{{ HTML::linkAction('UserController@create', 'Register') }}</li>
-						<li>{{ HTML::linkAction('UserController@login', 'Login') }}</li>
+						<li>{{ HTML::linkAction('UsersController@create', 'Register') }}</li>
+						<li>{{ HTML::linkAction('UsersController@login', 'Login') }}</li>
 					@else
 						<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account<b class="caret"></b></a>
 						<ul class="dropdown-menu">
-							<li>{{ HTML::linkAction('UserController@details', 'Account Details') }}</li>
-							<li>{{ HTML::linkAction('UserController@logout', 'Logout') }}</li>
+							<li>{{ HTML::linkAction('UsersController@details', 'Account Details') }}</li>
+							<li>{{ HTML::linkAction('UsersController@logout', 'Logout') }}</li>
 						</ul>
 					@endif
 				</ul>

@@ -22,23 +22,23 @@
                 <h2>Discover Menus. Review Entrees. Share what you eat.</h2>
 				<div class="hidden-xs">
 					@if (Auth::guest())
-						{{ HTML::linkAction('UserController@create', 'Sign Up', array(), array('class' => 'btn btn-lg btn-default', 'style' => 'width: 225px;')) }}
+						{{ HTML::linkAction('UsersController@create', 'Sign Up', array(), array('class' => 'btn btn-lg btn-default', 'style' => 'width: 225px;')) }}
 						<div class="or_wrap">
 							<div class="or_btn">OR</div>
 						</div>
-						<a href="{{ action('UserController@fbGoToLoginUrl')}}" class="btn btn-lg btn-facebook" style="width:225px;"><i class="fa fa-facebook btn-facebook-i"></i> Connect with Facebook</a>
+						<a href="{{ action('UsersController@fbGoToLoginUrl')}}" class="btn btn-lg btn-facebook" style="width:225px;"><i class="fa fa-facebook btn-facebook-i"></i> Connect with Facebook</a>
 						<br/><br/>
-						<span class="already_member">Already signed up? {{ HTML::linkAction('UserController@login', 'Login &raquo;')}}</span>
+						<span class="already_member">Already signed up? {{ HTML::linkAction('UsersController@login', 'Login &raquo;')}}</span>
 					@else
 						<span class="already_member">Welcome Back, {{Auth::user()->firstname}}!</a>
 					@endif
 				</div>
 				<div class="visible-xs">
 					@if (Auth::guest())
-						{{ HTML::linkAction('UserController@create', 'Sign Up', array(), array('class' => 'btn btn-lg btn-default', 'style' => 'width: 225px;')) }}
-						<a href="{{ action('UserController@fbGoToLoginUrl')}}" class="btn btn-lg btn-facebook" style="width:225px;margin-top:5px;"><i class="fa fa-facebook btn-facebook-i"></i> Connect with Facebook</a>
+						{{ HTML::linkAction('UsersController@create', 'Sign Up', array(), array('class' => 'btn btn-lg btn-default', 'style' => 'width: 225px;')) }}
+						<a href="{{ action('UsersController@fbGoToLoginUrl')}}" class="btn btn-lg btn-facebook" style="width:225px;margin-top:5px;"><i class="fa fa-facebook btn-facebook-i"></i> Connect with Facebook</a>
 						<br/><br/>
-						<span class="already_member">Already signed up? {{ HTML::linkAction('UserController@login', 'Login')}}</span>
+						<span class="already_member">Already signed up? {{ HTML::linkAction('UsersController@login', 'Login')}}</span>
 					@else
 						<span class="already_member">Welcome Back, {{Auth::user()->firstname}}!</a>
 					@endif

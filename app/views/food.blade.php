@@ -152,7 +152,7 @@
 	@if (Auth::check())
 	<div class="col-xs-6 col-md-4">
 		<div class="thumbnail">
-			<form id="my-awesome-dropzone" action="{{ url('user/upload')}}" class="dropzone">
+			<form id="my-awesome-dropzone" action="{{ url('users/upload')}}" class="dropzone">
 				<input type="hidden" name="food_id" value="{{$data['id']}}" />
 			</form>
 		</div>
@@ -188,7 +188,7 @@
         {{ Form::close() }}
     </div>
 	@else
-	Hey, you need an account to comment! {{ HTML::linkAction('UserController@create', 'Register', 'Register') }} or {{ HTML::linkAction('UserController@login', 'Login', 'Login') }}
+	Hey, you need an account to comment! {{ HTML::linkAction('UsersController@create', 'Register', 'Register') }} or {{ HTML::linkAction('UsersController@login', 'Login', 'Login') }}
 	@endif
 	<hr/>
 	<div class="comments"></div>

@@ -27,39 +27,39 @@ Route::get('dining/food/{id}', 'DiningController@getFood');
 
 Route::get('search', 'SearchController@searchMain');
 
-// Confide Routes
-Route::get('user/create',                 'UserController@create');
-Route::post('user',                        'UserController@store');
-Route::get('user/login',                  'UserController@login');
-Route::post('user/login',                  'UserController@do_login');
-Route::get('user/confirm/{code}',         'UserController@confirm');
-Route::get('user/forgot_password',        'UserController@forgot_password');
-Route::post('user/forgot_password',        'UserController@do_forgot_password');
-Route::get('user/reset_password/{token}', 'UserController@reset_password');
-Route::post('user/reset_password',         'UserController@do_reset_password');
-Route::get('user/logout',                 'UserController@logout');
+// Confide routes
+Route::get( 'users/create',                 'UsersController@create');
+Route::post('users',                        'UsersController@store');
+Route::get( 'users/login',                  'UsersController@login');
+Route::post('users/login',                  'UsersController@do_login');
+Route::get( 'users/confirm/{code}',         'UsersController@confirm');
+Route::get( 'users/forgot_password',        'UsersController@forgot_password');
+Route::post('users/forgot_password',        'UsersController@do_forgot_password');
+Route::get( 'users/reset_password/{token}', 'UsersController@reset_password');
+Route::post('users/reset_password',         'UsersController@do_reset_password');
+Route::get( 'users/logout',                 'UsersController@logout');
 
 // Additional Confide Routes
-Route::get('user/details',                 array('before' => 'auth', 'uses' => 'UserController@details'));
+Route::get('users/details',                 array('before' => 'auth', 'uses' => 'UsersController@details'));
 
 //Upload Route
-Route::post('user/upload',                 'UserController@post_upload');
-Route::post('user/generateCode',                 'UserController@generateEmailCode');
+Route::post('users/upload',                 'UsersController@post_upload');
+Route::post('users/generateCode',            'UsersController@generateEmailCode');
 
 //Rating, Comment, Favorite Routes
 Route::post('ratings/setStar',               'DiningController@setStar');
 Route::post('ratings/insertComment',         array('before' => 'csrf|auth', 'uses' => 'DiningController@insertComment'));
-Route::post('user/updateSettingsToggles',   'UserController@updateSettingsToggles');
-Route::post('favorites/update',               'DiningController@updateFavorites');
-Route::post('ratings/insertVote',         array('before' => 'auth', 'uses' => 'DiningController@insertVote'));
+Route::post('user/updateSettingsToggles',    'UsersController@updateSettingsToggles');
+Route::post('favorites/update',              'DiningController@updateFavorites');
+Route::post('ratings/insertVote',            array('before' => 'auth', 'uses' => 'DiningController@insertVote'));
 
 //Search Routes
-Route::post('search/by/date',              array('before' => 'csrf', 'uses' => 'SearchController@redirectToDate'));
-Route::post('search/by/food',              array('before' => 'csrf', 'uses' => 'SearchController@searchByFood'));
-Route::post('search/schedule',             'SearchController@getSchedule');
-Route::post('mail/receiveimages', 'DiningController@receiveMailImages');
-Route::get('fb/callback', 'UserController@fbCallback');
-Route::get('fb/auth', array('uses' => 'UserController@fbGoToLoginUrl'));
+Route::post('search/by/date',               array('before' => 'csrf', 'uses' => 'SearchController@redirectToDate'));
+Route::post('search/by/food',               array('before' => 'csrf', 'uses' => 'SearchController@searchByFood'));
+Route::post('search/schedule',              'SearchController@getSchedule');
+Route::post('mail/receiveimages', 			'DiningController@receiveMailImages');
+Route::get('fb/callback', 					'UsersController@fbCallback');
+Route::get('fb/auth', array('uses' => 'UsersController@fbGoToLoginUrl'));
 
 //Confide Custom Validator
 App::bind('confide.user_validator', 'CustomValidator');

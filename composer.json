@@ -6,7 +6,7 @@
 	"require": {
 		"laravel/framework": "4.2.*",
 		"laravelbook/ardent": "dev-master",
-        "zizaco/confide": "3.2.x",
+        "zizaco/confide": "~4.0@beta",
 		"guzzlehttp/guzzle": "4.*",
 		"barryvdh/laravel-migration-generator": "dev-master",
 		"mews/purifier": "dev-master",

@@ -70,25 +70,21 @@ return array(
     |
     */
 
-	'email_reset_password' =>       'confide::emails.passwordreset', // with $user and $token.
+    'email_reset_password' =>       'confide::emails.passwordreset', // with $user and $token.
     'email_account_confirmation' => 'confide::emails.confirm', // with $user
 
     /*
     |--------------------------------------------------------------------------
-    | Signup (create) Cache
+    | Password reset expiration
     |--------------------------------------------------------------------------
     |
-    | By default you will only can only register once every 2 hours
-    | (120 minutes) because you are not able to receive a registration
-    | email more often then that.
-    |
-    | You can adjust that limitation here, set to 0 for no caching.
-    | Time is in minutes.
-    |
+    | By default. A password reset request will expire after 7 hours. With the
+    | line below you will be able to customize the duration of the reset
+    | requests here.
     |
     */
-    'signup_cache' => 120,
-    
+    'password_reset_expiration' => 7, // hours
+
     /*
     |--------------------------------------------------------------------------
     | Signup E-mail and confirmation (true or false)
@@ -106,7 +102,7 @@ return array(
     | signup_confirm:
     | is to decide of a member needs to be confirmed before he is able to login
     | so when you set this to true, then a member has to be confirmed before
-    | he is able to login, so if you want to use an IPN for confirmation, be 
+    | he is able to login, so if you want to use an IPN for confirmation, be
     | sure that the ipn process also changes the confirmed flag in the member
     | table, otherwise they will not be able to login after the payment.
     |
