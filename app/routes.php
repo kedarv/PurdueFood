@@ -40,7 +40,7 @@ Route::post('users/reset_password',         'UsersController@do_reset_password')
 Route::get( 'users/logout',                 'UsersController@logout');
 
 // Additional Confide Routes
-Route::get('users/details',                 array('before' => 'auth', 'uses' => 'UsersController@details'));
+Route::get('user/details',                 array('before' => 'auth', 'uses' => 'UsersController@details'));
 
 //Upload Route
 Route::post('users/upload',                 'UsersController@post_upload');
