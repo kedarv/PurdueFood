@@ -22,7 +22,7 @@
         <div class="headline">
             <div class="container">
                 <h1>Purdue Food</h1>
-                <h2>Discover Menus. Review Entrees. Share what you eat.</h2>
+                <h2><b>Discover</b> Menus. <b>Review</b> Entrees. <b>Share</b> what you eat.</h2>
 				<div class="hidden-xs">
 					@if (Auth::guest())
 						{{ HTML::linkAction('UsersController@create', 'Sign Up', array(), array('class' => 'btn btn-lg btn-default', 'style' => 'width: 225px;')) }}
