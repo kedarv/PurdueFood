@@ -61,8 +61,9 @@ Route::post('mail/receiveimages', 			'DiningController@receiveMailImages');
 Route::get('fb/callback', 					'UsersController@fbCallback');
 Route::get('fb/auth', array('uses' => 'UsersController@fbGoToLoginUrl'));
 
+
+Route::post('followers/update',              'UsersController@updateFollowers');
+
+
 //Confide Custom Validator
 App::bind('confide.user_validator', 'CustomValidator');
-
-//temp
-Route::get( 'dining/temp',                 'DiningController@tempProc');

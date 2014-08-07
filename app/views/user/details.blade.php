@@ -6,10 +6,31 @@
 #heading {
 	display: none;
 }
+input[type=checkbox][id=followCheckbox] { display:none; } /* to hide the checkbox itself */
+input[type=checkbox] + label:before {
+    font-family: FontAwesome;
+    display: inline-block;
+    position: absolute;
+    margin-top: -22px;
+    font-size: 2.8em;
+    font-weight: 500;
+    content: "\f004";
+}
+input[type=checkbox][id=followCheckbox] + label:before { color: #BFBFBF; } /* allow space for check mark */
+input[type=checkbox]:checked + label:before { color: #F01D7C; } /* allow space for check mark */
+.code {
+    padding: 2px 4px;
+    font-size: 90%;
+    color: #fff;
+    background-color: #333;
+    border-radius: 3px;
+    box-shadow: inset 0 -1px 0 rgba(0,0,0,.25);
+}
 </style>
 @stop
 
 @section('content')
+<input type="hidden" id="id_data" data-user="{{Auth::id()}}">
 <div class="row">
 	<div class="col-md-10"><h1>{{Auth::user()->firstname}}'s Profile</h1></div>
     <div class="col-md-2"><a href="#" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="https://www.gravatar.com/avatar/{{md5(strtolower(trim(Auth::user()->email)))}}?&amp;r=x&amp;d=identicon&amp;s=100" alt="Profile Picture"></a></div>
@@ -92,6 +113,13 @@
 	</div>
 </div>
 
+@if (Auth::check())
+<div style="display:inline-block;font-size:12px;">
+    {{Form::checkbox('Follow', 'followToggle_follow', $data['isFollower'], array('id' => 'followCheckbox'))}}
+    Follow<label for="followCheckbox"></label>
+</div>
+@endif
+
 <script>
 
     $(function () {
@@ -121,6 +149,30 @@
                     }
 
                 });
+
+        });
+        $(' [value^="followToggle_"]:checkbox').change(function()
+        {
+            followOrNot = this.checked
+
+            form_data = {
+                follower_user_id:$('#id_data').data("user"),
+                target_user_id:"herp",
+                value:followOrNot
+            };
+            console.log(form_data);
+
+            $.ajax(
+                {
+                    type: 'POST',
+                    url: '/followers/update',
+                    data: form_data,
+                    success:function (data)
+                    {
+                        //$("#postFavoriteAlert").removeClass("alert-success alert-info").addClass("alert-" + data['status']).html(data['text']).fadeIn(500).removeClass("hidden").delay(5000).fadeOut();
+                        console.log("Data: " + data['status'] + " " + data['text']);
+                    }
+                }, 'json');
 
         });
     });
