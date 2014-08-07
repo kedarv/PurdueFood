@@ -88,6 +88,17 @@ class jsonemail extends Command {
 			}
 		}
 		$this->info('Successfully Cached');
+		$allowedTo = User::where('settingToggle_allowemail', '=', 1)
+					->where('email', '!=', '')->select('id')->get()->toArray();
+		foreach($allowedTo as $allowed) {
+			$favlist = Favorites::where('user_id', '=', $allowed['id'])->select('food_id')->get()->toArray();
+			foreach($favlist as $next) {
+				$count = NextDay::where('food_id', '=', $next['food_id'])->select('food_name', 'hall', 'station', 'meal')->get()->toArray();
+				foreach($count as $item) {
+					$this->info($item['food_name'] . $item['meal'] . $allowed['id']);
+				}
+			}
+		}
 	}
 
 	/**

@@ -128,7 +128,7 @@ input[type=checkbox]:checked + label:before { color: #F01D7C; } /* allow space f
            console.log(this.value + "|" + this.checked + " userID: "+$('#user').data("user"));
             type = this.name
             hideOrShow = this.checked
-            $.post("/purduefood/public/user/updateSettingsToggles",
+            $.post("/user/updateSettingsToggles",
                 {
                     user_id:$('#user').data("user"),
                     settingToggle:this.value,

@@ -67,3 +67,6 @@ Route::post('followers/update',              'UsersController@updateFollowers');
 
 //Confide Custom Validator
 App::bind('confide.user_validator', 'CustomValidator');
+
+//temp
+//Route::get( 'dining/temp',                 'DiningController@tempProc');
