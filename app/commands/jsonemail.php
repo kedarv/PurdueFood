@@ -37,13 +37,35 @@ class jsonemail extends Command {
 	 */
 	public function fire()
 	{
+		NextDay::truncate();
 		$date = date('m-d-Y', time());
 		$array = ["Earhart", "Ford", "Hillenbrand", "Wiley", "Windsor"];
 		foreach($array as $hall) {
 			$url = "http://api.hfs.purdue.edu/menus/v2/locations/". $hall . "/".$date."";
-			if (!Cache::has($hall . "_" . $date)) {
+			if (!Cache::has($hall . "_" . $date)) { // Cached file DOES NOT exist
 				$getfile = file_get_contents($url);
 				$cacheforever = Cache::forever($hall . "_" . $date, $getfile);
+				$json = Cache::get($hall . "_" . $date);
+				$json = json_decode($json, true);
+				foreach($json['Meals'] as $value) {
+					if($value['Status'] == "Closed" || $value['Status'] == "Unavailable") {
+						continue;
+					}
+					foreach($value['Stations'] as $station) {
+						foreach($station['Items'] as $items) {
+							$this->info($items['ID'] . $items['Name'] . " at " . $hall . " " . $station['Name'] . " for " . $value['Name']);
+							$food = new NextDay;
+							$food->food_id = $items['ID'];
+							$food->food_name = $items['Name'];
+							$food->hall = $hall;
+							$food->station = $station['Name'];
+							$food->meal = $value['Name'];
+							$food->save();
+						}
+					}
+				}
+			}
+			else { // Cached file DOES exist
 				$json = Cache::get($hall . "_" . $date);
 				$json = json_decode($json, true);
 				foreach($json['Meals'] as $value) {
