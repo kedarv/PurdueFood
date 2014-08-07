@@ -46,6 +46,7 @@ public function details() {
 			$data['numFav'] = $favorites->count();
 			$data['numReviews'] = $reviews->count();
 			$data['reviews']=$reviewsArray;
+            $data['isFollower']=0//todo
 
 			return View::make('user.details',compact('data'));
 		}
@@ -400,6 +401,37 @@ public function details() {
         Confide::logout();
 
         return Redirect::to('/');
+    }
+    public function updateFollowers()
+    {
+        if (Request::ajax() && Input::get('follower_user_id') == Auth::id()){
+            $data = array(
+                'follower_user_id'=> Input::get('follower_user_id'),
+                'target_user_id'=>  Input::get('target_user_id'),
+                'value'=> Input::get('value'),
+            );
+
+            $int=((int)($data['value']=="true"));
+            $getFollower = Followers::firstOrNew(array('target_user_id' => $data['target_user_id'], 'follower_user_id' => $data['follower_user_id']));
+            $getFollower->following = $int;
+            $getFollower->save();
+            if($int==0)
+            {
+                $text="Follower Removed!";
+            }
+            else
+            {
+                $text="Now following!";
+            }
+
+            $return_data = array('status' => 'success', 'text' => $text);
+        } else {
+            $return_data = array('status' => 'danger', 'text' => 'Something went wrong!');
+        }
+        // Return JSON Reponse
+        header('Content-Type: application/json');
+        echo json_encode($return_data);
+        exit();
     }
 
 }
