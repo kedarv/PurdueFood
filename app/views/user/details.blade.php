@@ -100,7 +100,7 @@
            console.log(this.value + "|" + this.checked + " userID: "+$('#user').data("user"));
             type = this.name
             hideOrShow = this.checked
-            $.post("/purduefood/public/user/updateSettingsToggles",
+            $.post("/user/updateSettingsToggles",
                 {
                     user_id:$('#user').data("user"),
                     settingToggle:this.value,
