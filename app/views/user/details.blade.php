@@ -6,7 +6,7 @@
 #heading {
 	display: none;
 }
-input[type=checkbox] { display:none; } /* to hide the checkbox itself */
+input[type=checkbox][id=followCheckbox] { display:none; } /* to hide the checkbox itself */
 input[type=checkbox] + label:before {
     font-family: FontAwesome;
     display: inline-block;
@@ -16,7 +16,7 @@ input[type=checkbox] + label:before {
     font-weight: 500;
     content: "\f004";
 }
-input[type=checkbox] + label:before { color: #BFBFBF; } /* allow space for check mark */
+input[type=checkbox][id=followCheckbox] + label:before { color: #BFBFBF; } /* allow space for check mark */
 input[type=checkbox]:checked + label:before { color: #F01D7C; } /* allow space for check mark */
 .code {
     padding: 2px 4px;
