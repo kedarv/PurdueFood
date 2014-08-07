@@ -46,7 +46,7 @@ public function details() {
 			$data['numFav'] = $favorites->count();
 			$data['numReviews'] = $reviews->count();
 			$data['reviews']=$reviewsArray;
-            $data['isFollower']=0//todo
+            $data['isFollower']=0;//todo
 
 			return View::make('user.details',compact('data'));
 		}
