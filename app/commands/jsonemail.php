@@ -89,15 +89,19 @@ class jsonemail extends Command {
 		}
 		$this->info('Successfully Cached');
 		$allowedTo = User::where('settingToggle_allowemail', '=', 1)
-					->where('email', '!=', '')->select('id')->get()->toArray();
+					->where('email', '!=', '')->select('id', 'email', 'firstname', 'lastname')->get()->toArray();
 		foreach($allowedTo as $allowed) {
 			$favlist = Favorites::where('user_id', '=', $allowed['id'])->select('food_id')->get()->toArray();
-			foreach($favlist as $next) {
-				$count = NextDay::where('food_id', '=', $next['food_id'])->select('food_name', 'hall', 'station', 'meal')->get()->toArray();
-				foreach($count as $item) {
-					$this->info($item['food_name'] . $item['meal'] . $allowed['id']);
-				}
-			}
+			$data = NextDay::whereIn('food_id', Favorites::where('user_id', '=', $allowed['id'])->select('food_id')->get()->toArray())->get()->toArray();
+				//$data = NextDay::where('food_id', '=', $next['food_id'])->select('food_name', 'hall', 'station', 'meal')->get()->toArray();
+				//foreach($data as $item) {
+					//$this->info($item['food_name'] . $item['meal'] . $allowed['id']);
+				//}
+			
+			Mail::send('user.emails.fav', compact('data'), function($message) use ($allowed)
+			{
+				$message->to($allowed['email'], ''.$allowed['firstname']. ' ' . $allowed['lastname'].'')->subject('Tomorrows Schedule!');
+			});
 		}
 	}
 

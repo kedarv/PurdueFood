@@ -4,18 +4,15 @@ protected static $restful = true;
 	public function getContentDataAttribute($data) {
 		return json_decode($data);
 	}
-	/*public function tempProc () { // temporarily process email favorite command
+	public function tempProc () { // temporarily process email favorite command
 		$data['name'] = "Temp Page";
 		$allowedTo = User::where('settingToggle_allowemail', '=', 1)
 					->where('email', '!=', '')->select('id')->get()->toArray();
 		foreach($allowedTo as $allowed) {
-			$favlist = Favorites::where('user_id', '=', $allowed['id'])->select('food_id')->get()->toArray();
-			foreach($favlist as $next) {
-				$count = NextDay::where('food_id', '=', $next['food_id'])->select('food_name', 'hall', 'station', 'meal')->get()->toArray();
-			}
+			$count = NextDay::whereIn('food_id', Favorites::where('user_id', '=', $allowed['id'])->select('food_id')->get()->toArray())->get()->toArray();
 		}
 		return View::make('temp', compact('data', 'allowedTo', 'favlist', 'count'));
-	}*/
+	}
 	
     public function pushData($name = NULL, $date = NULL){
 		if($date == NULL) {

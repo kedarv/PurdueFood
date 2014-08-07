@@ -65,4 +65,4 @@ Route::get('fb/auth', array('uses' => 'UsersController@fbGoToLoginUrl'));
 App::bind('confide.user_validator', 'CustomValidator');
 
 //temp
-//Route::get( 'dining/temp',                 'DiningController@tempProc');
+Route::get( 'dining/temp',                 'DiningController@tempProc');
