@@ -13,8 +13,7 @@ FacebookSession::setDefaultApplication(Config::get('keys.fb_appid'), Config::get
  */
 class UsersController extends Controller {
 	/* Custom User Methods */
-public function details()
-		{
+public function details() {
 			$data['name'] = Auth::user()->firstname . "'s Profile";
 
 			$favorites = Favorites::where('user_id', '=', Auth::id())
@@ -202,6 +201,16 @@ public function details()
             return Redirect::to('user/details');
         }
     }
+    public function updateSettingsToggles() {
+		$data = array(
+			'settingToggle' =>	Input::get('settingToggle'),
+            'user_id'		=>  Input::get('user_id'),
+            'value'			=>  Input::get('value'),
+        );
+		$query= "UPDATE users SET ".$data['settingToggle']." = ".((int)($data['value']=="true"))." where id = ".$data['user_id']."";
+		DB::update($query);
+		return 'Updated!';
+ }
 	/* Confide Methods */
     /**
      * Displays the form for account creation

@@ -65,13 +65,19 @@
     </div>
 	</div>
 </div>
-<hr/>
+
 <div class="row">
-	<div class="col-md-12">
-		<?php
-		$user = User::find(Auth::id());
-		?>
-		<h2>Dietary Preferences</h2>
+<h2>Other Settings</h2>
+<hr/>
+	<?php
+	$user = User::find(Auth::id());
+	?>
+	<div class="col-md-6">
+	<h4>Email Settings</h4>
+	{{Form::checkbox('allowemail', 'settingToggle_allowemail', $user->settingToggle_allowemail)}} Allow Nightly Emails<br>
+	</div>
+	<div class="col-md-6">
+		<h4>Dietary Preferences</h4>
 		{{Form::checkbox('non vegetarian items', 'settingToggle_vegetarian', $user->settingToggle_vegetarian)}} Hide non-vegetarian items<br>
 		{{Form::checkbox('dairy items', 'settingToggle_dairy', $user->settingToggle_dairy)}} Hide items containing dairy<br>
 		{{Form::checkbox('soy idems', 'settingToggle_soy', $user->settingToggle_soy)}} Hide items containing soy<br>
@@ -94,7 +100,7 @@
            console.log(this.value + "|" + this.checked + " userID: "+$('#user').data("user"));
             type = this.name
             hideOrShow = this.checked
-            $.post("/user/updateSettingsToggles",
+            $.post("/purduefood/public/user/updateSettingsToggles",
                 {
                     user_id:$('#user').data("user"),
                     settingToggle:this.value,
