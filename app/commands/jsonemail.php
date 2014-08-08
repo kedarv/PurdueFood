@@ -99,6 +99,7 @@ class jsonemail extends Command {
 					{
 						$message->to($allowed['email'], ''.$allowed['firstname']. ' ' . $allowed['lastname'].'')->subject('Tomorrows Schedule!');
 					});
+					$this->info('Data not empty, sent mail');
 				}
 				else {
 					$data['title'] = "Aw Man!";
@@ -107,6 +108,7 @@ class jsonemail extends Command {
 					{
 						$message->to($allowed['email'], ''.$allowed['firstname']. ' ' . $allowed['lastname'].'')->subject('Tomorrows Schedule!');
 					});
+					$this->info('Data empty, sent mail');
 				}
 			}
 		}
