@@ -92,16 +92,18 @@ class jsonemail extends Command {
 					->where('email', '!=', '')->select('id', 'email', 'firstname', 'lastname')->get()->toArray();
 		foreach($allowedTo as $allowed) {
 			$favlist = Favorites::where('user_id', '=', $allowed['id'])->select('food_id')->get()->toArray();
-			if(!empty($favlist)) {
+			if(!empty($favlist)) { // Make sure we're not matching against an empty array
 				$data = NextDay::whereIn('food_id', Favorites::where('user_id', '=', $allowed['id'])->select('food_id')->get()->toArray())->get()->toArray();
-				if(!empty($data)) {
-					$this->info('next day query');
-						//$data = NextDay::where('food_id', '=', $next['food_id'])->select('food_name', 'hall', 'station', 'meal')->get()->toArray();
-						//foreach($data as $item) {
-							//$this->info($item['food_name'] . $item['meal'] . $allowed['id']);
-						//}
-					
+				if(!empty($data)) { // Make sure that there's some matches				
 					Mail::send('user.emails.fav', compact('data'), function($message) use ($allowed)
+					{
+						$message->to($allowed['email'], ''.$allowed['firstname']. ' ' . $allowed['lastname'].'')->subject('Tomorrows Schedule!');
+					});
+				}
+				else {
+					$data['title'] = "Aw Man!";
+					$data['firstname'] = $allowed['firstname'];
+					Mail::send('user.emails.fav_none', compact('data'), function($message) use ($allowed)
 					{
 						$message->to($allowed['email'], ''.$allowed['firstname']. ' ' . $allowed['lastname'].'')->subject('Tomorrows Schedule!');
 					});
