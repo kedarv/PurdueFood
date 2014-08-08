@@ -56,7 +56,7 @@
 
         <!-- First Featurette -->
         <div class="featurette" id="about">
-            <img class="featurette-image img-circle img-responsive pull-right" src="img/350x350.gif">
+            <img class="featurette-image img-circle img-responsive pull-right" src="{{asset('img/home_features/menus.jpg')}}" alt="View Menus">
             <h2 class="featurette-heading">View Menus
             </h2>
             <p class="lead">Easily see when and where your favorite dishes will be served in the upcoming week. You can even receive email updates!</p>
@@ -66,7 +66,7 @@
 
         <!-- Second Featurette -->
         <div class="featurette" id="services">
-            <img class="featurette-image img-circle img-responsive pull-left" src="img/350x350.gif">
+            <img class="featurette-image img-circle img-responsive pull-left" src="{{asset('img/home_features/reviews.jpg')}}" alt="Reviews">
             <h2 class="featurette-heading">Review Items
             </h2>
             <p class="lead">You can rate dishes and leave comments, just like you would on Yelp. We will provide the Purdue Food Services with useful feedback on what you like!</p>
@@ -76,7 +76,7 @@
 
         <!-- Third Featurette -->
         <div class="featurette" id="contact">
-            <img class="featurette-image img-circle img-responsive pull-right" src="img/350x350.gif">
+            <img class="featurette-image img-circle img-responsive pull-right" src="{{asset('img/home_features/search.jpg')}}" alt="Search">
             <h2 class="featurette-heading">Search for Items
             </h2>
             <p class="lead">If you liked last night's pasta, go search for pasta and add that dish to your favorites!</p>
