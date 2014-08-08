@@ -9,7 +9,7 @@
 	<META NAME="robot" CONTENT="index,follow">
     <title>Purdue Food</title>
 	{{ HTML::style('css/bootstrap.min.css'); }}
-	{{ HTML::style('https://fonts.googleapis.com/css?family=Roboto:400,300'); }}
+	{{ HTML::style('https://fonts.googleapis.com/css?family=Roboto:300,500'); }}
 	{{ HTML::style('css/home.css'); }}
 	{{ HTML::style('//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css'); }}
 	{{ HTML::script('//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'); }}
@@ -22,7 +22,7 @@
         <div class="headline">
             <div class="container">
                 <h1>Purdue Food</h1>
-                <h2><b>Discover</b> Menus. <b>Review</b> Entrees. <b>Share</b> what you eat.</h2>
+                <h2><span class="headline-bold">Discover</span> Menus. <span class="headline-bold">Review</span> Entrees. <span class="headline-bold">Share</span> what you eat.</h2>
 				<div class="hidden-xs">
 					@if (Auth::guest())
 						{{ HTML::linkAction('UsersController@create', 'Sign Up', array(), array('class' => 'btn btn-lg btn-default', 'style' => 'width: 225px;')) }}
@@ -88,7 +88,7 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; PurdueFood.com</p>
+                    <p>&copy; PurdueFood.com</p>
                 </div>
             </div>
         </footer>
