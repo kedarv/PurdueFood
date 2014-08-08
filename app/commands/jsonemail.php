@@ -91,6 +91,7 @@ class jsonemail extends Command {
 		$allowedTo = User::where('settingToggle_allowemail', '=', 1)
 					->where('email', '!=', '')->select('id', 'email', 'firstname', 'lastname')->get()->toArray();
 		foreach($allowedTo as $allowed) {
+			$this->info($allowed['firstname']);
 			$favlist = Favorites::where('user_id', '=', $allowed['id'])->select('food_id')->get()->toArray();
 			if(!empty($favlist)) { // Make sure we're not matching against an empty array
 				$data = NextDay::whereIn('food_id', Favorites::where('user_id', '=', $allowed['id'])->select('food_id')->get()->toArray())->get()->toArray();
