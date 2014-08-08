@@ -91,8 +91,11 @@ class jsonemail extends Command {
 		$allowedTo = User::where('settingToggle_allowemail', '=', 1)
 					->where('email', '!=', '')->select('id', 'email', 'firstname', 'lastname')->get()->toArray();
 		foreach($allowedTo as $allowed) {
+		$this->info('allowed foreach');
 			$favlist = Favorites::where('user_id', '=', $allowed['id'])->select('food_id')->get()->toArray();
+			$this->info(print_r($favlist));
 			$data = NextDay::whereIn('food_id', Favorites::where('user_id', '=', $allowed['id'])->select('food_id')->get()->toArray())->get()->toArray();
+			$this->info('next day query');
 				//$data = NextDay::where('food_id', '=', $next['food_id'])->select('food_name', 'hall', 'station', 'meal')->get()->toArray();
 				//foreach($data as $item) {
 					//$this->info($item['food_name'] . $item['meal'] . $allowed['id']);
