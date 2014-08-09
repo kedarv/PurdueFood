@@ -34,7 +34,7 @@ class SearchController extends Controller {
 				$json = json_encode(array('status' => 'danger', 'text' => 'Please fill in the form!'));
 			}
 			else { // Validation Passed
-				$url = "http://api.hfs.purdue.edu/Menus/v2/search/". Input::get('food');
+				$url = "http://api.hfs.purdue.edu/Menus/v2/search/". rawurlencode(Input::get('food'));
 				if (Cache::has(Input::get('food') . "_search")) {
 					$json = Cache::get(Input::get('food') . "_search");
 				}
