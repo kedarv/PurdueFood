@@ -76,7 +76,8 @@ class SearchController extends Controller {
 				}
 				else {
 					$getfile = file_get_contents($url);
-					Cache::forever(Input::get('food_id') . "_schedule", $getfile);
+					$expiresAt = Carbon::now()->addDay();
+					Cache::put(Input::get('food_id') . "_schedule", $getfile, $expiresAt);
 					$json = Cache::get(Input::get('food_id') . "_schedule");
 				}
 			}
