@@ -195,6 +195,7 @@ return array(
 		'Confide'   	  => 'Zizaco\Confide\Facade',
 		'Purifier' 		  => 'Mews\Purifier\Facades\Purifier',
         'Clockwork'       => 'Clockwork\Support\Laravel\Facade',
+		'Carbon' => 'Carbon\Carbon',
 	),
 
 );
