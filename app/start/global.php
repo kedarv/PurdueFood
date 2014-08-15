@@ -87,3 +87,10 @@ App::missing(function($exception)
     $data['name']="Error 404";
     return Response::view('errors.missing', compact('data'), 404);
 });
+
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
+App::error(function(ModelNotFoundException $e)
+{
+    return Response::make('Not Found', 404);
+});
