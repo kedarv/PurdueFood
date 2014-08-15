@@ -79,3 +79,11 @@ App::down(function()
 */
 require app_path().'/filters.php';
 App::bind('confide.user_validator', 'RegisterValidator');
+
+
+
+App::missing(function($exception)
+{
+    $data['name']="Error 404";
+    return Response::view('errors.missing', compact('data'), 404);
+});
