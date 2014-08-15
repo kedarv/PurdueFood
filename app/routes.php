@@ -41,6 +41,7 @@ Route::get( 'users/logout',                 'UsersController@logout');
 
 // Additional Confide Routes
 Route::get('user/details',                 array('before' => 'auth', 'uses' => 'UsersController@details'));
+Route::get('user/{username}',                 array('before' => 'auth', 'uses' => 'UsersController@publicdetails'));
 
 //Upload Route
 Route::post('users/upload',                 'UsersController@post_upload');

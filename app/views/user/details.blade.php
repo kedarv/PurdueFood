@@ -113,13 +113,6 @@ input[type=checkbox]:checked + label:before { color: #F01D7C; } /* allow space f
 	</div>
 </div>
 
-@if (Auth::check())
-<div style="display:inline-block;font-size:12px;">
-    {{Form::checkbox('Follow', 'followToggle_follow', $data['isFollower'], array('id' => 'followCheckbox'))}}
-    Follow<label for="followCheckbox"></label>
-</div>
-@endif
-
 <script>
 
     $(function () {
@@ -149,30 +142,6 @@ input[type=checkbox]:checked + label:before { color: #F01D7C; } /* allow space f
                     }
 
                 });
-
-        });
-        $(' [value^="followToggle_"]:checkbox').change(function()
-        {
-            followOrNot = this.checked
-
-            form_data = {
-                follower_user_id:$('#id_data').data("user"),
-                target_user_id:"herp",
-                value:followOrNot
-            };
-            console.log(form_data);
-
-            $.ajax(
-                {
-                    type: 'POST',
-                    url: '/followers/update',
-                    data: form_data,
-                    success:function (data)
-                    {
-                        //$("#postFavoriteAlert").removeClass("alert-success alert-info").addClass("alert-" + data['status']).html(data['text']).fadeIn(500).removeClass("hidden").delay(5000).fadeOut();
-                        console.log("Data: " + data['status'] + " " + data['text']);
-                    }
-                }, 'json');
 
         });
     });
