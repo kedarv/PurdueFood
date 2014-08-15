@@ -16,8 +16,9 @@ class UsersController extends Controller {
 public function details() {
 			$data['name'] = Auth::user()->firstname . "'s Profile";
 
-			$favorites = Favorites::where('user_id', '=', Auth::id())
-				->where('favorite', '=', 1, 'AND')->get();
+
+            //Get favorites
+			$favorites = Favorites::where('user_id', '=', Auth::id())->where('favorite', '=', 1, 'AND')->get();
 			$favoriteArray=array();
 			foreach($favorites as $each)
 			{
@@ -29,8 +30,10 @@ public function details() {
 				}
 				array_push($favoriteArray,array('name'=>$name,'food_id'=>$each['food_id']));
 			}
-			$data['favorites'] = $favoriteArray;
+            $data['numFav'] = $favorites->count();
+            $data['favorites'] = $favoriteArray;
 
+            //Get reviews
 			$reviews = Reviews::where('user_id', '=', Auth::id())->get();
 			$reviewsArray=array();
 			foreach($reviews as $each)
@@ -43,17 +46,18 @@ public function details() {
 				}
 				array_push($reviewsArray,array('name'=>$name,'food_id'=>$each['food_id'],'comment'=>$each['comment'],'rating'=>$each['rating'], 'comment_id' => $each['id']));
 			}
-			$data['numFav'] = $favorites->count();
 			$data['numReviews'] = $reviews->count();
 			$data['reviews']=$reviewsArray;
-            $data['isFollower']=0;//todo
+            $data['user']=Auth::user();
 
 			return View::make('user.details',compact('data'));
 		}
-    public function publicDetails($username) {
+    public function publicDetails($username)
+    {
+        $user=User::where('username','=',$username)->firstOrFail();
 
-        $data['name'] = Auth::user()->firstname . "'s Profile";
-        $user=User::where('username','=',$username)->first();
+        $data['name'] = $user->firstname . "'s Profile";
+
         $user_id=$user->id;
         $data['user_id']=$user_id;
         $data['username']=$user->username;
@@ -91,7 +95,13 @@ public function details() {
         $data['reviews']=$reviewsArray;
 
 
-        $data['isFollower']=Followers::where('follower_user_id','=',Auth::id())->where('target_user_id','=',$user_id,'AND')->first()->following;
+        $followerCheck=Followers::where('follower_user_id','=',Auth::id())->where('target_user_id','=',$user_id,'AND')->first();
+        if($followerCheck==null)
+        {
+            $data['isFollower']=0;
+        }
+        else{$data['isFollower']=$followerCheck->following;}
+
 
         return View::make('user.publicdetails',compact('data'));
     }
