@@ -6,34 +6,14 @@
 #heading {
 	display: none;
 }
-input[type=checkbox][id=followCheckbox] { display:none; } /* to hide the checkbox itself */
-input[type=checkbox] + label:before {
-    font-family: FontAwesome;
-    display: inline-block;
-    position: absolute;
-    margin-top: -22px;
-    font-size: 2.8em;
-    font-weight: 500;
-    content: "\f004";
-}
-input[type=checkbox][id=followCheckbox] + label:before { color: #BFBFBF; } /* allow space for check mark */
-input[type=checkbox]:checked + label:before { color: #F01D7C; } /* allow space for check mark */
-.code {
-    padding: 2px 4px;
-    font-size: 90%;
-    color: #fff;
-    background-color: #333;
-    border-radius: 3px;
-    box-shadow: inset 0 -1px 0 rgba(0,0,0,.25);
-}
 </style>
 @stop
 
 @section('content')
 <input type="hidden" id="id_data" data-user="{{Auth::id()}}">
 <div class="row">
-	<div class="col-md-10"><h1>{{Auth::user()->firstname}}'s Profile</h1></div>
-    <div class="col-md-2"><a href="#" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="https://www.gravatar.com/avatar/{{md5(strtolower(trim(Auth::user()->email)))}}?&amp;r=x&amp;d=identicon&amp;s=100" alt="Profile Picture"></a></div>
+	<div class="col-md-10"><h1>{{$data['name']}}</h1></div>
+    <div class="col-md-2"><a href="#" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="https://www.gravatar.com/avatar/{{md5(strtolower(trim($data['user']->email)))}}?&amp;r=x&amp;d=identicon&amp;s=100" alt="Profile Picture"></a></div>
 	<hr/>
 </div>
 <hr/>
@@ -41,8 +21,8 @@ input[type=checkbox]:checked + label:before { color: #F01D7C; } /* allow space f
 	<div class="col-md-3">
 		<ul class="list-group">
 			<li class="list-group-item text-center"><b>User Information</b></li>
-			<li class="list-group-item text-right"><span class="pull-left"><strong>Joined</strong></span> {{date("F j, Y", strtotime(Auth::user()->created_at))}}</li>
-			<li class="list-group-item text-right"><span class="pull-left"><strong>Email</strong></span> {{Auth::user()->email}}</li>
+			<li class="list-group-item text-right"><span class="pull-left"><strong>Joined</strong></span> {{date("F j, Y", strtotime($data['user']->created_at))}}</li>
+			<li class="list-group-item text-right"><span class="pull-left"><strong>Email</strong></span> {{$data['user']->email}}</li>
 			<li class="list-group-item text-center">You have <b>{{$data['numReviews']}} {{Str::plural('review', $data['numReviews'])}}</b></li>
 			<li class="list-group-item text-center">You have <b>{{$data['numFav']}} {{Str::plural('favorite', $data['numFav'])}}</b></li>
 		</ul> 
@@ -90,21 +70,18 @@ input[type=checkbox]:checked + label:before { color: #F01D7C; } /* allow space f
 <div class="row">
 <h2>Other Settings</h2>
 <hr/>
-	<?php
-	$user = User::find(Auth::id());
-	?>
 	<div class="col-md-6">
 	<h4>Email Settings</h4>
-	{{Form::checkbox('allowemail', 'settingToggle_allowemail', $user->settingToggle_allowemail)}} Allow Nightly Emails<br>
+	{{Form::checkbox('allowemail', 'settingToggle_allowemail', $data['user']->settingToggle_allowemail)}} Allow Nightly Emails<br>
 	</div>
 	<div class="col-md-6">
 		<h4>Dietary Preferences</h4>
-		{{Form::checkbox('non vegetarian items', 'settingToggle_vegetarian', $user->settingToggle_vegetarian)}} Hide non-vegetarian items<br>
-		{{Form::checkbox('dairy items', 'settingToggle_dairy', $user->settingToggle_dairy)}} Hide items containing dairy<br>
-		{{Form::checkbox('soy idems', 'settingToggle_soy', $user->settingToggle_soy)}} Hide items containing soy<br>
-		{{Form::checkbox('egg items', 'settingToggle_egg', $user->settingToggle_egg)}} Hide items containing eggs<br>
-		{{Form::checkbox('wheat items', 'settingToggle_wheat', $user->settingToggle_wheat)}} Hide items containing wheat<br>
-		{{Form::checkbox('gluten items', 'settingToggle_gluten', $user->settingToggle_gluten)}} Hide items containing gluten<br>
+		{{Form::checkbox('non vegetarian items', 'settingToggle_vegetarian', $data['user']->settingToggle_vegetarian)}} Hide non-vegetarian items<br>
+		{{Form::checkbox('dairy items', 'settingToggle_dairy', $data['user']->settingToggle_dairy)}} Hide items containing dairy<br>
+		{{Form::checkbox('soy idems', 'settingToggle_soy', $data['user']->settingToggle_soy)}} Hide items containing soy<br>
+		{{Form::checkbox('egg items', 'settingToggle_egg', $data['user']->settingToggle_egg)}} Hide items containing eggs<br>
+		{{Form::checkbox('wheat items', 'settingToggle_wheat', $data['user']->settingToggle_wheat)}} Hide items containing wheat<br>
+		{{Form::checkbox('gluten items', 'settingToggle_gluten', $data['user']->settingToggle_gluten)}} Hide items containing gluten<br>
 
 		<div class="alert alert-success" role="alert" id="postUpdateAlert" hidden="true">
 			<div id="postUpdateAlertMessage">herp</div>
