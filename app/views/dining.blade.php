@@ -11,7 +11,7 @@ console.log("endpoint: http://api.hfs.purdue.edu/menus/v2/locations/{{{ $data['s
 <hr/>
 	@foreach($json['Meals'] as $value)
 		<div class="well"><h2 style="margin-top:0px;">{{{$value['Name']}}} <small>From {{{date('g:i A', strtotime($value['Hours']['StartTime']))}}} to {{{date('g:i A', strtotime($value['Hours']['EndTime']))}}}</small></h2><hr/>
-		@if($value['Status'] == "Closed" || $value['Status'] == "Unavailable")
+		@if(count($value['Stations']) == 0)
 			<div class="alert alert-danger">Dining Court Closed</div></div>
 			@continue
 		@endif
