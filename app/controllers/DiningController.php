@@ -17,6 +17,17 @@ protected static $restful = true;
     public function pushData($name = NULL, $date = NULL){
 		if($date == NULL) {
 			$date = date('m-d-Y', time());
+			// #id selection based on time
+			$hour = date('G', time);
+			if($hour <= 10){
+				$mealtime = "breakfast";
+			}
+			elseif($hour > 10 && $hour <= 3){
+				$mealtime = "lunch";
+			}
+			elseif($hour > 3 && $hour <= 23){
+				$mealtime = "dinner";
+			}
 		}
 		if($name == NULL) {
 			$name = "Earhart";
