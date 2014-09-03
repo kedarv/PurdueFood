@@ -16,11 +16,11 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Today's Menu <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li>{{ HTML::linkAction('DiningController@pushData', 'Earhart', ['name' => 'Earhart']) }}</li>
-                            <li>{{ HTML::linkAction('DiningController@pushData', 'Ford', ['name' => 'Ford']) }}</li>
-                            <li>{{ HTML::linkAction('DiningController@pushData', 'Hillenbrand', ['name' => 'Hillenbrand']) }}</li>
-                            <li>{{ HTML::linkAction('DiningController@pushData', 'Wiley', ['name' => 'Wiley']) }}</li>
-                            <li>{{ HTML::linkAction('DiningController@pushData', 'Windsor', ['name' => 'Windsor']) }}</li>
+                            <li><a href="{{action('DiningController@pushData', ['name' => 'Earhart'])}}#{{$data['mealtime']}}">Earhart</a></li>
+                            <li><a href="{{action('DiningController@pushData', ['name' => 'Ford'])}}#{{$data['mealtime']}}">Ford</a></li>
+                            <li><a href="{{action('DiningController@pushData', ['name' => 'Hillenbrand'])}}#{{$data['mealtime']}}">Hillenbrand</a></li>
+                            <li><a href="{{action('DiningController@pushData', ['name' => 'Wiley'])}}#{{$data['mealtime']}}">Wiley</a></li>
+                            <li><a href="{{action('DiningController@pushData', ['name' => 'Windsor'])}}#{{$data['mealtime']}}">Windsor</a></li>
                         </ul>
                     </li>
 					<li>{{ HTML::linkAction('SearchController@searchMain', 'Search') }}</li>

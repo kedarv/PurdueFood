@@ -10,7 +10,7 @@ console.log("endpoint: http://api.hfs.purdue.edu/menus/v2/locations/{{{ $data['s
 <a href="https://www.google.com/maps/dir/Current+Location/{{{urlencode($data['nav_link'])}}}+Lafayette+IN">Navigate to {{{$data['shortName']}}} Dining Court &raquo;</a>
 <hr/>
 	@foreach($json['Meals'] as $value)
-		<div class="well" id="{{{$value['Name']}}}"><h2 style="margin-top:0px;">{{{$value['Name']}}} <small>From {{{date('g:i A', strtotime($value['Hours']['StartTime']))}}} to {{{date('g:i A', strtotime($value['Hours']['EndTime']))}}}</small></h2><hr/>
+		<div class="well" id="{{{strtolower($value['Name'])}}}"><h2 style="margin-top:0px;">{{{$value['Name']}}} <small>From {{{date('g:i A', strtotime($value['Hours']['StartTime']))}}} to {{{date('g:i A', strtotime($value['Hours']['EndTime']))}}}</small></h2><hr/>
 		@if(count($value['Stations']) == 0)
 			<div class="alert alert-danger">Dining Court Closed</div></div>
 			@continue
