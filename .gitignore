@@ -11,3 +11,4 @@ app/storage/cache
 app/config/database.php
 public/uploads
 incomingmail.log
+app/config/keys.php
