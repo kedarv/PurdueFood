@@ -68,3 +68,16 @@ Route::post('followers/update',              'UsersController@updateFollowers');
 
 //Confide Custom Validator
 App::bind('confide.user_validator', 'CustomValidator');
+
+//View Share
+$hour = date('G', time());
+if($hour <= 10){
+	$time = "breakfast";
+}
+elseif($hour > 10 && $hour <= 15){
+	$time = "lunch";
+}
+elseif($hour > 15 && $hour <= 23){
+	$time = "dinner";
+}
+View::share('mealtime', $time);
