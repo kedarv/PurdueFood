@@ -46,7 +46,6 @@ body.modal-open {
 $('.input-group.date').datepicker({
     startDate: "02/28/2012",
     todayBtn: "linked",
-    daysOfWeekDisabled: "0",
     autoclose: true,
     todayHighlight: true,
 	format: 'mm-dd-yyyy',
