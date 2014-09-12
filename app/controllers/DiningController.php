@@ -42,24 +42,42 @@ protected static $restful = true;
 			$json = Cache::get($name . "_" . $date);
 		}
 		$json = json_decode($json, true);
+        foreach($json['Meals'] as $key1 => $eachMeal)
+        {
+            foreach($eachMeal['Stations'] as $key2 => $eachStation)
+            {
+                foreach($eachStation['Items'] as $key3 => $eachItem)
+                {
+                    $id = $eachItem['ID'];
+                    $json['Meals'][$key1]['Stations'][$key2]['Items'][$key3]['isUserFavorite']=$this->isFavorite($id);
+                    $json['Meals'][$key1]['Stations'][$key2]['Items'][$key3]['rating']=$this->getAverageRating($id);
+                    $saveData = Foods::firstOrCreate(array('food_id' => $id, 'name'=>$eachItem['Name']));
+                }
+            }
+        }
+
+
+        $this->er(($json));
 		return View::make('dining', compact('data', 'json'));
     }
 	public function getFood($id){
 
-        if(substr($id,8,1)!="-")
-            $id=Foods::where('name','=',urldecode($id))->first()->food_id;
-		$url = "http://api.hfs.purdue.edu/Menus/v2/V2Items/".$id."";
-		if (Cache::has($id)) {
-			$json = Cache::get($id);
-		} else {
-			$getfile = file_get_contents($url);
-			$cacheforever = Cache::forever($id, $getfile);
-			$json = Cache::get($id);
-		}
-		$json = json_decode($json, true);
-		$data['id'] = $id;
-		$data['name'] = $json['Name'];
-        $saveData = Foods::firstOrCreate(array('food_id' => $id, 'name'=>$json['Name']));
+//        if(substr($id,8,1)!="-")
+//            $id=Foods::where('name','=',urldecode($id))->first()->food_id;
+//		$url = "http://api.hfs.purdue.edu/Menus/v2/V2Items/".$id."";
+//		if (Cache::has($id)) {
+//			$json = Cache::get($id);
+//		} else {
+//			$getfile = file_get_contents($url);
+//			$cacheforever = Cache::forever($id, $getfile);
+//			$json = Cache::get($id);
+//		}
+//		$json = json_decode($json, true);
+//		$data['id'] = $id;
+//		$data['name'] = $json['Name'];
+//        $saveData = Foods::firstOrCreate(array('food_id' => $id, 'name'=>$json['Name']));
+        $data['id'] = $id;
+		$data['name'] = Foods::where('food_id', '=', $id)->first()->name;
 
 
         // Get Relevant Reviews
@@ -264,5 +282,40 @@ protected static $restful = true;
         }
         $output = print_r($_REQUEST, true);
         file_put_contents('incomingmail.log', $output, FILE_APPEND);
+    }
+    public function isFavorite($id)
+    {
+        $favoriteLookup=Favorites::where('user_id', '=', Auth::id()) ->where('food_id', '=', $id, 'AND')->first();
+        //$this->er($favoriteLookup);
+        if($favoriteLookup==null)
+        {
+            return false;
+        }
+        return $favoriteLookup->favorite;
+    }
+    function getAverageRating($id)
+    {
+        //copypasta
+        $reviews = Reviews::where('food_id', '=', $id)
+            ->join('users', 'reviews.user_id', '=', 'users.id')
+            ->get(array('reviews.*', 'users.firstname', 'users.lastname', 'users.username', 'users.email'));
+        $data['numVotes'] = $reviews->count();
+        if($data['numVotes'] > 0) {
+            // Round votes to nearest .5
+            $notrounded_average = $reviews->sum('rating')/$reviews->count();
+            $data['averageRating'] = round($notrounded_average * 2, 0)/2;
+        }
+        else {
+            $data['averageRating'] = 0;
+        }
+        return $data['averageRating'];
+    }
+    public function er($data)
+    {
+        ob_start();
+        print_r($data);
+        $contents = ob_get_contents();
+        ob_end_clean();
+        error_log($contents);
     }
 }
