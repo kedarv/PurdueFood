@@ -48,7 +48,7 @@ class jsonemail extends Command {
 				$json = Cache::get($hall . "_" . $date);
 				$json = json_decode($json, true);
 				foreach($json['Meals'] as $value) {
-					if($value['Status'] == "Closed" || $value['Status'] == "Unavailable") {
+					if(count($value['Stations']) == 0) {
 						continue;
 					}
 					foreach($value['Stations'] as $station) {
@@ -69,7 +69,7 @@ class jsonemail extends Command {
 				$json = Cache::get($hall . "_" . $date);
 				$json = json_decode($json, true);
 				foreach($json['Meals'] as $value) {
-					if($value['Status'] == "Closed" || $value['Status'] == "Unavailable") {
+					if(count($value['Stations']) == 0) {
 						continue;
 					}
 					foreach($value['Stations'] as $station) {
