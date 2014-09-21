@@ -30,9 +30,6 @@ console.log("endpoint: http://api.hfs.purdue.edu/menus/v2/locations/{{{ $data['s
                         @if($items['isUserFavorite'] == true)
                         <span class="fa fa-heart" style="color: red;"></span>
                         @endif
-
-                            <span><input id="input-avgRating" data-size="xs" value="{{$items['rating']}}" class="rating" data-disabled="true" data-show-clear="false" data-show-caption="false"></span>
-
 						<span class="fa fa-chevron-right pull-right" style="padding-top:2px;"></span>
 						</h4>
 					</a>
