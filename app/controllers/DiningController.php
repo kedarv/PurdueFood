@@ -62,22 +62,19 @@ protected static $restful = true;
     }
 	public function getFood($id){
 
-//        if(substr($id,8,1)!="-")
-//            $id=Foods::where('name','=',urldecode($id))->first()->food_id;
-//		$url = "http://api.hfs.purdue.edu/Menus/v2/V2Items/".$id."";
-//		if (Cache::has($id)) {
-//			$json = Cache::get($id);
-//		} else {
-//			$getfile = file_get_contents($url);
-//			$cacheforever = Cache::forever($id, $getfile);
-//			$json = Cache::get($id);
-//		}
-//		$json = json_decode($json, true);
-//		$data['id'] = $id;
-//		$data['name'] = $json['Name'];
-//        $saveData = Foods::firstOrCreate(array('food_id' => $id, 'name'=>$json['Name']));
-        $data['id'] = $id;
-		$data['name'] = Foods::where('food_id', '=', $id)->first()->name;
+        if(substr($id,8,1)!="-")
+        {
+            $food=Foods::where('name','=',urldecode($id))->first();
+
+            $data['id'] = $food->id;
+            $data['name'] = $food->name;
+        }
+        else
+        {
+            $data['id'] = $id;
+            $data['name'] = Foods::where('food_id', '=', $id)->first()->name;
+        }
+
 
 
         // Get Relevant Reviews
