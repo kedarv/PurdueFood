@@ -22,8 +22,8 @@ console.log("endpoint: http://api.hfs.purdue.edu/menus/v2/locations/{{{ $data['s
 			<h3>{{{$station['Name']}}}</h3>
 				<div class="list-group">
 			@foreach($station['Items'] as $items)
-					<a href="{{action('DiningController@getFood', ['id' => $items['ID']])}}" class="list-group-item" style="padding-top:15px;">
-						<h4 class="list-group-item-heading">{{{$items['Name']}}}
+					<a href="{{action('DiningController@getFood', ['id' => urlencode($items['Name'])])}}" class="list-group-item" style="padding-top:15px;">
+						<h4 class="list-group-item-heading">{{$items['Name']}}
 						@if($items['IsVegetarian'] == true)
 							<span class="fa fa-leaf" style="color: green;"></span>
 						@endif
