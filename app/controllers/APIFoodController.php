@@ -2,27 +2,23 @@
 
 class APIFoodController extends \BaseController {
 
+	public $restful = true;
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
-	public function index()
-	{
-        return Foods::all()->toJson();
+	public function get_index() {
+        return "Hello World [API]";
 	}
-
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-        return Foods::find($id)->toJson();
+	
+	public function get_food($id) {
+		if (empty($id) || $id == null) {
+			return null;
+			http_response_code(400);
+		}
+		else {
+			return Foods::find($id)->toJson();
+		}
 	}
-
-
 }
