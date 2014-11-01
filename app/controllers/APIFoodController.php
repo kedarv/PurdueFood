@@ -1,24 +1,27 @@
 <?php
 
 class APIFoodController extends \BaseController {
-
-	public $restful = true;
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
-	public function get_index() {
+	public function index() {
         return "Hello World [API]";
 	}
-	
-	public function get_food($id) {
-		if (empty($id) || $id == null) {
-			return null;
-			http_response_code(400);
+	public function show($id){
+		$check = Foods::where('food_id', '=', $id)->count();
+		if($check == 1) {
+			$content = Foods::find($id)->toJson();
+			$response = Response::make($content);
+			$response->header('Content-Type', 'application/json');
+			return $response;
 		}
 		else {
-			return Foods::find($id)->toJson();
+			$content = ["Bad Request"];
+			$response = Response::make($content, 200);
+			$response->header('Content-Type', 'application/json');
+			return $response;
 		}
 	}
 }

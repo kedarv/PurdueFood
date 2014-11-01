@@ -83,4 +83,10 @@ elseif($hour > 15 && $hour <= 23){
 View::share('mealtime', $time);
 
 
-Route::resource('api/food', 'APIFoodController');
+/*
+    API Routes
+*/
+Route::group(array('prefix' => 'api/v1'), function()
+{
+    Route::resource('food', 'APIFoodController', array('only' => array('index', 'show')));
+});
